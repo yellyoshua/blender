@@ -1,0 +1,31 @@
+name: Production deployment workflow
+on:
+  push:
+    branches: [production]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    name: Tests
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.13.x
+
+      - name: Execute Tests
+        run: echo "Tests executed"
+
+  deploys:
+    runs-on: ubuntu-latest
+    name: Deploys
+    needs:
+      - tests
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.13.x
+
+      - name: Deploying to production
+        run: echo "Deployed to production"

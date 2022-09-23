@@ -1,0 +1,17 @@
+name: Master deployment workflow
+on:
+  push:
+    branches: [main]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    name: Tests
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.13.x
+
+      - name: Execute Tests
+        run: echo "Tests executed"
