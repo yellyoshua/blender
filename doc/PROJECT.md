@@ -26,11 +26,17 @@ Reconocimiento, Calificación, Rewards a post publicados con información útil 
 
 ### Con la APP se podrá:
 
-1. ~~Registrarse e iniciar sesión con~~ integración a las diversas redes sociales.
-2. Configuración personalizada del perfil e información a compartir
-3. Generar o integrarse a comunidades cercana
-4. compartir experiencias y calificaciones de los servicios/productos generados en la comunidad.
-5. búsqueda de contactos cercanos a través de geolocalización o aquellos Grupos de comunidades de interés que
+1. Inicio de sesion y registro con diversas redes sociales (Facebook, Instagram, Google, Twitter).
+  - Captcha de verificacion
+  - Seguridad (verificacion): Mobile number verification, Verficacion biometrica (Tensorflow) - poses.
+3. Configuración personalizada del perfil e información a compartir
+  - Perfiles: 
+   1. Personal: Datos basicos (Nombre, edad, fumador o bebedor, inclinacion politica y religiosa)  (prompt --> caja de preguntas personales a responder), profesional y feed (Post y eventos)
+  - Profile prompt
+  - 
+5. Generar o integrarse a comunidades cercana
+6. compartir experiencias y calificaciones de los servicios/productos generados en la comunidad.
+7. búsqueda de contactos cercanos a través de geolocalización o aquellos Grupos de comunidades de interés que
 se encuentran en la dirección que se consulte.
 6. ~~Contactar de forma directa con los usuarios por llamada o videollamada~~
 7. ~~Chat interactivo con traducciones en línea~~
