@@ -9,21 +9,19 @@ import routes_setup from './routes_setup.js';
 const app = express();
 
 // Parse application/JSON
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({extended: true, limit: '50mb'}));
 
 // Enable CORS
 app.use(cors());
 
 // Mount [/api] routes
-routes_setup(routes, app, {
+routes_setup(routes, {
   path_prefix: '/api',
-  after_middlewares: [],
-  // Mount locale middleware to handle locale changes
-  before_middlewares: [localeMiddleware()],
-  // Add auth middleware
-  auth_middlewares: [authMiddleware(routes)]
-});
+  auth_middlewares: [authMiddleware(routes)],
+  before_middlewares: [],
+  after_middlewares: [localeMiddleware()]
+})(app);
 
 // Mount errors middleware
 app.use(errorsMiddleware());

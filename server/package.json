@@ -4,10 +4,11 @@
   "description": "",
   "main": "src/app.js",
   "scripts": {
-    "start": "node dist/app.js",
+    "start": "npm run build && node dist/app.js",
     "eslint": "eslint --ext .js,.jsx .",
     "dev": "nodemon",
-    "build": "babel src --out-dir dist"
+    "build": "babel src --out-dir dist",
+    "seed": "babel-node src/database/seeder.js"
   },
   "author": "yellyoshua",
   "license": "ISC",

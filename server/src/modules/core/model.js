@@ -57,6 +57,6 @@ export default (Model = mongoose.Model) => {
 
       return data;
     },
-    model: Model
+    raw: Model
   };
 };

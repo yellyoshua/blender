@@ -14,10 +14,6 @@ const usersSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  password: {
-    type: String,
-    required: true
-  },
   status: {
     type: String,
     enum: ['active', 'inactive'],
@@ -28,8 +24,10 @@ const usersSchema = new mongoose.Schema({
     type: String,
     required: true
   }
-}, {collection: 'users', strictQuery: false});
+}, {collection: 'users', strictQuery: false, timestamps: true, strict: true});
 
 export const users = mongoose.model('users', usersSchema);
 
-export default model(users);
+export default model(users, {
+  populate: ''
+});

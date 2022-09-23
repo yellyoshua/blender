@@ -15,7 +15,7 @@ export default () => {
     updateFiles: false,
     extension: '.json',
     objectNotation: true,
-    logDebugFn: logger.debug,
+    logDebugFn: logger.info,
     logWarnFn: logger.warn,
     logErrorFn: logger.error
   });
