@@ -2,7 +2,7 @@
 
 Blender es una plataforma global para crear relaciones de amistad/comunidades/networking en línea donde puedes conocer personas nuevas, expandir el círculo social e incluso conocer a gente local de 190+ países.
 
-No se permite coquetear o flirtear (sin el consentimiento de la otra persona), estricto control de los usuarios facilitando, de hecho, el bloqueo de personas que quieran “ir más allá” por comportamientos irracionales o indebidos.
+Estricto control de los usuarios facilitando, de hecho, el bloqueo de personas por comportamientos irracionales o indebidos.
 
 Permite localizar a gente cercana a tu ubicación y comenzar a chatear con ell@s, puedes también publicar contenido en tu perfil, agregar información que quieras compartir, buscar grupos de personas cercanos a ti y con tus mismos gustos generando Networking. 
 
