@@ -1,0 +1,5 @@
+- Si fueras un animal, ¿cuál serías?
+- Si fueras un superhéroe, ¿cuál serías?
+- ¿Qué es lo que más te gusta de tu trabajo?
+- ¿Qué es lo que menos te gusta de tu trabajo?
+- ¿Qué es lo que más te gusta de tu vida?
