@@ -25,7 +25,6 @@
 - [Docker](https://www.docker.com/) - Containerization platform
 - [GitHub Actions](https://github.com) - CI/CD platform
 - [AWS Container Registry](https://aws.amazon.com/ecr/) - Container registry for Docker images
-- [AWS Elastic Container Service](https://aws.amazon.com/ecs/) - Container orchestration service
 - [AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeanstalk/) - Platform as a service (PaaS) for deploying and scaling web applications and services
 
 ### Project Management
