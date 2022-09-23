@@ -1,0 +1,35 @@
+{
+  "name": "node-server-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node dist/app.js",
+    "eslint": "eslint --ext .js,.jsx .",
+    "dev": "nodemon",
+    "build": "babel src --out-dir dist"
+  },
+  "author": "yellyoshua",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "i18n": "^0.15.0",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "micromatch": "^4.0.5",
+    "mongoose": "^6.3.6",
+    "winston": "^3.7.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.18.10",
+    "@babel/core": "^7.19.1",
+    "@babel/node": "^7.19.1",
+    "@babel/preset-env": "^7.19.1",
+    "@jest/globals": "^28.1.1",
+    "eslint": "^8.17.0",
+    "jest": "^28.1.1",
+    "nodemon": "^2.0.20"
+  }
+}

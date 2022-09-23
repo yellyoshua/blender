@@ -1,0 +1,7 @@
+{
+  "watch": ["."],
+  "ignore": ["**/*.test.ts", "node_modules", "dist"],
+  "ext": "ts,mjs,js,json,graphql",
+  "exec": "babel-node src/app.js",
+  "legacyWatch": true
+}

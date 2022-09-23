@@ -1,0 +1,12 @@
+{
+	"exceptions": {
+		"auth": {
+			"invalid_credentials": "Credenciales inválidas"
+		},
+		"user": {
+			"not_found": "Usuario no encontrado",
+			"already_exists": "El usuario ya existe"
+		},
+		"unexpected_error": "Un error inesperado ha ocurrido"
+	}
+}
