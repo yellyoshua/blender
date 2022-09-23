@@ -34,4 +34,4 @@ Perfiles que irán dentro de la app. Que va a tener cada uno de ellos y que va a
 - Cargo
 - Ubicación
 - Contacto
-- [Prompts (Preguntas de la app)](Professional.Pompts.md)
+- [Prompts (Preguntas de la app)](Professional.Prompts.md)
