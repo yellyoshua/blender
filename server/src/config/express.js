@@ -1,4 +1,5 @@
 import express from 'express';
+import helmet from 'helmet';
 import cors from 'cors';
 import routes from '../modules/routes';
 import authMiddleware from '../middlewares/auth.middleware.js';
@@ -11,6 +12,9 @@ const app = express();
 // Parse application/JSON
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({extended: true, limit: '50mb'}));
+
+// Helmet
+app.use(helmet({hidePoweredBy: true}));
 
 // Enable CORS
 app.use(cors());
