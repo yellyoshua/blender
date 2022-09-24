@@ -1,0 +1,9 @@
+{
+	"compilerOptions": {
+		"baseUrl": "./",
+		"paths": {
+			"@/modules/*": ["<rootDir>/src/modules/*"],
+			"@/services/*": ["<rootDir>/src/services/*"]
+		}
+	}
+}
