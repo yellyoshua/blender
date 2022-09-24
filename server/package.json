@@ -31,7 +31,6 @@
     "@babel/node": "^7.19.1",
     "@babel/preset-env": "^7.19.1",
     "@jest/globals": "^28.1.1",
-    "babel-plugin-root-import": "^6.6.0",
     "eslint": "^8.17.0",
     "jest": "^28.1.1",
     "nodemon": "^2.0.20",

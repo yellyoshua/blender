@@ -1,4 +1,4 @@
-import usersModel from '@/modules/users/users.model';
+import usersModel from '../users/users.model';
 
 export default {
   github: async () => {

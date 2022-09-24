@@ -1,14 +1,4 @@
 {
   "presets": ["@babel/preset-env"],
-  "plugins": [
-    "@babel/plugin-proposal-private-methods",
-    [
-      "babel-plugin-root-import", {
-        "paths": [
-          { "rootPathPrefix": "@/modules/", "rootPathSuffix": "src/modules/" },
-          { "rootPathPrefix": "@/services/", "rootPathSuffix": "src/services/" }
-        ]
-      }
-    ]
-  ]
+  "plugins": ["@babel/plugin-proposal-private-methods"]
 }
