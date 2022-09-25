@@ -1,5 +1,5 @@
 # Nodejs with express server
-FROM node:17.4.0-alpine
+FROM public.ecr.aws/lambda/nodejs:16.2022.09.22.12
 
 # Create app directory
 WORKDIR /app
@@ -11,5 +11,8 @@ RUN npm install
 
 # Build app
 RUN npm run build
+
+# Copy .env file
+COPY .env .env
 
 CMD ["lambda.handler"]
