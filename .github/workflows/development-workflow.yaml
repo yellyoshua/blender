@@ -19,3 +19,33 @@ jobs:
       - name: Execute Tests
         working-directory: server
         run: npm run test
+  server-push-image:
+    runs-on: ubuntu-latest
+    name: Server push image
+    needs:
+      - server-tests
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.13.x
+      
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        working-directory: server
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Push to AWS ECR
+        working-directory: server
+        run: |
+          aws ecr get-login-password --region ${region}  | docker login --username AWS --password-stdin ${accountid}.dkr.ecr.${region}.amazonaws.com
+          docker build --tag ${accountid}.dkr.ecr.${region}.amazonaws.com/${ecr_repository}:v1.${GITHUB_RUN_NUMBER} .
+          echo "::set-output name=tag::v1.${GITHUB_RUN_NUMBER}"
+          docker push ${accountid}.dkr.ecr.${region}.amazonaws.com/${ecr_repository}:v1.${GITHUB_RUN_NUMBER}
+        env:
+          accountid: ${{ secrets.AWS_ACCOUNT_ID}}
+          region: ${{ secrets.AWS_REGION }}
+          ecr_repository: blender-app-dev

@@ -10,3 +10,5 @@ then(() => {
     logger.info(`Server started on port ${vars.port}`);
   });
 });
+
+export default app;

@@ -1,5 +1,5 @@
 # Nodejs with express server
-FROM node:17.4.0-alpine AS build_base
+FROM node:17.4.0-alpine
 
 # Create app directory
 WORKDIR /app
@@ -12,8 +12,4 @@ RUN npm install
 # Build app
 RUN npm run build
 
-ENV PORT=4000
-
-EXPOSE ${PORT}
-
-CMD [ "npm", "start" ]
+CMD ["lambda.handler"]
