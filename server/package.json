@@ -26,6 +26,7 @@
     "micromatch": "^4.0.5",
     "mongoose": "^6.3.6",
     "serverless-express": "^2.0.12",
+    "serverless-http": "^3.0.2",
     "winston": "^3.7.2"
   },
   "devDependencies": {
