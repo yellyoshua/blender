@@ -2,7 +2,6 @@
   "name": "node-server-boilerplate",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.js",
   "scripts": {
     "start": "npm run build && node dist/app.js",
     "test": "jest",
@@ -15,6 +14,8 @@
   "author": "yellyoshua",
   "license": "ISC",
   "dependencies": {
+    "@vendia/serverless-express": "^4.10.1",
+    "aws-serverless-express": "^3.4.0",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
