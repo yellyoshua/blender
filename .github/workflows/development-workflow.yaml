@@ -51,7 +51,9 @@ jobs:
           docker build --tag ${accountid}.dkr.ecr.${region}.amazonaws.com/${ecr_repository}:v1.${GITHUB_RUN_NUMBER} .
           echo "::set-output name=tag::v1.${GITHUB_RUN_NUMBER}"
           docker push ${accountid}.dkr.ecr.${region}.amazonaws.com/${ecr_repository}:v1.${GITHUB_RUN_NUMBER}
+          aws lambda update-function-code --function-name ${lambda_function_name} --image-uri ${accountid}.dkr.ecr.${region}.amazonaws.com/${ecr_repository}:v1.${GITHUB_RUN_NUMBER}
         env:
           accountid: ${{ secrets.AWS_ACCOUNT_ID}}
           region: ${{ secrets.AWS_REGION }}
+          lambda_function_name: blender-app-dev
           ecr_repository: blender-app-dev
