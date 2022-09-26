@@ -4,7 +4,7 @@ on:
     branches: [development]
 
 jobs:
-  server-tests:
+  tests:
     runs-on: ubuntu-latest
     name: Server tests
     steps:
@@ -12,6 +12,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16.13.x
+
       - name: Install dependencies
         working-directory: server
         run: npm install
@@ -19,11 +20,12 @@ jobs:
       - name: Execute Tests
         working-directory: server
         run: npm run test
-  server-push-image:
+
+  deploys:
     runs-on: ubuntu-latest
     name: Server push image & deploy
     needs:
-      - server-tests
+      - tests
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-node@v2

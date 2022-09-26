@@ -13,12 +13,17 @@ jobs:
         with:
           node-version: 16.13.x
 
+      - name: Install dependencies
+        working-directory: server
+        run: npm install
+
       - name: Execute Tests
-        run: echo "Tests executed"
+        working-directory: server
+        run: npm run test
 
   deploys:
     runs-on: ubuntu-latest
-    name: Deploys
+    name: Server push image & deploy
     needs:
       - tests
     steps:
@@ -26,6 +31,31 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16.13.x
+      
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      
+      - name: Set up .env variables
+        working-directory: server
+        run: |
+          echo "DATABASE_URL=${DATABASE_URL}" >> .env
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL_PROD }}
 
-      - name: Deploying to production
-        run: echo "Deployed to production"
+      - name: Push to AWS ECR
+        working-directory: server
+        run: |
+          aws ecr get-login-password --region ${region}  | docker login --username AWS --password-stdin ${accountid}.dkr.ecr.${region}.amazonaws.com
+          docker build --tag ${accountid}.dkr.ecr.${region}.amazonaws.com/${ecr_repository}:v1.${GITHUB_RUN_NUMBER} .
+          echo "::set-output name=tag::v1.${GITHUB_RUN_NUMBER}"
+          docker push ${accountid}.dkr.ecr.${region}.amazonaws.com/${ecr_repository}:v1.${GITHUB_RUN_NUMBER}
+          aws lambda update-function-code --function-name ${lambda_function_name} --image-uri ${accountid}.dkr.ecr.${region}.amazonaws.com/${ecr_repository}:v1.${GITHUB_RUN_NUMBER}
+        env:
+          accountid: ${{ secrets.AWS_ACCOUNT_ID}}
+          region: ${{ secrets.AWS_REGION }}
+          lambda_function_name: blender-app-prod
+          ecr_repository: blender-app-prod
