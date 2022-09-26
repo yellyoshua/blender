@@ -21,7 +21,7 @@ jobs:
         run: npm run test
   server-push-image:
     runs-on: ubuntu-latest
-    name: Server push image
+    name: Server push image & deploy
     needs:
       - server-tests
     steps:
