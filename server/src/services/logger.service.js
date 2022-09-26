@@ -2,13 +2,15 @@ import vars from '../config/vars';
 import {createLogger, format, transports} from 'winston';
 
 export default () => {
-  const logger = createLoggerService({
-    file_output: {
-      error: 'logs/error.log',
-      warn: 'logs/warn.log',
-      info: vars.env.production && 'logs/info.log'
-    }
-  });
+  // const logger = createLoggerService({
+  //   file_output: {
+  //     error: 'logs/error.log',
+  //     warn: 'logs/warn.log',
+  //     info: vars.env.production && 'logs/info.log'
+  //   }
+  // });
+
+  const logger = console;
 
   return {
     info (message, obj) {
