@@ -1,8 +1,10 @@
-const serverlessExpressHandler = require('serverless-express/handler');
-const app = require('./dist/app.js').default;
-console.log(app);
+// const app = require('./dist/app.js').default;
 
-exports.handler = (event, context) => {
-  console.log('event, context :', event, context);
-  return serverlessExpressHandler(app)(event, context);
+exports.handler = (event, context, callback) => {
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      message: 'Hello World!'
+    })
+  };
 };
