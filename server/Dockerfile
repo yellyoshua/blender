@@ -14,7 +14,4 @@ RUN npm install
 # Build app
 RUN npm run build
 
-# Copy .env file
-COPY .env .env
-
 CMD ["lambda.handler"]

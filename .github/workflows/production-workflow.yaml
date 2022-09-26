@@ -38,13 +38,6 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-      
-      - name: Set up .env variables
-        working-directory: server
-        run: |
-          echo "DATABASE_URL=${DATABASE_URL}" >> .env
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL_PROD }}
 
       - name: Push to AWS ECR
         working-directory: server
