@@ -15,7 +15,6 @@
   "license": "ISC",
   "dependencies": {
     "@vendia/serverless-express": "^4.10.1",
-    "aws-serverless-express": "^3.4.0",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
@@ -25,10 +24,7 @@
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "micromatch": "^4.0.5",
-    "mongoose": "^6.3.6",
-    "serverless-express": "^2.0.12",
-    "serverless-http": "^3.0.2",
-    "winston": "^3.7.2"
+    "mongoose": "^6.3.6"
   },
   "devDependencies": {
     "@babel/cli": "^7.18.10",
