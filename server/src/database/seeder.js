@@ -19,10 +19,7 @@ then(handle_success).
 catch(handle_error);
 
 function get_seeders_path () {
-  return utils.walk(
-    path.resolve(__dirname, 'seeders'),
-    '*.js'
-  );
+  return utils.folder_contents(path.resolve(__dirname, 'seeders'));
 }
 
 function read_seeders (seeders_path = []) {
