@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import model from '../core/model.js';
+
 const geolocationSchema = new mongoose.Schema({
   latitude: {
     type: Number
@@ -41,7 +42,12 @@ const profilesSchema = new mongoose.Schema({
   },
   company_website: {
     type: String
+  },
+  interests: {
+    type: [mongoose.Types.ObjectId],
+    ref: 'interests'
   }
+
 
 }, {collection: 'profiles', strictQuery: false, timestamps: true, strict: true});
 
