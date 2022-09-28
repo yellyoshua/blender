@@ -44,7 +44,7 @@
 		"default-case": 2,
 		"default-case-last": 2,
 		"default-param-last": 2,
-		"dot-location": 2,
+		"dot-location": 0,
 		"dot-notation": 2,
 		"eol-last": 2,
 		"eqeqeq": 2,
