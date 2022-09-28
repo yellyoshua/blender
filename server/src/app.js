@@ -4,15 +4,23 @@ import vars from './config/vars';
 import app from './config/express';
 import mongoose from './config/mongoose';
 
-mongoose.connect(vars.databaseURL).
-then(() => {
-  logger.info(`Server started on port ${vars.port}`);
-});
+let database_connect = () => {
+  return mongoose.connect(vars.databaseURL);
+};
 
 if (!process.env.LAMBDA_MODE) {
+  database_connect().
+  then(() => {
+    logger.info(`Server started on port ${vars.port}`);
+  });
+
   app.listen(vars.port, () => {
     logger.info(`Server started on port ${vars.port}`);
   });
+
+  database_connect = null;
 }
+
+export const db_connect = database_connect;
 
 export default app;

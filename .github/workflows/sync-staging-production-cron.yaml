@@ -1,0 +1,33 @@
+name: Sync staging database
+on:
+  schedule:
+    - cron: '0 0 * * *' # Every day at 00:00
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    name: Sync production data to staging database
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.13.x
+      
+      - name: Install MongoDB tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y mongodb-tools
+      
+      - name: Export production database
+        run: |
+          mongodump --uri ${{ secrets.DATABASE_URL_PRODUCTION }} --gzip --archive=production.gz --authenticationDatabase admin
+          
+      - name: Import production database to staging
+        run: |
+          mongorestore --uri ${{ secrets.DATABASE_URL_STAGING }} --gzip --archive=production.gz --authenticationDatabase admin --drop
+      
+      - name: Remove production database dump
+        run: rm production.gz
+
+      - name: Reset staging database user password
+        run: |
+          mongo --host ${{ secrets.DATABASE_URL_STAGING }} --authenticationDatabase admin --eval "db.users.updateMany({}, {$set: {password: "hello_world"}})"

@@ -50,3 +50,8 @@ se encuentran en la dirección que se consulte.
 2. Notificaciones configurables acerca de intereses, lugares o publicaciones específicos
 3. Eventos cercanos a ubicación actual a los cuales asistirá la comunidad de acuerdo a perfil.
 4. Informaciones sobre nuevos contactos integrados a la comunidad o perfiles de acuerdo a interés de
+
+Tema de filtros, ejemplo de filtros:
+- Filtro de edad
+- Filtro de género
+- Filtro de intereses

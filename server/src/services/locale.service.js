@@ -1,5 +1,6 @@
 import i18n from 'i18n';
 import path from 'path';
+import vars from '../config/vars.js';
 
 /**
  * Configure the i18n module
@@ -13,9 +14,12 @@ export default () => {
     directory: path.join(__dirname, '../locales'),
     header: 'app-language',
     updateFiles: false,
+    debug: !vars.env.production,
     extension: '.json',
     objectNotation: true,
-    logDebugFn: logger.info,
+    logDebugFn: vars.env.production
+      ? null
+      : logger.info,
     logWarnFn: logger.warn,
     logErrorFn: logger.error
   });
