@@ -4,7 +4,7 @@ const id = mongoose.Types.ObjectId;
 
 export const INTERESTS_REF = {
   beverage_beer: id('623fb1b764fd56550e229ed7'),
-  beverage_wine: id('623fb1b764fd56550e229ed8'),
+  beverage_wine: id('623fb11764fd56550e229ed8'),
   beverage_whiskey: id('623fb1b764fd56550e229ed9'),
   beverage_vodka: id('623fb1b764fd56550e229eda'),
   beverage_cocktail: id('623fb1b764fd56550e229edb'),

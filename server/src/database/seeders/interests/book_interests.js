@@ -10,7 +10,7 @@ export const INTERESTS_REF = {
   book_childrens: id('623fb1b764fd56550e229ed5'),
   book_classics: id('623fb1b764fd56550e229ed6'),
   book_comic_book_or_graphic_novel: id('623fb1b764fd56550e229ed7'),
-  book_coming_of_age: id('623fb1b764fd56550e229ed8'),
+  book_coming_of_age: id('623f11b764fd56550e229ed8'),
   book_crime: id('623fb1b764fd56550e229ed9'),
   book_drama: id('623fb1b764fd56550e229eda'),
   book_fairytale: id('623fb1b764fd56550e229edb'),

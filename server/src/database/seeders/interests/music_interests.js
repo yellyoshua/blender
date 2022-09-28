@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const id = mongoose.Types.ObjectId;
 
 export const INTERESTS_REF = {
-  music_alternative: id('623fb1b764fd56550e229ed8'),
+  music_alternative: id('623fb1b764fd56550e221ed8'),
   music_blues: id('623fb1b764fd56550e229ed9'),
   music_classical: id('623fb1b764fd56550e229eda'),
   music_country: id('623fb1b764fd56550e229edb'),
