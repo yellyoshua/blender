@@ -3,26 +3,26 @@ import mongoose from 'mongoose';
 const id = mongoose.Types.ObjectId;
 
 export const INTERESTS_REF = {
-  cuisine_american: id('623fb1b764fd56550e229edc'),
-  cuisine_brazilian: id('623fb1b764fd56550e229edf'),
-  cuisine_caribbean: id('623fb1b764fd56e50e2f9ee2'),
-  cuisine_chinese: id('6f3fb1b764fd56f50e229ee3'),
-  cuisine_french: id('623fb1b764fd56550e229ee6'),
-  cuisine_german: id('623fb1b764fd56550e229ee7'),
-  cuisine_greek: id('623fb1b764fd56550e229eea'),
-  cuisine_indian: id('623fb1b764fd56550e229eed'),
-  cuisine_italian: id('623fb1b764fd56550e229eee'),
-  cuisine_japanese: id('623fb1b764fd56550e229eef'),
-  cuisine_korean: id('623fb1b764fd56550e229ef0'),
-  cuisine_mediterranean: id('623fb1b764fd56550e229ef1'),
-  cuisine_mexican: id('623fb1b764fd56550e229ef2'),
-  cuisine_moroccan: id('623fb1b764fd56550e229ef3'),
-  cuisine_thai: id('623fb1b764fd56550e229ef4'),
-  cuisine_turkish: id('623fb1b764fd56550e229ef5'),
-  cuisine_vietnamese: id('623fb1b764fd56550e229ef6'),
-  cuisine_vegan: id('623fb1b764fd56550e229ef7'),
-  cuisine_vegetarian: id('623fb1b764fd56550e229ef8'),
-  cuisine_pescatarian: id('623fb1b764fd56550e229ef9')
+  cuisine_american: id('53ea3f4436e9abb40c000178'),
+  cuisine_brazilian: id('53ea407346f584b80c000095'),
+  cuisine_caribbean: id('53ea41d846f584b80c0000bc'),
+  cuisine_chinese: id('53ea4287a51beeb00c0000ea'),
+  cuisine_french: id('53ea460d36e9abb40c0001ae'),
+  cuisine_german: id('53ea46dca51beeb00c0000ff'),
+  cuisine_greek: id('53ea46e446f584b80c00011a'),
+  cuisine_indian: id('53ea571ba51beeb00c00011f'),
+  cuisine_italian: id('53ea5a6936e9abb40c0001dc'),
+  cuisine_japanese: id('53ea5ac936e9abb40c0001de'),
+  cuisine_korean: id('53ea5c7936e9abb40c0001e2'),
+  cuisine_mediterranean: id('53ea5f539aadb8ac0c00011e'),
+  cuisine_mexican: id('53ea5fdd46f584b80c0001df'),
+  cuisine_moroccan: id('53ea601136e9abb40c000209'),
+  cuisine_thai: id('53ea60bea51beeb00c000177'),
+  cuisine_turkish: id('53ea6b549aadb8ac0c00017b'),
+  cuisine_vietnamese: id('53ea6be836e9abb40c000263'),
+  cuisine_vegan: id('53ea6dfd9aadb8ac0c0001b7'),
+  cuisine_vegetarian: id('53ea70c39aadb8ac0c0001d5'),
+  cuisine_pescatarian: id('53ea70df9aadb8ac0c0001d7')
 };
 
 export default [

@@ -3,16 +3,14 @@ import mongoose from 'mongoose';
 const id = mongoose.Types.ObjectId;
 
 export const INTERESTS_REF = {
-
-
-  religion_christian: id('623fb1b764fd56550e229edf'),
-  religion_muslim: id('623fb1b764fd56550e229ee0'),
-  religion_buddhist: id('623fb1b764fd66550e229ee1'),
-  religion_hindu: id('623fb1b764fd56550e229ef2'),
-  religion_jewish: id('623fb1b764fd56f50e229ee3'),
-  religion_sikh: id('623fb1b764fd5f5b0e229ee4'),
-  religion_atheist: id('6f3fb1e764fe56550e229ee5'),
-  religion_agnostic: id('623fb1b764fd56550e229ee6')
+  religion_christian: id('53ea44659aadb8ac0c0000ec'),
+  religion_muslim: id('53ea603c46f584b80c0001e1'),
+  religion_buddhist: id('53ea6043a51beeb00c00016a'),
+  religion_hindu: id('53ea622146f584b80c0001ff'),
+  religion_jewish: id('53ea637546f584b80c00020e'),
+  religion_sikh: id('53ea64d346f584b80c00021f'),
+  religion_atheist: id('53ea660236e9abb40c00023e'),
+  religion_agnostic: id('53ea660a46f584b80c00022e')
 };
 
 export default [

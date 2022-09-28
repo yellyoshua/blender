@@ -3,18 +3,18 @@ import mongoose from 'mongoose';
 const id = mongoose.Types.ObjectId;
 
 export const INTERESTS_REF = {
-  beverage_beer: id('623fb1b764fd56550e229ed7'),
-  beverage_wine: id('623fb11764fd56550e229ed8'),
-  beverage_whiskey: id('623fb1b764fd56550e229ed9'),
-  beverage_vodka: id('623fb1b764fd56550e229eda'),
-  beverage_cocktail: id('623fb1b764fd56550e229edb'),
-  beverage_tequila: id('623fb1b764fd56550e229edc'),
-  beverage_smoothie: id('623fb1b764fd56550e229edd'),
-  beverage_juice: id('623fb1b764fd56550e229ede'),
-  beverage_coffee: id('623fb1b764fd56550e229edf'),
-  beverage_tea: id('623fb1b764fd56550e229ee0'),
-  beverage_water: id('623fb1b764fd56558e229ee1'),
-  beverage_hot_chocolate: id('623fb1b764fdf6e50e229ee2')
+  beverage_beer: id('53ea737346f584b80c0002b1'),
+  beverage_wine: id('53d54f22f1d5ea877300031b'),
+  beverage_whiskey: id('53d54f22f1d5ea8773000338'),
+  beverage_vodka: id('53ea266f9aadb8ac0c00003f'),
+  beverage_cocktail: id('53ea298a36e9abb40c00007d'),
+  beverage_tequila: id('53ea2e8136e9abb40c0000c2'),
+  beverage_smoothie: id('53ea321ba51beeb00c000064'),
+  beverage_juice: id('53ea325a46f584b80c000068'),
+  beverage_coffee: id('53ea327736e9abb40c000109'),
+  beverage_tea: id('53ea38149aadb8ac0c000089'),
+  beverage_water: id('53ea3f3fa51beeb00c0000b9'),
+  beverage_hot_chocolate: id('53ea3f9746f584b80c000085')
 };
 
 export default [

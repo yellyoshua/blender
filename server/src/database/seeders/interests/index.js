@@ -1,5 +1,5 @@
-import music_interests, {INTERESTS_REF as music_ref} from './music_interests';
 import sport_interests, {INTERESTS_REF as sport_ref} from './sport_interests';
+import music_interests, {INTERESTS_REF as music_ref} from './music_interests';
 import movie_interests, {INTERESTS_REF as movie_ref} from './movie_interests';
 import book_interests, {INTERESTS_REF as book_ref} from './book_interests';
 import cuisine_interests, {INTERESTS_REF as cuisine_ref} from './cuisine_interests';
