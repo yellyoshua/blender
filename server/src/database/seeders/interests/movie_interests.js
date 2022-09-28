@@ -3,11 +3,11 @@ import mongoose from 'mongoose';
 const id = mongoose.Types.ObjectId;
 
 export const INTERESTS_REF = {
-  movie_action: id('623fb1b764fd56550e229ee1'),
-  movie_adventure: id('623fb1b764fd56550e229ee2'),
-  movie_animation: id('623fb1b764fd56550e229ee3'),
-  movie_biography: id('623fb1b764fd56550e229ee4'),
-  movie_comedy: id('623fb1b764fd56550e229ee5'),
+  movie_action: id('623fb1b764fd5e550e229ee1'),
+  movie_adventure: id('623fb1b764fd56e50e22fed2'),
+  movie_animation: id('6d3fb1b764fd56e50e229ee3'),
+  movie_biography: id('623fb1b764fd56550e2b9ee4'),
+  movie_comedy: id('623fb1b764fd56df0e229de5'),
   movie_crime: id('623fb1b764fd56550e229ee6'),
   movie_documentary: id('623fb1b764fd56550e229ee7'),
   movie_drama: id('623fb1b764fd56550e229ee8'),
@@ -18,7 +18,7 @@ export const INTERESTS_REF = {
   movie_horror: id('623fb1b764fd56550e229eed'),
   movie_musical: id('623fb1b764fd56550e229eef'),
   movie_mystery: id('623fb1b764fd56550e229ef0'),
-  movie_news: id('623fb1b764fd56550e229ef1'),
+  movie_news: id('623fb1b764fd56550ef29ef1'),
   movie_romance: id('623fb1b764fd56550e229ef1'),
   movie_sci_fi: id('623fb1b764fd56550e229ef2'),
   movie_sport: id('623fb1b764fd56550e229ef3'),

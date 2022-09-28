@@ -7,11 +7,11 @@ export const INTERESTS_REF = {
 
   religion_christian: id('623fb1b764fd56550e229edf'),
   religion_muslim: id('623fb1b764fd56550e229ee0'),
-  religion_buddhist: id('623fb1b764fd56550e229ee1'),
-  religion_hindu: id('623fb1b764fd56550e229ee2'),
-  religion_jewish: id('623fb1b764fd56550e229ee3'),
-  religion_sikh: id('623fb1b764fd56550e229ee4'),
-  religion_atheist: id('623fb1b764fd56550e229ee5'),
+  religion_buddhist: id('623fb1b764fd66550e229ee1'),
+  religion_hindu: id('623fb1b764fd56550e229ef2'),
+  religion_jewish: id('623fb1b764fd56f50e229ee3'),
+  religion_sikh: id('623fb1b764fd5f5b0e229ee4'),
+  religion_atheist: id('6f3fb1e764fe56550e229ee5'),
   religion_agnostic: id('623fb1b764fd56550e229ee6')
 };
 

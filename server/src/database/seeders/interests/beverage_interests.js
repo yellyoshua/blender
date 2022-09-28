@@ -13,8 +13,8 @@ export const INTERESTS_REF = {
   beverage_juice: id('623fb1b764fd56550e229ede'),
   beverage_coffee: id('623fb1b764fd56550e229edf'),
   beverage_tea: id('623fb1b764fd56550e229ee0'),
-  beverage_water: id('623fb1b764fd56550e229ee1'),
-  beverage_hot_chocolate: id('623fb1b764fd56550e229ee2')
+  beverage_water: id('623fb1b764fd56558e229ee1'),
+  beverage_hot_chocolate: id('623fb1b764fdf6e50e229ee2')
 };
 
 export default [

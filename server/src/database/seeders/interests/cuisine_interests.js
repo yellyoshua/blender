@@ -5,8 +5,8 @@ const id = mongoose.Types.ObjectId;
 export const INTERESTS_REF = {
   cuisine_american: id('623fb1b764fd56550e229edc'),
   cuisine_brazilian: id('623fb1b764fd56550e229edf'),
-  cuisine_caribbean: id('623fb1b764fd56550e229ee2'),
-  cuisine_chinese: id('623fb1b764fd56550e229ee3'),
+  cuisine_caribbean: id('623fb1b764fd56e50e2f9ee2'),
+  cuisine_chinese: id('6f3fb1b764fd56f50e229ee3'),
   cuisine_french: id('623fb1b764fd56550e229ee6'),
   cuisine_german: id('623fb1b764fd56550e229ee7'),
   cuisine_greek: id('623fb1b764fd56550e229eea'),
