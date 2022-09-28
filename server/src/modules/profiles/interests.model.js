@@ -9,10 +9,9 @@ const interestsSchema = new mongoose.Schema({
       'music',
       'movie',
       'book',
-      'food',
-      'drink',
+      'cuisine',
+      'beverage',
       'hobby',
-      'activity',
       'religion',
       'political'
     ],

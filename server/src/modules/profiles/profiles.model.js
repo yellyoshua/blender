@@ -46,8 +46,11 @@ const profilesSchema = new mongoose.Schema({
   interests: {
     type: [mongoose.Types.ObjectId],
     ref: 'interests'
+  },
+  personalities: {
+    type: [mongoose.Types.ObjectId],
+    ref: 'personalities'
   }
-
 
 }, {collection: 'profiles', strictQuery: false, timestamps: true, strict: true});
 

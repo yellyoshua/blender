@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import music_interests, {INTERESTS_REF as music_ref} from './music_interests';
 import sport_interests, {INTERESTS_REF as sport_ref} from './sport_interests';
 import movie_interests, {INTERESTS_REF as movie_ref} from './movie_interests';
@@ -8,8 +7,6 @@ import beverage_interests, {INTERESTS_REF as beverage_ref} from './beverage_inte
 import hobby_interests, {INTERESTS_REF as hobby_ref} from './hobby_interests';
 import religion_interests, {INTERESTS_REF as religion_ref} from './religion_interests';
 import political_interests, {INTERESTS_REF as political_ref} from './political_interests';
-
-const id = mongoose.Types.ObjectId;
 
 export const INTERESTS_REF = {
   ...sport_ref,
