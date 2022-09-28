@@ -5,6 +5,7 @@ import fs from 'fs';
 export default {
   applyRoutes,
   walk,
+  folder_contents,
   composeQuery
 };
 
@@ -29,6 +30,16 @@ function composeQuery (query = {}) {
   });
 
   return {filter, options};
+}
+
+function folder_contents (folder_path = '') {
+  // eslint-disable-next-line no-sync
+  const folder_content = fs.readdirSync(path.resolve(folder_path));
+  const folder_paths = folder_content.map((seeder) => {
+    return path.resolve(folder_path, seeder);
+  });
+
+  return folder_paths;
 }
 
 function walk (directory, pattern = '', filepaths = []) {

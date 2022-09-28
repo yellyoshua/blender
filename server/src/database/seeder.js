@@ -12,20 +12,13 @@ const skip_seeders_for_production = [
 ];
 
 mongoose.connect(vars.databaseURL).
-then(get_seeders_path).
 then(read_seeders).
 then(seed_data).
 then(handle_success).
 catch(handle_error);
 
-function get_seeders_path () {
-  return utils.walk(
-    path.resolve(__dirname, 'seeders'),
-    '*.js'
-  );
-}
-
-function read_seeders (seeders_path = []) {
+function read_seeders () {
+  const seeders_path = utils.folder_contents(path.resolve(__dirname, 'seeders'));
   const seeders_path_promises = seeders_path.map(async (seeder_path) => {
     const collection = path.basename(seeder_path, '.js');
     const seeder = await import(seeder_path);
