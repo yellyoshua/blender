@@ -3,14 +3,13 @@
 ### Frontend - PWA (Progressive Web App)
 
 - [React](https://reactjs.org/) - A JavaScript library for building user interfaces
-- [Redux](https://redux.js.org/) - A predictable state container for JavaScript apps
+- [Recoil](https://recoiljs.org/) - State management library for React
 - [Axios](https://axios-http.com/) - Promise based HTTP client for the browser and node.js
 - [React Router](https://reactrouter.com/) - Declarative routing for React
 - [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework for rapidly building custom designs
 - [React Hook Form](https://react-hook-form.com/) - Performant, flexible and extensible forms with easy-to-use validation
 - [React Icons](https://react-icons.github.io/react-icons/) - Icon components for React
 - [React Toastify](https://fkhadra.github.io/react-toastify/introduction) - Toast notifications for React
-- [i18next](https://www.i18next.com/) - Internationalization-framework written in and for JavaScript
 
 ### Backend
 
@@ -24,8 +23,8 @@
 
 - [Docker](https://www.docker.com/) - Containerization platform
 - [GitHub Actions](https://github.com) - CI/CD platform
-- [AWS Container Registry](https://aws.amazon.com/ecr/) - Container registry for Docker images
-- [AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeanstalk/) - Platform as a service (PaaS) for deploying and scaling web applications and services
+- [AWS Lambda](https://aws.amazon.com/lambda/) - Serverless computing platform
+- [AWS API Gateway](https://aws.amazon.com/api-gateway/) - API management platform
 
 ### Project Management
 
