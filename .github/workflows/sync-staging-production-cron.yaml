@@ -1,7 +1,7 @@
 name: Sync staging database
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '*/5 * * * *'
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -21,15 +21,15 @@ jobs:
       
       - name: Export production database
         run: |
-          mongodump --uri ${{ secrets.DATABASE_URL_PRODUCTION }} --gzip --archive=production.gz --authenticationDatabase admin
+          mongodump --uri "${{ secrets.DATABASE_URL_PRODUCTION }}" --gzip --archive=production.gz --authenticationDatabase admin
           
       - name: Import production database to staging
         run: |
-          mongorestore --uri ${{ secrets.DATABASE_URL_STAGING }} --gzip --archive=production.gz --authenticationDatabase admin --drop
+          mongorestore --uri "${{ secrets.DATABASE_URL_STAGING }}" --gzip --archive=production.gz --authenticationDatabase admin --drop
       
       - name: Remove production database dump
         run: rm production.gz
 
       - name: Reset staging database user password
         run: |
-          mongo --host ${{ secrets.DATABASE_URL_STAGING }} --authenticationDatabase admin --eval "db.users.updateMany({}, {$set: {password: "hello_world"}})"
+          mongo --host "${{ secrets.DATABASE_URL_STAGING }}" --authenticationDatabase admin --eval "db.users.updateMany({}, {$set: {password: "hello_world"}})"
