@@ -10,6 +10,8 @@ WORKDIR ${FUNCTION_DIR}
 COPY . .
 
 # Install dependencies
-RUN pip install -r requirements.txt
+
+RUN pip install -r requirements.txt && \
+    pip install awsgi
 
 CMD ["lambda.handler"]
