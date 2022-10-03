@@ -1,12 +1,13 @@
-import App, { loader as appLoader } from '../modules/app';
+import * as App from '../modules/app';
 
+/**
+ * @type {import('react-router').RouteObject[]}
+ */
 export default [
   {
-    path: '/private',
-    element: <App />,
-    loader: appLoader,
-    children: [
-      {index: true, element: <App />}
-    ]
+    path: '/',
+    element: <App.default />,
+    loader: App.loader,
+    children: []
   }
 ];

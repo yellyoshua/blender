@@ -1,8 +1,13 @@
-import Home from '../modules/home';
+import * as Home from '../modules/home';
 
+/**
+ * @type {import('react-router').RouteObject[]}
+ */
 export default [
   {
     path: '/',
-    element: <Home />
+    element: <Home.default />,
+    loader: Home.loader,
+    children: []
   }
 ];
