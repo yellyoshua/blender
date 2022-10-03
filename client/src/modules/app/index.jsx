@@ -8,6 +8,7 @@ export function loader ({params}) {
 export default function App () {
   return (
     <div className={styles.App}>
+      <h1>Hola </h1>
       <Outlet />
     </div>
   );

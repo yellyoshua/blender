@@ -32,6 +32,6 @@ jobs:
       - name: Remove production database dump
         run: rm production.gz
 
-      - name: Reset staging database user password
-        run: |
-          mongo --host "${{ secrets.DATABASE_URL_STAGING }}" --authenticationDatabase admin --eval "db.users.updateMany({}, {$set: {password: "hello_world"}})"
+      # - name: Reset staging database user password
+      #   run: |
+      #     mongo --host "${{ secrets.DATABASE_URL_STAGING }}" --authenticationDatabase admin --eval "db.users.updateMany({}, {$set: {password: "hello_world"}})"
