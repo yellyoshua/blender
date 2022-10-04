@@ -1,3 +1,4 @@
+import PublicLayout from '../layouts/PublicLayout';
 import * as Home from '../modules/home';
 import * as Login from '../modules/login';
 
@@ -7,12 +8,17 @@ import * as Login from '../modules/login';
 export default [
   {
     path: '/',
-    element: <Home.default />,
-    loader: Home.loader,
-    children: []
-  },
-  {
-    path: '/login',
-    element: <Login.default />
+    element: <PublicLayout />,
+    children: [
+      {
+        path: '',
+        element: <Home.default />,
+        loader: Home.loader
+      },
+      {
+        path: 'login',
+        element: <Login.default />
+      }
+    ]
   }
 ];

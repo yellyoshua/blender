@@ -6,21 +6,23 @@
  */
 
 function crud (axios_instance, route_path) {
+  const parsed_route_path = `/${route_path}`;
+
   return {
     async get (params) {
-      const {data = {}} = await axios_instance.get(route_path, { params });
+      const {data = {}} = await axios_instance.get(parsed_route_path, { params });
       return data.response;
     },
     async post (post_data = {}) {
-      const {data = {}} = await axios_instance.post(route_path, post_data);
+      const {data = {}} = await axios_instance.post(parsed_route_path, post_data);
       return data.response;
     },
     async put (put_data = {}) {
-      const {data = {}} = await axios_instance.put(route_path, put_data);
+      const {data = {}} = await axios_instance.put(parsed_route_path, put_data);
       return data.response;
     },
     async delete (params) {
-      const {data = {}} = await axios_instance.delete(route_path, { params });
+      const {data = {}} = await axios_instance.delete(parsed_route_path, { params });
       return data.response;
     }
   };

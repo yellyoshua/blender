@@ -1,8 +1,8 @@
 import { Outlet, useLoaderData } from 'react-router-dom';
 import styles from './app.module.css';
-import interestsController from '../../api/controllers/interests.controller';
+import interestsService from '../core/services/interests.service';
 
-const interests = interestsController();
+const interests = interestsService();
 
 export function loader () {
   return interests.get();
