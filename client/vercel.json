@@ -1,0 +1,10 @@
+{
+  "framework": null,
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "destination": "/index.html"
+    }
+  ],
+  "outputDirectory": "dist"
+}
