@@ -1,5 +1,5 @@
 // eslint-disable-next-line id-length
-import _ from 'lodash';
+import _ from 'underscore';
 import {RouterProvider, createBrowserRouter} from 'react-router-dom';
 import PrivateRoutes from './PrivateRoutes';
 import PublicRoutes from './PublicRoutes';
@@ -18,8 +18,8 @@ export default function Navigation () {
 }
 
 function compose_private_routes (privateRoutes) {
-  return _.map(privateRoutes, (route) => {
-    return _.extend(route, {
+  return _(privateRoutes).map((route) => {
+    return _(route).extend({
       path: `/app${route.path}`
     });
   });
