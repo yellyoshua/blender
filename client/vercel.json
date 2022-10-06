@@ -1,10 +1,7 @@
 {
   "framework": null,
   "rewrites": [
-    {
-      "source": "/:path*",
-      "destination": "/index.html"
-    }
+    {"source": "/(.*)", "destination": "/"}
   ],
   "outputDirectory": "dist"
 }
