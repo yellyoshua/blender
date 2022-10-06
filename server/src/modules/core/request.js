@@ -16,7 +16,7 @@ function compose_request_handler_args (request, response, method) {
 
 function response_handler (response_data) {
   return (res) => {
-    if (response_data.redirect) {
+    if (response_data && response_data.redirect) {
       const redirect_code = response_data.redirect_code || 302;
       return res.status(redirect_code).redirect(response_data.redirect);
     }
