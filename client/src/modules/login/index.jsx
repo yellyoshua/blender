@@ -1,9 +1,14 @@
-import styles from './login.module.css';
+import { useRecoilValue } from 'recoil';
+import { isMobileState } from '../shared/components/ResizeDevice';
+import LoginDesktop from './components/Login.desktop';
+import LoginMobile from './components/Login.mobile';
 
 export default function Login () {
-  return (
-    <div className="text-center">
-      Login Page
-    </div>
-  );
+  const isMobile = useRecoilValue(isMobileState);
+
+  if (isMobile) {
+    return <LoginMobile />;
+  }
+
+  return <LoginDesktop />;
 }
