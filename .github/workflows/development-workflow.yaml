@@ -4,7 +4,7 @@ on:
     branches: [development]
 
 jobs:
-  tests:
+  tests-server:
     runs-on: ubuntu-latest
     name: Server tests
     steps:
@@ -21,11 +21,11 @@ jobs:
         working-directory: server
         run: npm run test
 
-  deploys:
+  deploys-server:
     runs-on: ubuntu-latest
     name: Server push image & deploy
     needs:
-      - tests
+      - tests-server
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-node@v2
