@@ -13,7 +13,7 @@ export default function App () {
 
   return (
     <div className={styles.App}>
-      <h1>Hola </h1>
+      <h1>Interests list</h1>
       {
         response.map((user) => {
           return (
