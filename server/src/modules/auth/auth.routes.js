@@ -8,6 +8,12 @@ export default [
     handler: authController.google
   },
   {
+    path: '/auth/google/callback',
+    method: 'get',
+    private: false,
+    handler: authController.googleCallback
+  },
+  {
     path: '/auth/github',
     method: 'get',
     private: false,
