@@ -2,23 +2,38 @@ import mongoose from 'mongoose';
 import model from '../core/model.js';
 
 const usersSchema = new mongoose.Schema({
-  full_name: {
+  first_name: {
     type: String,
     required: true
+  },
+  last_name: {
+    type: String
+  },
+  picture: {
+    type: String
   },
   email: {
     type: String,
     required: true
   },
-  status: {
+  provider: {
     type: String,
-    enum: ['active', 'inactive'],
-    default: 'active',
+    enum: ['twitter', 'google'],
+    select: false,
     required: true
   },
-  gender: {
+  provider_user_id: {
     type: String,
+    select: false,
     required: true
+  },
+  is_active: {
+    type: Boolean,
+    default: true
+  },
+  profile: {
+    type: mongoose.Types.ObjectId,
+    ref: 'profiles'
   }
 }, {collection: 'users', strictQuery: false, timestamps: true, strict: true});
 

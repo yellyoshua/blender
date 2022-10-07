@@ -10,10 +10,6 @@ const geolocationSchema = new mongoose.Schema({
   }
 });
 const profilesSchema = new mongoose.Schema({
-  picture: {
-    type: String,
-    required: true
-  },
   birthday: {
     type: Date,
     required: true
@@ -50,8 +46,12 @@ const profilesSchema = new mongoose.Schema({
   personalities: {
     type: [mongoose.Types.ObjectId],
     ref: 'personalities'
+  },
+  gender: {
+    type: String,
+    enum: ['M', 'F', 'X'],
+    required: true
   }
-
 }, {collection: 'profiles', strictQuery: false, timestamps: true, strict: true});
 
 export const profiles = mongoose.model('profiles', profilesSchema);
