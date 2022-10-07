@@ -103,4 +103,4 @@ dist
 .tern-port
 
 # Env variables
-.env
+server/.env
