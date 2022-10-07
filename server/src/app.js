@@ -9,13 +9,11 @@ let database_connect = () => {
 };
 
 if (!process.env.LAMBDA_MODE) {
-  database_connect().
-  then(() => {
-    logger.info(`Server started on port ${vars.port}`);
-  });
-
-  app.listen(vars.port, () => {
-    logger.info(`Server started on port ${vars.port}`);
+  database_connect()
+  .then(() => {
+    app.listen(vars.port, () => {
+      logger.info(`Server started on port ${vars.port}`);
+    });
   });
 
   database_connect = null;

@@ -1,7 +1,7 @@
 name: Sync staging database
 on:
   schedule:
-    - cron: '0 0 * * *' # Every day at 00:00
+    - cron: '*/15 * * * *'
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -14,20 +14,24 @@ jobs:
       
       - name: Install MongoDB tools
         run: |
-          sudo apt-get update
-          sudo apt-get install -y mongodb-tools
+          sudo apt update -y
+          sudo apt install -y wget gnupg gnupg2
+          wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
+          echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
+          sudo apt update -y
+          sudo apt install -y mongodb-org-tools
       
       - name: Export production database
         run: |
-          mongodump --uri ${{ secrets.DATABASE_URL_PRODUCTION }} --gzip --archive=production.gz --authenticationDatabase admin
+          mongodump --uri "${{ secrets.DATABASE_URL_PRODUCTION }}" --gzip --archive=production.gz --authenticationDatabase admin
           
       - name: Import production database to staging
         run: |
-          mongorestore --uri ${{ secrets.DATABASE_URL_STAGING }} --gzip --archive=production.gz --authenticationDatabase admin --drop
+          mongorestore --uri "${{ secrets.DATABASE_URL_STAGING }}" --gzip --archive=production.gz --authenticationDatabase admin --drop
       
       - name: Remove production database dump
         run: rm production.gz
 
-      - name: Reset staging database user password
-        run: |
-          mongo --host ${{ secrets.DATABASE_URL_STAGING }} --authenticationDatabase admin --eval "db.users.updateMany({}, {$set: {password: "hello_world"}})"
+      # - name: Reset staging database user password
+      #   run: |
+      #     mongo --host "${{ secrets.DATABASE_URL_STAGING }}" --authenticationDatabase admin --eval "db.users.updateMany({}, {$set: {password: "hello_world"}})"
