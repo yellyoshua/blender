@@ -4,21 +4,8 @@ const jwt = jsonwebtoken();
 
 const auth_payload_key = 'auth_payload';
 
-export default (routes = []) => {
-  const privatePaths = routes.filter((route) => route.private);
-
+export default () => {
   const authenticate = (req, res, next) => {
-    const is_private_path = privatePaths.find((route) => {
-      return (
-        route.path === req.path &&
-        route.method === req.method.toLowerCase()
-      );
-    });
-
-    if (!is_private_path) {
-      return next();
-    }
-
     const token = req.headers.authorization;
 
     if (!token) {
