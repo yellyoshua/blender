@@ -12,13 +12,70 @@ export default defineConfig({
       manifest: {
         name: 'Blender',
         short_name: 'Blender',
-        description: 'Blending cultures',
+        start_url: '/',
+        display: 'standalone',
+        orientation: 'portrait',
+        scope: '/',
+        background_color: '#473D5F',
         theme_color: '#473D5F',
-        icons: []
+        description: 'Blending cultures',
+        icons: [
+          {
+            src: 'assets/icons/icon-72x72.png',
+            sizes: '72x72',
+            type: 'image/png'
+          },
+          {
+            src: 'assets/icons/icon-96x96.png',
+            sizes: '96x96',
+            type: 'image/png'
+          },
+          {
+            src: 'assets/icons/icon-128x128.png',
+            sizes: '128x128',
+            type: 'image/png'
+          },
+          {
+            src: 'assets/icons/icon-144x144.png',
+            sizes: '144x144',
+            type: 'image/png'
+          },
+          {
+            src: 'assets/icons/icon-152x152.png',
+            sizes: '152x152',
+            type: 'image/png'
+          },
+          {
+            src: 'assets/icons/icon-192x192.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: 'assets/icons/icon-384x384.png',
+            sizes: '384x384',
+            type: 'image/png'
+          },
+          {
+            src: 'assets/icons/icon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png'
+          }
+        ]
       },
       devOptions: {
-        enabled: false
-      }
+        enabled: true,
+        type: 'classic'
+      },
+      manifestFilename: 'manifest.json',
+      filename: 'service-worker.js',
+      registerType: 'autoUpdate',
+      injectRegister: 'inline',
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+        cleanupOutdatedCaches: true,
+        sourcemap: true
+      },
+      srcDir: 'public'
     })
   ]
 });
