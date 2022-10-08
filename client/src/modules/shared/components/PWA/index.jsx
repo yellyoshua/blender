@@ -1,5 +1,4 @@
 import { useRegisterSW } from 'virtual:pwa-register/react';
-import './styles.css';
 
 const four_hours_in_ms = 1000 * 60 * 60 * 4;
 
@@ -29,23 +28,47 @@ export default function ReloadPrompt () {
   };
 
   return (
-    <div className="ReloadPrompt-container">
-      { (offlineReady || needRefresh) && <div className="ReloadPrompt-toast">
-        <div className="ReloadPrompt-message">
-          { offlineReady
-            ? <span>App ready to work offline</span>
-            : <span>New content available, click on reload button to update.</span>
-          }
-        </div>
-        { needRefresh && <button 
-          className="ReloadPrompt-toast-button"
-          onClick={() => updateServiceWorker(true)}
-        >
-          Reload
-        </button> }
-        <button className="ReloadPrompt-toast-button" onClick={() => close()}>Close</button>
-      </div>
+    <div>
+      {
+        (offlineReady || needRefresh) && <PromptMessage
+          offlineReady={offlineReady}
+          needRefresh={needRefresh}
+          updateServiceWorker={updateServiceWorker}
+          close={close}
+        />
       }
+    </div>
+  );
+}
+
+function PromptMessage ({offlineReady, needRefresh, updateServiceWorker, close}) {
+  const renderButton = (label, handler) => {
+    return (
+      <button 
+        className={`
+          border-gray-600 rounded-md border px-2 py-1 ml-2 mr-1
+          hover:bg-gray-600 hover:text-white text-sm
+        `}
+        onClick={handler}
+      >
+        {label}
+      </button>
+    );
+  };
+
+  return (
+    <div className={`
+      fixed bottom-0 right-0 text-left border-gray-600 
+      bg-white rounded-md shadow-lg p-4 m-4 border
+    `}>
+      <div className="mb-2 text-sm">
+        { offlineReady
+          ? <span>App ready to work offline</span>
+          : <span>New content available, click on reload button to update.</span>
+        }
+      </div>
+      { needRefresh && renderButton('Reload', () => updateServiceWorker(true))}
+      {renderButton('Close', () => close())}
     </div>
   );
 }
