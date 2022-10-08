@@ -5,7 +5,7 @@ export default [
   {
     path: '/interests',
     method: 'get',
-    private: false,
+    private: true,
     handler: interestsController.interests.find
   },
   {

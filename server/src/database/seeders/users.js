@@ -11,26 +11,12 @@ export const USERS_REF = {
 export default [
   {
     _id: USERS_REF.yoshua,
-    full_name: 'Yoshua Lopez',
-    country: 'Ecuador',
-    email: 'yoshua@mail.com',
-    status: 'active',
-    gender: 'M'
-  },
-  {
-    _id: USERS_REF.laura,
-    full_name: 'Laura Socarras',
-    country: 'Colombia',
-    email: 'laura@mail.com',
-    status: 'active',
-    gender: 'F'
-  },
-  {
-    _id: USERS_REF.paz,
-    full_name: 'Maria Paz Quirola',
-    country: 'Ecuador',
-    email: 'paz@mail.com',
-    status: 'active',
-    gender: 'F'
+    first_name: 'Yoshua',
+    last_name: 'Lopez',
+    email: '4623@holbertonstudents.com',
+    picture: 'https://lh3.googleusercontent.com/a/ALm5wu0xsGkf6zbCIl8OX9ptpTVplezLImHuhLkP0U2R=s96-c',
+    provider: 'google',
+    provider_user_id: '117735676720136783794',
+    is_active: true
   }
 ];
