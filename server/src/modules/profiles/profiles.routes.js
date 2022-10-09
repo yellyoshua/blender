@@ -1,17 +1,10 @@
-import interestsController from './interests.controller';
-import personalitiesController from './personalities.controller';
+import profilesController from './profiles.controller';
 
 export default [
   {
-    path: '/interests',
+    path: '/profiles',
     method: 'get',
     private: true,
-    handler: interestsController.interests.find
-  },
-  {
-    path: '/personalities',
-    method: 'get',
-    private: false,
-    handler: personalitiesController.personalities.find
+    handler: profilesController.profiles.find
   }
 ];

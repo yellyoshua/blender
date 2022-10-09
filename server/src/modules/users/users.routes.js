@@ -5,14 +5,14 @@ export default [
   {
     path: '/users',
     method: 'get',
-    private: false,
-    handler: usersController.getUsers
+    private: true,
+    handler: usersController.users.find
   },
   {
     path: '/users',
-    method: 'post',
-    private: false,
+    method: 'put',
+    private: true,
     schema: schemas.createUserSchema,
-    handler: usersController.users.create
+    handler: usersController.users.update
   }
 ];

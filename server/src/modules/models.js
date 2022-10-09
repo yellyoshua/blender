@@ -1,7 +1,7 @@
 import users from './users/users.model';
 import profiles from './profiles/profiles.model';
-import interests from './profiles/interests.model';
-import personalities from './profiles/personalities.models';
+import interests from './interests/interests.model';
+import personalities from './personalities/personalities.models';
 import prompts from './prompts/prompts.model';
 
 export default {
