@@ -1,6 +1,6 @@
 /* eslint-disable max-params */
 import joi from 'joi';
-import {CustomError} from '../utils';
+import {CustomError} from '../modules/shared/utils';
 
 const {ValidationError} = joi;
 
@@ -14,7 +14,7 @@ const parseError = (error) => {
   }
   
   console.log('error', error);
-  logger.error(error);
+  console.error(error);
 
   return __t('exceptions.unexpected_error');
 };

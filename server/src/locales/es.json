@@ -1,8 +1,12 @@
 {
 	"exceptions": {
 		"auth": {
-			"invalid_credentials": "Credenciales inválidas"
+      "no_token_provided": "No se ha proporcionado token",
+      "invalid_token": "Token inválido"
 		},
+    "session": {
+      "not_found": "Sesión no encontrada"
+    },
 		"user": {
 			"not_found": "Usuario no encontrado",
 			"already_exists": "El usuario ya existe"

@@ -1,20 +1,21 @@
 import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import styles from './app.module.css';
-import interestsService from '../core/services/interests.service';
+import services from '../core/services';
 import useAuthentication from '../shared/hooks/useAuthentication';
 
-const interestsApi = interestsService();
+const usersService = services.users();
 
 export default function App () {
-  const [interests, setInterests] = useState([]);
+  const [users, setUsers] = useState([]);
   const auth = useAuthentication();
-
+  
   useEffect(() => {
-    interestsApi.get().
-    then(setInterests);
+    usersService.get().
+    then(setUsers);
   }, []);
-
+  
+  console.log('users :', users);
   return (
     <div className={styles.App}>
       <h1>Interests list</h1>
@@ -22,9 +23,9 @@ export default function App () {
         Logout
       </button>
       {
-        interests.map((user) => {
+        users.map((user) => {
           return (
-            <div key={user._id}>{user.name}</div>
+            <div key={user._id}>{user.email}</div>
           );
         })
       }
