@@ -1,20 +1,17 @@
+/* eslint-disable id-length */
 /* eslint-disable max-params */
 import joi from 'joi';
+import _ from 'underscore';
 import {CustomError} from '../modules/shared/utils';
-
-const {ValidationError} = joi;
 
 const parseError = (error) => {
   if (error instanceof CustomError) {
     return error.message;
   }
 
-  if (error instanceof ValidationError) {
+  if (error instanceof joi.ValidationError) {
     return error.details.map((detail) => detail.message);
   }
-  
-  console.log('error', error);
-  console.error(error);
 
   return __t('exceptions.unexpected_error');
 };
@@ -22,18 +19,18 @@ const parseError = (error) => {
 export default () => {
   return (errors, req, res, next) => {
     if (errors) {
-      const parsed_errors = [];
-    
-      if (errors && Array.isArray(errors)) {
-        errors.forEach((error) => {
-          parsed_errors.push(parseError(error));
-        });
-      } else {
-        parsed_errors.push(parseError(errors));
-      }
-  
+      const parsed_errors = _([]).chain()
+      .concat(errors)
+      .flatten()
+      .map(parseError)
+      .flatten()
+      .compact()
+      .value();
+
+      console.error('Errors :', parsed_errors);
+      
       return res.status(500).json({
-        response: null, errors: parsed_errors.flat(2)
+        response: null, errors: parsed_errors
       });
     }
 
