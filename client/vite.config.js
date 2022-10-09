@@ -63,8 +63,7 @@ export default defineConfig({
         ]
       },
       devOptions: {
-        enabled: true,
-        type: 'classic'
+        enabled: false
       },
       manifestFilename: 'manifest.json',
       filename: 'service-worker.js',
