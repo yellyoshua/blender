@@ -1,7 +1,7 @@
 name: Sync staging database
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '0 0 * * *'
 jobs:
   sync:
     runs-on: ubuntu-latest
