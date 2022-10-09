@@ -1,5 +1,5 @@
 import repositories from '../repositories';
 
-export default function interestsService () {
+export default function usersService () {
   return repositories.users;
 }
