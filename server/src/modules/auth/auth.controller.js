@@ -5,10 +5,6 @@ import jsonwebtokenService from '../../services/jsonwebtoken.service';
 const jwt = jsonwebtokenService();
 
 export default {
-  github: async () => {
-    await usersModel.find({});
-    return 'github';
-  },
   google: () => ({redirect: googleAuthService.newAuthorizeUrl()}),
   googleCallback: async (params) => {
     const client_tokens = await googleAuthService.claimTokens(params.code);
