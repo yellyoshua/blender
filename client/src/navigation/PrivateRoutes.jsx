@@ -1,4 +1,4 @@
-import * as App from '../modules/app';
+import App from '../modules/app';
 
 /**
  * @type {import('react-router').RouteObject[]}
@@ -6,8 +6,7 @@ import * as App from '../modules/app';
 export default [
   {
     path: '/',
-    element: <App.default />,
-    loader: App.loader,
+    element: <App />,
     children: []
   }
 ];

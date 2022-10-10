@@ -1,30 +1,18 @@
-// eslint-disable-next-line id-length
-import _ from 'underscore';
 import {RouterProvider, createBrowserRouter} from 'react-router-dom';
 import PrivateRoutes from './PrivateRoutes';
 import PublicRoutes from './PublicRoutes';
+import Authentication from '../modules/shared/components/Authentication';
+import interceptors from '../modules/core/configurations/interceptors';
 
-const router = createBrowserRouter([
-  ...compose_private_routes(PrivateRoutes),
-  ...compose_public_routes(PublicRoutes)
-]);
+const privateRoutes = createBrowserRouter(PrivateRoutes);
+const publicRoutes = createBrowserRouter(PublicRoutes);
 
 export default function Navigation () {
   return (
-    <RouterProvider
-      router={router}
+    <Authentication
+      interceptors={interceptors}
+      privateRoute={<RouterProvider router={privateRoutes} />}
+      publicRoute={<RouterProvider router={publicRoutes} />}
     />
   );
-}
-
-function compose_private_routes (privateRoutes) {
-  return _(privateRoutes).map((route) => {
-    return _(route).extend({
-      path: `/app${route.path}`
-    });
-  });
-}
-
-function compose_public_routes (publicRoutes) {
-  return publicRoutes;
 }
