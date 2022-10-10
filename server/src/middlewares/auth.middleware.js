@@ -2,6 +2,7 @@
 import jsonwebtoken from '../services/jsonwebtoken.service.js';
 import sessionsModel from '../modules/sessions/sessions.model.js';
 import {NoTokenProvidedException, SessionNotFoundException} from '../modules/shared/exceptions';
+import {parseApiErrors} from '../utils/errors.js';
 
 const jwt = jsonwebtoken();
 
@@ -20,7 +21,7 @@ export default () => {
       const token = req.headers.authorization;
 
       if (!token) {
-        return next(new NoTokenProvidedException());
+        throw new NoTokenProvidedException();
       }
 
       const token_payload = jwt.decode(token.split(' ')[1]);
@@ -33,12 +34,13 @@ export default () => {
       });
 
       if (!session) {
-        return next(new SessionNotFoundException());
+        throw new SessionNotFoundException();
       }
 
       return next();
     } catch (error) {
-      return next(error);
+      const errors = parseApiErrors(error);
+      return res.status(401).json({response: null, errors});
     }
   };
 };
