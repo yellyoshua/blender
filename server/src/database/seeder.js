@@ -36,14 +36,14 @@ function seed_data (seeders = []) {
     const records = seeder.records;
 
     if (vars.env.production && skip_seeders_for_production.includes(collection)) {
-      return logger.warn(`Skipping seeding '${collection}' for production`);
+      return console.warn(`Skipping seeding '${collection}' for production`);
     }
 
-    logger.info(`Seeding '${collection}' with ${records.length} records`);
+    console.log(`Seeding '${collection}' with ${records.length} records`);
 
     const model = models[collection];
     if (!model) {
-      return logger.warn(`Skipping seeding '${collection}' as model not found`);
+      return console.warn(`Skipping seeding '${collection}' as model not found`);
     }
 
     return Promise.resolve(model.raw.deleteMany({})).
@@ -54,11 +54,11 @@ function seed_data (seeders = []) {
 }
 
 function handle_error (err) {
-  logger.error(err);
+  console.error(err);
   process.exit(1);
 }
 
 function handle_success () {
-  logger.info('Seeded database successfully');
+  console.info('Seeded database successfully');
   process.exit(0);
 }
