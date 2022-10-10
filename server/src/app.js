@@ -12,7 +12,7 @@ if (!process.env.LAMBDA_MODE) {
   database_connect()
   .then(() => {
     app.listen(vars.port, () => {
-      logger.info(`Server started on port ${vars.port}`);
+      console.log(`Server started on port ${vars.port}`);
     });
   });
 

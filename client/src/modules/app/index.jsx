@@ -1,34 +1,17 @@
-import { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
-import styles from './app.module.css';
-import interestsService from '../core/services/interests.service';
-import useAuthentication from '../shared/hooks/useAuthentication';
-
-const interestsApi = interestsService();
+import { Suspense } from 'react';
+import { useRecoilValue } from 'recoil';
+import { getCurrentUserAtom } from './atoms';
+import CompleteProfile from './CompleteProfile';
+import AppMobile from './App.mobile';
 
 export default function App () {
-  const [interests, setInterests] = useState([]);
-  const auth = useAuthentication();
-
-  useEffect(() => {
-    interestsApi.get().
-    then(setInterests);
-  }, []);
+  const currentUser = useRecoilValue(getCurrentUserAtom());
 
   return (
-    <div className={styles.App}>
-      <h1>Interests list</h1>
-      <button onClick={auth.logout}>
-        Logout
-      </button>
-      {
-        interests.map((user) => {
-          return (
-            <div key={user._id}>{user.name}</div>
-          );
-        })
-      }
-      <Outlet />
-    </div>
+    <Suspense fallback={<h1>Loading</h1>}>
+      <CompleteProfile user={currentUser}>
+        <AppMobile />
+      </CompleteProfile>
+    </Suspense>
   );
 }

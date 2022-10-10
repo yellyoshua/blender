@@ -1,5 +1,6 @@
 import vars from '../config/vars.js';
 import jwt from 'jsonwebtoken';
+import {InvalidTokenException} from '../modules/shared/exceptions';
 
 export default () => {
   const secret = vars.jwtSecret;
@@ -26,7 +27,11 @@ export default () => {
      */
   
     decode: (token) => {
-      return jwt.verify(token, secret);
+      try {
+        return jwt.verify(token, secret);
+      } catch (error) {
+        throw new InvalidTokenException();
+      }
     }
   };
 };

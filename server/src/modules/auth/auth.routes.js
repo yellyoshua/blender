@@ -12,11 +12,5 @@ export default [
     method: 'get',
     private: false,
     handler: authController.googleCallback
-  },
-  {
-    path: '/auth/github',
-    method: 'get',
-    private: false,
-    handler: authController.github
   }
 ];

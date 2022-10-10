@@ -6,7 +6,6 @@ import App from '../modules/app';
 export default [
   {
     path: '/',
-    element: <App />,
-    children: []
+    element: <App />
   }
 ];

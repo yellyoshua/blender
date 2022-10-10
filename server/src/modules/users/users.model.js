@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import model from '../core/model.js';
+import profilesModel from '../profiles/profiles.model.js';
 
 const usersSchema = new mongoose.Schema({
   first_name: {
@@ -39,6 +40,15 @@ const usersSchema = new mongoose.Schema({
 
 export const users = mongoose.model('users', usersSchema);
 
-export default model(users, {
-  populate: ''
-});
+const users_crud = model(users, {populate: ''});
+
+const users_create_parent = users_crud.create;
+users_crud.create = async (data) => {
+  const profile = await profilesModel.create({});
+
+  data.profile = profile._id;
+
+  return users_create_parent(data);
+};
+
+export default users_crud;

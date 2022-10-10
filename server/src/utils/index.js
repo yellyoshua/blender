@@ -2,21 +2,6 @@ import micromatch from 'micromatch';
 import path from 'path';
 import fs from 'fs';
 
-export default {
-  applyRoutes,
-  walk,
-  folder_contents,
-  composeQuery
-};
-
-export class CustomError extends Error {
-  constructor (message) {
-    super(message);
-    this.name = this.constructor.name;
-    this.message = message;
-  }
-}
-
 function composeQuery (query = {}) {
   const filter = {};
   const options = {};
@@ -64,3 +49,10 @@ function applyRoutes (routes = [], app = {}) {
     app[method](route_path, handlers);
   });
 }
+
+export default {
+  applyRoutes,
+  walk,
+  folder_contents,
+  composeQuery
+};
