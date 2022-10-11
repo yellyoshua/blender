@@ -1,28 +1,26 @@
-import mongoose from 'mongoose';
-
-const id = mongoose.Types.ObjectId;
+import {generateObjectId} from '../../utils';
 
 export const INTERESTS_REF = {
-  cuisine_american: id('53ea3f4436e9abb40c000178'),
-  cuisine_brazilian: id('53ea407346f584b80c000095'),
-  cuisine_caribbean: id('53ea41d846f584b80c0000bc'),
-  cuisine_chinese: id('53ea4287a51beeb00c0000ea'),
-  cuisine_french: id('53ea460d36e9abb40c0001ae'),
-  cuisine_german: id('53ea46dca51beeb00c0000ff'),
-  cuisine_greek: id('53ea46e446f584b80c00011a'),
-  cuisine_indian: id('53ea571ba51beeb00c00011f'),
-  cuisine_italian: id('53ea5a6936e9abb40c0001dc'),
-  cuisine_japanese: id('53ea5ac936e9abb40c0001de'),
-  cuisine_korean: id('53ea5c7936e9abb40c0001e2'),
-  cuisine_mediterranean: id('53ea5f539aadb8ac0c00011e'),
-  cuisine_mexican: id('53ea5fdd46f584b80c0001df'),
-  cuisine_moroccan: id('53ea601136e9abb40c000209'),
-  cuisine_thai: id('53ea60bea51beeb00c000177'),
-  cuisine_turkish: id('53ea6b549aadb8ac0c00017b'),
-  cuisine_vietnamese: id('53ea6be836e9abb40c000263'),
-  cuisine_vegan: id('53ea6dfd9aadb8ac0c0001b7'),
-  cuisine_vegetarian: id('53ea70c39aadb8ac0c0001d5'),
-  cuisine_pescatarian: id('53ea70df9aadb8ac0c0001d7')
+  cuisine_american: generateObjectId('cuisine_american'),
+  cuisine_brazilian: generateObjectId('cuisine_brazilian'),
+  cuisine_caribbean: generateObjectId('cuisine_caribbean'),
+  cuisine_chinese: generateObjectId('cuisine_chinese'),
+  cuisine_french: generateObjectId('cuisine_french'),
+  cuisine_german: generateObjectId('cuisine_german'),
+  cuisine_greek: generateObjectId('cuisine_greek'),
+  cuisine_indian: generateObjectId('cuisine_indian'),
+  cuisine_italian: generateObjectId('cuisine_italian'),
+  cuisine_japanese: generateObjectId('cuisine_japanese'),
+  cuisine_korean: generateObjectId('cuisine_korean'),
+  cuisine_mediterranean: generateObjectId('cuisine_mediterranean'),
+  cuisine_mexican: generateObjectId('cuisine_mexican'),
+  cuisine_moroccan: generateObjectId('cuisine_moroccan'),
+  cuisine_thai: generateObjectId('cuisine_thai'),
+  cuisine_turkish: generateObjectId('cuisine_turkish'),
+  cuisine_vietnamese: generateObjectId('cuisine_vietnamese'),
+  cuisine_vegan: generateObjectId('cuisine_vegan'),
+  cuisine_vegetarian: generateObjectId('cuisine_vegetarian'),
+  cuisine_pescatarian: generateObjectId('cuisine_pescatarian')
 };
 
 export default [

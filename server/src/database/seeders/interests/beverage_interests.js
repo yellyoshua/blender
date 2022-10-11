@@ -1,20 +1,18 @@
-import mongoose from 'mongoose';
-
-const id = mongoose.Types.ObjectId;
+import {generateObjectId} from '../../utils';
 
 export const INTERESTS_REF = {
-  beverage_beer: id('53ea737346f584b80c0002b1'),
-  beverage_wine: id('53d54f22f1d5ea877300031b'),
-  beverage_whiskey: id('53d54f22f1d5ea8773000338'),
-  beverage_vodka: id('53ea266f9aadb8ac0c00003f'),
-  beverage_cocktail: id('53ea298a36e9abb40c00007d'),
-  beverage_tequila: id('53ea2e8136e9abb40c0000c2'),
-  beverage_smoothie: id('53ea321ba51beeb00c000064'),
-  beverage_juice: id('53ea325a46f584b80c000068'),
-  beverage_coffee: id('53ea327736e9abb40c000109'),
-  beverage_tea: id('53ea38149aadb8ac0c000089'),
-  beverage_water: id('53ea3f3fa51beeb00c0000b9'),
-  beverage_hot_chocolate: id('53ea3f9746f584b80c000085')
+  beverage_beer: generateObjectId('beverage_beer'),
+  beverage_wine: generateObjectId('beverage_wine'),
+  beverage_whiskey: generateObjectId('beverage_whiskey'),
+  beverage_vodka: generateObjectId('beverage_vodka'),
+  beverage_cocktail: generateObjectId('beverage_cocktail'),
+  beverage_tequila: generateObjectId('beverage_tequila'),
+  beverage_smoothie: generateObjectId('beverage_smoothie'),
+  beverage_juice: generateObjectId('beverage_juice'),
+  beverage_coffee: generateObjectId('beverage_coffee'),
+  beverage_tea: generateObjectId('beverage_tea'),
+  beverage_water: generateObjectId('beverage_water'),
+  beverage_hot_chocolate: generateObjectId('beverage_hot_chocolate')
 };
 
 export default [

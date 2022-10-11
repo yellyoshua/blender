@@ -1,31 +1,29 @@
-import mongoose from 'mongoose';
-
-const id = mongoose.Types.ObjectId;
+import {generateObjectId} from '../../utils';
 
 export const INTERESTS_REF = {
-  hobby_art: id('53ea404936e9abb40c000188'),
-  hobby_collecting: id('53ea41259aadb8ac0c0000cc'),
-  hobby_cooking: id('53ea46999aadb8ac0c0000fb'),
-  hobby_crafts: id('53ea4bed46f584b80c00015c'),
-  hobby_dancing: id('53ea5d9546f584b80c0001c1'),
-  hobby_drawing: id('53ea5d9b36e9abb40c0001ef'),
-  hobby_fashion: id('53ea6116a51beeb00c000179'),
-  hobby_fishing: id('53ea612d46f584b80c0001e5'),
-  hobby_gaming: id('53ea61caa51beeb00c00017b'),
-  hobby_gardening: id('53ea62e736e9abb40c000234'),
-  hobby_home_improvement: id('53ea63d69aadb8ac0c00013f'),
-  hobby_painting: id('53ea66c39aadb8ac0c000168'),
-  hobby_photography: id('53ea670c46f584b80c00023b'),
-  hobby_sewing: id('53ea6bd246f584b80c000269'),
-  hobby_shopping: id('53ea6eb19aadb8ac0c0001c4'),
-  hobby_singing: id('53594eba5768ea9f5900001f'),
-  hobby_sculpting: id('53aaf71275c4d7fd0c000030'),
-  hobby_traveling: id('53d54f22f1d5ea8773000328'),
-  hobby_reading: id('53d54f22f1d5ea877300032c'),
-  hobby_writing: id('53ea224636e9abb40c000050'),
-  hobby_learning_new_languages: id('53ea305536e9abb40c0000de'),
-  hobby_playing_an_instrument: id('53ea327c9aadb8ac0c00006b'),
-  hobby_camping: id('53ea3edc9aadb8ac0c0000b8')
+  hobby_art: generateObjectId('hobby_art'),
+  hobby_collecting: generateObjectId('hobby_collecting'),
+  hobby_cooking: generateObjectId('hobby_cooking'),
+  hobby_crafts: generateObjectId('hobby_crafts'),
+  hobby_dancing: generateObjectId('hobby_dancing'),
+  hobby_drawing: generateObjectId('hobby_drawing'),
+  hobby_fashion: generateObjectId('hobby_fashion'),
+  hobby_fishing: generateObjectId('hobby_fishing'),
+  hobby_gaming: generateObjectId('hobby_gaming'),
+  hobby_gardening: generateObjectId('hobby_gardening'),
+  hobby_home_improvement: generateObjectId('hobby_home_improvement'),
+  hobby_painting: generateObjectId('hobby_painting'),
+  hobby_photography: generateObjectId('hobby_photography'),
+  hobby_sewing: generateObjectId('hobby_sewing'),
+  hobby_shopping: generateObjectId('hobby_shopping'),
+  hobby_singing: generateObjectId('hobby_singing'),
+  hobby_sculpting: generateObjectId('hobby_sculpting'),
+  hobby_traveling: generateObjectId('hobby_traveling'),
+  hobby_reading: generateObjectId('hobby_reading'),
+  hobby_writing: generateObjectId('hobby_writing'),
+  hobby_learning_new_languages: generateObjectId('hobby_learning_new_languages'),
+  hobby_playing_an_instrument: generateObjectId('hobby_playing_an_instrument'),
+  hobby_camping: generateObjectId('hobby_camping')
 };
 
 export default [

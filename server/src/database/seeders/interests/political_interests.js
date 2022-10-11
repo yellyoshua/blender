@@ -1,12 +1,10 @@
-import mongoose from 'mongoose';
-
-const id = mongoose.Types.ObjectId;
+import {generateObjectId} from '../../utils';
 
 export const INTERESTS_REF = {
 
-  political_right: id('623fb1b764fd56550e229ee0'),
-  political_left: id('623fb1b764fd46550e229ee1'),
-  political_centre: id('623fb1b764fd5e550e229ee2')
+  political_right: generateObjectId('political_right'),
+  political_left: generateObjectId('political_left'),
+  political_centre: generateObjectId('political_centre')
 };
 
 export default [

@@ -1,13 +1,11 @@
-import mongoose from 'mongoose';
+import {generateObjectId} from '../utils';
 import {INTERESTS_REF} from './interests/index.js';
 import {PERSONALITIES_REF} from './personalities.js';
 
-const id = mongoose.Types.ObjectId;
-
 export const PROFILES_REF = {
-  yoshua: id('623fb1b764fd56550e229ed8'),
-  laura: id('623fb1b764fd56550e229ed6'),
-  paz: id('623fb1b764fd56580e229ed6')
+  yoshua: generateObjectId('yoshua'),
+  laura: generateObjectId('laura'),
+  paz: generateObjectId('paz')
 };
 
 export default [
