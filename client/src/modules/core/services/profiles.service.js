@@ -1,5 +1,7 @@
-import repositories from '../repositories';
+import { FetcherApi } from '../configurations/fetcher';
+import repository from '../utils/repository';
 
-export default function profilesService () {
-  return repositories.profiles;
-}
+const profiles_crud = repository(FetcherApi)('profiles');
+
+export default profiles_crud;
+

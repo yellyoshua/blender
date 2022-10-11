@@ -1,7 +1,0 @@
-import { FetcherApi } from '../configurations/fetcher';
-import repository from '../utils/repository';
-
-const interests_crud = repository(FetcherApi)('users');
-
-export default interests_crud;
-
