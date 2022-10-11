@@ -1,17 +1,22 @@
-import { Suspense } from 'react';
-import { useRecoilValue } from 'recoil';
-import { getCurrentUserAtom } from './atoms';
+import { useEffect } from 'react';
 import CompleteProfile from './CompleteProfile';
 import AppMobile from './App.mobile';
+import { useCurrentUserStore } from './stores';
 
 export default function App () {
-  const currentUser = useRecoilValue(getCurrentUserAtom());
+  const {currentUser, getCurrentUser} = useCurrentUserStore();
+
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
+
+  if (!currentUser) {
+    return null;
+  }
 
   return (
-    <Suspense fallback={<h1>Loading</h1>}>
-      <CompleteProfile user={currentUser}>
-        <AppMobile />
-      </CompleteProfile>
-    </Suspense>
+    <CompleteProfile user={currentUser}>
+      <AppMobile />
+    </CompleteProfile>
   );
 }

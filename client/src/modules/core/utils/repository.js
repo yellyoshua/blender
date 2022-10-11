@@ -5,7 +5,7 @@ import services from '../services';
  */
 
 function setup_headers (axios_instance) {
-  const accessToken = services.auth().getAccessToken();
+  const accessToken = services.auth.getAccessToken();
 
   axios_instance.defaults.headers.common = {
     'Content-Type': 'application/json',
@@ -28,8 +28,8 @@ function setupInterceptors (axios_instance) {
     const textError = String(error);
     const statusCode = Number(textError.match(/\d+/ug)[0]);
 
-    if (statusCodesForLogout.includes(statusCode) && services.auth().isAuthenticated()) {
-      services.auth().logout();
+    if (statusCodesForLogout.includes(statusCode) && services.auth.isAuthenticated()) {
+      services.auth.logout();
       return location.reload();
     }
 
