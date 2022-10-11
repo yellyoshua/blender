@@ -43,10 +43,9 @@ jobs:
         working-directory: server
         run: |
           npm install
-          npm run seed
+          NODE_ENV=production npm run seed
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL_PRODUCTION }}
-          NODE_ENV: production
 
       - name: Push to AWS ECR
         working-directory: server
