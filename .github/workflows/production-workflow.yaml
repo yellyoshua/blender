@@ -41,7 +41,9 @@ jobs:
 
       - name: Install seeds
         working-directory: server
-        run: npm run seed
+        run: |
+          npm install
+          npm run seed
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL_PRODUCTION }}
           NODE_ENV: production
