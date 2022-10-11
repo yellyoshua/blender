@@ -1,5 +1,7 @@
-import repositories from '../repositories';
+import { FetcherApi } from '../configurations/fetcher';
+import repository from '../utils/repository';
 
-export default function usersService () {
-  return repositories.users;
-}
+const interests_crud = repository(FetcherApi)('users');
+
+export default interests_crud;
+

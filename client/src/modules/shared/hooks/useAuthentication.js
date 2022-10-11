@@ -1,23 +1,15 @@
 import { useEffect, useState } from 'react';
-import { atom, selector, useRecoilValue, useSetRecoilState } from 'recoil';
-import authService from '../../core/services/auth.service';
+import createStore from 'zustand';
+import services from '../../core/services';
 
-export const authStateAtom = atom({
-  key: 'authStateAtom',
-  default: {
-    accessToken: authService().getAccessToken()
-  }
-});
-
-export const accessTokenAtom = selector({
-  key: 'accessTokenAtom',
-  get: ({ get }) => get(authStateAtom).accessToken
-});
+export const useAuthStateStore = createStore(() => ({
+  accessToken: services.auth.getAccessToken()
+}));
 
 export default function useAuthentication () {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
-  const authState = useRecoilValue(authStateAtom);
-  const setAuthState = useSetRecoilState(authStateAtom);
+  const authState = useAuthStateStore();
+  const setAuthState = useAuthStateStore.setState;
 
   const updateAuthState = (authState = {}) => {
     setAuthState((prevAuthState) => ({
@@ -27,18 +19,18 @@ export default function useAuthentication () {
   };
 
   const login = (accessToken) => {
-    authService().login(accessToken);
+    services.auth.login(accessToken);
     updateAuthState({accessToken: accessToken});
   };
 
   const logout = () => {
-    authService().logout();
+    services.auth.logout();
     updateAuthState({accessToken: null});
   };
 
   useEffect(() => {
     setIsAuthenticating(true);
-    const accessToken = authService().getAccessToken();
+    const accessToken = services.auth.getAccessToken();
     updateAuthState({accessToken: accessToken});
     setIsAuthenticating(false);
   }, [authState.accessToken]);
