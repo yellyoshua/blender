@@ -1,5 +1,4 @@
-import { useRecoilValue } from 'recoil';
-import {authProvidersAtom} from '../../../login';
+import {useAuthProvidersStore} from '../../stores';
 
 function LoginButton ({providerAuthUrl, providerLogo, providerLabel, className}) {
   return (
@@ -14,11 +13,11 @@ function LoginButton ({providerAuthUrl, providerLogo, providerLabel, className})
 }
 
 /**
- * @param {{provider: 'google' | 'facebook', apiUrl: string}} props
+ * @param {{provider: 'google', apiUrl: string}} props
  */
 
 export default function SocialLoginButton ({provider, apiUrl}) {
-  const authProviders = useRecoilValue(authProvidersAtom);
+  const authProviders = useAuthProvidersStore();
 
   const provider_info = authProviders[provider];
 
@@ -30,7 +29,7 @@ export default function SocialLoginButton ({provider, apiUrl}) {
     <LoginButton
       className="flex items-center"
       providerAuthUrl={`${apiUrl}${provider_info.providerAuthUrl}`}
-      providerLogo={provider_info.providerLogo}
+      providerLogo={<provider_info.ProviderLogo />}
       providerLabel={provider_info.providerLabel}
     />
   );

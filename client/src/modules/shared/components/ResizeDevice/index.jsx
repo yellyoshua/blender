@@ -1,24 +1,14 @@
 import { useEffect } from 'react';
-import {atom, selector, useRecoilState} from 'recoil';
+import createStore from 'zustand';
 
-export const resizeDeviceState = atom({
-  key: 'resizeDeviceState',
-  default: {
-    width: window.innerWidth,
-    height: window.innerHeight,
-    isMobile: window.innerWidth < 768
-  }
-});
-
-export const isMobileState = selector({
-  key: 'isMobileState',
-  get: ({get}) => {
-    return get(resizeDeviceState).isMobile;
-  }
-});
+export const useResizeDeviceStore = createStore(() => ({
+  width: window.innerWidth,
+  height: window.innerHeight,
+  isMobile: window.innerWidth < 768
+}));
 
 export default function ResizeDevice ({children}) {
-  const [, setResizeDevice] = useRecoilState(resizeDeviceState);
+  const setResizeDevice = useResizeDeviceStore.setState;
 
   const handleResize = () => {
     setResizeDevice({

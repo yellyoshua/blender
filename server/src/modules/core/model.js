@@ -1,7 +1,10 @@
-import mongoose from 'mongoose';
 import query_model from './query_model';
 
-export default (Model = mongoose.Model) => {
+/**
+ * @param {import('mongoose').Model} Model
+ */
+
+export default (Model) => {
   return {
     async find (filter = {}, options = {}) {
       const mongooseInstance = Model.find(filter, null, {
@@ -34,12 +37,17 @@ export default (Model = mongoose.Model) => {
       return data;
     },
     async update (filter = {}, body = {}) {
-      const byId = {_id: filter._id};
       if (!filter._id) {
         throw new Error('_id is required');
       }
-      const mongooseInstance = Model.findByIdAndUpdate(byId, body);
-      const data = await mongooseInstance.exec();
+      const mongooseInstance = Model.findByIdAndUpdate(
+        filter._id,
+        {$set: body}
+      );
+      await mongooseInstance.exec();
+      const data = await Model.findById(filter._id)
+      .lean()
+      .exec();
 
       return data;
     },

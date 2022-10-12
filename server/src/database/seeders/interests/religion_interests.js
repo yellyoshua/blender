@@ -1,16 +1,14 @@
-import mongoose from 'mongoose';
-
-const id = mongoose.Types.ObjectId;
+import {generateObjectId} from '../../utils';
 
 export const INTERESTS_REF = {
-  religion_christian: id('53ea44659aadb8ac0c0000ec'),
-  religion_muslim: id('53ea603c46f584b80c0001e1'),
-  religion_buddhist: id('53ea6043a51beeb00c00016a'),
-  religion_hindu: id('53ea622146f584b80c0001ff'),
-  religion_jewish: id('53ea637546f584b80c00020e'),
-  religion_sikh: id('53ea64d346f584b80c00021f'),
-  religion_atheist: id('53ea660236e9abb40c00023e'),
-  religion_agnostic: id('53ea660a46f584b80c00022e')
+  religion_christian: generateObjectId('religion_christian'),
+  religion_muslim: generateObjectId('religion_muslim'),
+  religion_buddhist: generateObjectId('religion_buddhist'),
+  religion_hindu: generateObjectId('religion_hindu'),
+  religion_jewish: generateObjectId('religion_jewish'),
+  religion_sikh: generateObjectId('religion_sikh'),
+  religion_atheist: generateObjectId('religion_atheist'),
+  religion_agnostic: generateObjectId('religion_agnostic')
 };
 
 export default [

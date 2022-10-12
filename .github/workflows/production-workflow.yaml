@@ -39,6 +39,14 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
+      - name: Install seeds
+        working-directory: server
+        run: |
+          npm install
+          NODE_ENV=production npm run seed
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL_PRODUCTION }}
+
       - name: Push to AWS ECR
         working-directory: server
         run: |

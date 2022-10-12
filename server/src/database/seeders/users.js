@@ -1,11 +1,9 @@
-import mongoose from 'mongoose';
-
-const id = mongoose.Types.ObjectId;
+import {generateObjectId} from '../utils';
 
 export const USERS_REF = {
-  yoshua: id('623fb1b764fd56550e229ed4'),
-  laura: id('623fb1b764fd56550e229ed5'),
-  paz: id('623fb1b764fd56550e229ed6')
+  yoshua: generateObjectId('yoshua'),
+  laura: generateObjectId('laura'),
+  paz: generateObjectId('paz')
 };
 
 export default [

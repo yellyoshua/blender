@@ -1,34 +1,22 @@
-import { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
-import styles from './app.module.css';
-import interestsService from '../core/services/interests.service';
-import useAuthentication from '../shared/hooks/useAuthentication';
-
-const interestsApi = interestsService();
+import { useEffect } from 'react';
+import CompleteProfile from './CompleteProfile';
+import AppMobile from './App.mobile';
+import { useCurrentUserStore } from './stores';
 
 export default function App () {
-  const [interests, setInterests] = useState([]);
-  const auth = useAuthentication();
+  const {currentUser, getCurrentUser} = useCurrentUserStore();
 
   useEffect(() => {
-    interestsApi.get().
-    then(setInterests);
+    getCurrentUser();
   }, []);
 
+  if (!currentUser) {
+    return null;
+  }
+
   return (
-    <div className={styles.App}>
-      <h1>Interests list</h1>
-      <button onClick={auth.logout}>
-        Logout
-      </button>
-      {
-        interests.map((user) => {
-          return (
-            <div key={user._id}>{user.name}</div>
-          );
-        })
-      }
-      <Outlet />
-    </div>
+    <CompleteProfile user={currentUser}>
+      <AppMobile />
+    </CompleteProfile>
   );
 }

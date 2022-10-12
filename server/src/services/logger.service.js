@@ -1,4 +1,7 @@
-// import {createLogger, format, transports} from 'winston';
+/**
+ * No works on Lambda functions
+ * import {createLogger, format, transports} from 'winston';
+ */
 
 export default () => {
   return {

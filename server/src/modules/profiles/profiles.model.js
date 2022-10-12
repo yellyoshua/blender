@@ -11,16 +11,13 @@ const geolocationSchema = new mongoose.Schema({
 });
 const profilesSchema = new mongoose.Schema({
   birthday: {
-    type: Date,
-    required: true
+    type: Date
   },
   location_country: {
-    type: String,
-    required: true
+    type: String
   },
   location_city: {
-    type: String,
-    required: true
+    type: String
   },
   geolocation: geolocationSchema,
 
@@ -41,16 +38,17 @@ const profilesSchema = new mongoose.Schema({
   },
   interests: {
     type: [mongoose.Types.ObjectId],
-    ref: 'interests'
+    ref: 'interests',
+    default: []
   },
   personalities: {
     type: [mongoose.Types.ObjectId],
-    ref: 'personalities'
+    ref: 'personalities',
+    default: []
   },
   gender: {
     type: String,
-    enum: ['M', 'F', 'X'],
-    required: true
+    enum: ['M', 'F', 'X']
   }
 }, {collection: 'profiles', strictQuery: false, timestamps: true, strict: true});
 

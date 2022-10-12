@@ -12,7 +12,7 @@ export default (schema) => {
     }, {allowUnknown: true});
 
     if (error) {
-      return next(error);      
+      return next(error);
     }
 
     return next();
