@@ -1,7 +1,11 @@
 /* eslint-disable padded-blocks */
 import jsonwebtoken from '../services/jsonwebtoken.service.js';
 import sessionsModel from '../modules/sessions/sessions.model.js';
-import {NoTokenProvidedException, SessionNotFoundException} from '../modules/shared/exceptions';
+import {
+  NoTokenProvidedException,
+  SessionNotFoundException,
+  UserNotFoundException
+} from '../modules/shared/exceptions';
 import {parseApiErrors} from '../utils/errors.js';
 
 const jwt = jsonwebtoken();
@@ -31,10 +35,14 @@ export default () => {
       const [session] = await sessionsModel.find({
         _id: authorization.session_id,
         user: authorization.user_id
-      });
+      }, {populate: 'user'});
 
       if (!session) {
         throw new SessionNotFoundException();
+      }
+
+      if (!session.user) {
+        throw new UserNotFoundException();
       }
 
       return next();
