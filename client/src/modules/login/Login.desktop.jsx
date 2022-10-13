@@ -30,7 +30,12 @@ export default function LoginDesktop () {
   return (
     <div className="grid grid-cols-2 gap-20 min-h-screen select-none">
       <div className="flex justify-end items-center"> 
-        <img className="" style={{height: 450}} src={previews[activePreview]} alt="" />
+        <img
+          className="pointer-events-none"
+          style={{height: 450}}
+          src={previews[activePreview]}
+          alt="applicatoion preview"
+        />
       </div>
       <div className="flex flex-col justify-center items-start"> 
         <div className="text-center flex flex-col gap-3 p-3">
