@@ -28,13 +28,13 @@ export default function LoginDesktop () {
   }, []);
 
   return (
-    <div className="grid grid-cols-2 gap-20 min-h-screen">
+    <div className="grid grid-cols-2 gap-20 min-h-screen select-none">
       <div className="flex justify-end items-center"> 
         <img className="" style={{height: 450}} src={previews[activePreview]} alt="" />
       </div>
       <div className="flex flex-col justify-center items-start"> 
         <div className="text-center flex flex-col gap-3 p-3">
-          <div className="grow ">
+          <div className="grow">
             <BlenderappLogo className="mx-auto mt-4" />
             <BlenderappLabel className="mx-auto mt-4" width={200} />
             <p className="text-primary mx-auto mt-2 font-medium">Blending cultures</p>

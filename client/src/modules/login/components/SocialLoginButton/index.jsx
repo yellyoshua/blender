@@ -27,7 +27,7 @@ export default function SocialLoginButton ({provider, apiUrl}) {
   
   return (
     <LoginButton
-      className="flex items-center"
+      className="flex items-center cursor-pointer"
       providerAuthUrl={`${apiUrl}${provider_info.providerAuthUrl}`}
       providerLogo={<provider_info.ProviderLogo />}
       providerLabel={provider_info.providerLabel}
