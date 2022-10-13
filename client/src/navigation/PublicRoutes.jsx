@@ -1,6 +1,6 @@
 import Login from '../modules/login';
 import Terms from '../modules/terms';
-import PageNotFound from '../modules/errors/pagenotfound';
+import PageNotFound from '../modules/errors/PageNotFound';
 
 /**
  * @type {import('react-router').RouteObject[]}
@@ -15,7 +15,7 @@ export default [
     element: <Terms />
   },
   {
-    path: '/not-found',
+    path: '*',
     element: <PageNotFound />
   }
 ];
