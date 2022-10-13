@@ -10,13 +10,13 @@ export default defineConfig({
     VitePWA({
       includeAssets: ['favicon.ico'],
       manifest: {
-        name: 'Blender',
-        short_name: 'Blender',
+        name: 'Weblend',
+        short_name: 'Weblend',
         start_url: '/',
         display: 'standalone',
         orientation: 'portrait',
         scope: '/',
-        background_color: '#473D5F',
+        background_color: 'white',
         theme_color: '#473D5F',
         description: 'Blending cultures',
         icons: [
