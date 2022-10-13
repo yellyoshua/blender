@@ -1,5 +1,5 @@
 import App from '../modules/app';
-import PageNotFound from '../modules/errors/pagenotfound';
+import PageNotFound from '../modules/errors/PageNotFound';
 
 /**
  * @type {import('react-router').RouteObject[]}
@@ -10,7 +10,7 @@ export default [
     element: <App />
   },
   {
-    path: '/not-found',
+    path: '*',
     element: <PageNotFound />
   }
 ];
