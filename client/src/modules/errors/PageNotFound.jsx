@@ -13,8 +13,12 @@ const PageNotFound = () => {
     >
       {
         isMobile
-          ? <img src="/illustrations/not_found.svg" style={{minWidth: 300}} alt="not-found" />
-          : <img src="/illustrations/not_found.svg" style={{width: 500}} alt="not-found" />
+          ? <img src="/illustrations/not_found.svg" style={{ minWidth: 300 }} alt="not-found" />
+          : <img
+            className="w-5/12"
+            src="/illustrations/not_found.svg"
+            style={{ maxWidth: 1000 }}
+            alt="not-found" />
       }
     </div>
   );
