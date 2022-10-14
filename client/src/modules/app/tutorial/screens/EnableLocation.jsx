@@ -43,7 +43,7 @@ export default function EnableLocation ({profile, updateProfile}) {
 
   return (
     <div className="flex flex-col gap-3 items-center">
-      <h1>Enable Location</h1>
+      <h1>Set your location services</h1>
       <button
         className="bg-blue-500 text-white p-2 rounded"
         onClick={handleEnableLocation}
