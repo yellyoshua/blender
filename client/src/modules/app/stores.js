@@ -30,3 +30,14 @@ export const useCurrentUserStore = createStore((set) => ({
     finally(() => set({loading: false}));
   }
 }));
+
+export const useInterestsStores = createStore((set) => ({
+  interests: [],
+  loading: false,
+  getInterests: () => {
+    set({loading: true});
+    services.interests.get().
+    then((interests) => set({interests})).
+    finally(() => set({loading: false}));
+  }
+}));
