@@ -1,25 +1,25 @@
 import { useEffect, useMemo } from 'react';
-import { useInterestsStores } from '../../stores';
+import { usePersonalitiesStores } from '../../stores';
 
 
-export default function SelectInterests({ profile, updateProfile }) {
-  const { interests, getInterests, loading } = useInterestsStores();
+export default function SelectPersonalities({ profile, updateProfile }) {
+  const { personalities, getPersonalities, loading } = usePersonalitiesStores();
   useEffect(() => {
-    getInterests();
+    getPersonalities();
   }, []);
 
   return (
     <div className="my-10 flex flex-col gap-3 items-center">
-      <h1 className="text-3xl text-primary font-bold font-roboto">Interests</h1>
+      <h1 className="text-3xl text-primary font-bold font-roboto">Personalities</h1>
       <input
         type="text"
-        placeholder="Search for interests"
+        placeholder="Search for personalities"
         className={`
         text-lg px-4 py-2 w-96 h-10 rounded-3xl bg-gray-200 text-primary font-roboto font-light 
         `}
       />
       <div className="mt-6 grid grid-cols-3 gap-3 justify-center">
-        {interests.map((interest, index) => (
+        {personalities.map((personalities, index) => (
           <div key={index} className="flex items-center gap-2">
             <p
               className={`
@@ -28,7 +28,7 @@ export default function SelectInterests({ profile, updateProfile }) {
               hover:border-primary hover:font-normal hover:cursor-pointer
               `}
             >
-              {interest.name}</p>
+              {personalities.name}</p>
           </div>
         ))}
       </div>
