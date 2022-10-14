@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import model from '../core/model.js';
 
 const promptsSchema = new mongoose.Schema({
-  name: {
+  prompt: {
     type: String,
     required: true
   }
