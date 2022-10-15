@@ -2,21 +2,18 @@ import createStore from 'zustand';
 
 import services from '../core/services';
 
-const usersService = services.users;
-const profilesService = services.profiles;
-
 export const useCurrentUserStore = createStore((set) => ({
   currentUser: null,
   loading: false,
   getCurrentUser: () => {
     set({loading: true});
-    usersService.get({___populate: 'profile'}).
+    services.users.get({___populate: 'profile'}).
     then(([user]) => set({currentUser: user})).
     finally(() => set({loading: false}));
   },
   updateProfile: (profile) => {
     set({loading: true});
-    profilesService.put(profile).
+    services.profiles.put(profile).
     then((profile) => {
       set(
         (prevState) => ({
@@ -30,6 +27,7 @@ export const useCurrentUserStore = createStore((set) => ({
     finally(() => set({loading: false}));
   }
 }));
+
 export const usePersonalitiesStores = createStore((set) => ({
   personalities: [],
   loading: false,
