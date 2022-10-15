@@ -7,6 +7,9 @@ module.exports = {
     './src/**/*.{jsx,tsx}'
   ],
   theme: {
+    fontFamily: {
+      roboto: ['Roboto', 'sans-serif']
+    },
     extend: {
       colors: {
         primary: '#473D5F',
