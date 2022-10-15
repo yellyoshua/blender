@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import Tutorial from './tutorial';
 import AppMobile from './App.mobile';
+import {Ping} from '@uiball/loaders';
 import { useCurrentUserStore } from './stores';
 import { useResizeDeviceStore } from '../shared/components/ResizeDevice';
 
@@ -13,7 +14,9 @@ export default function App () {
   }, []);
 
   if (!currentUser) {
-    return null;
+    return <div className="flex items-center justify-center h-screen w-full">
+      <Ping size={45} speed={1} />
+    </div>;
   }
 
   if (isMobile) {
