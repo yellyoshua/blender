@@ -2,7 +2,7 @@ import './styles.css';
 
 export default function Terms () {
   return (
-    <div className="">
+    <div className="mb-20 mx-6 my-6">
       <div className="tittle">
         <h1 className="font-roboto">
           Terms and Conditions

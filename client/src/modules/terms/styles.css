@@ -1,29 +1,33 @@
 .tittle {
     text-align: center;
     color: #ffffff;
-    background-color: #473d5f;
+    background-color: #ffffff;
     margin-top: 0px;
-    height: 90px;
-    font-family: 'Grand Hotel', cursive;
-    padding-top: 50px;
-    font-size: 3rem;
+    color: gray;
+    padding-top: 20px;
+    font-size: 24px;
+    padding-bottom: 20px;
+    font-weight: 600;
 
 }
 
-body {
-    background-color: #ffff;
-}
 .subtitulo{
-    text-align: center;
-    color: #006A74;
+    text-align: left;
+    color: gray;
     margin: 8px;
     font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
     letter-spacing: normal;
+    margin-top: 20px;
 }
 .parrafo {
     /*text-align: justify;*/
     margin: 8px;
     font-family: 'Roboto', sans-serif;
-    color: #473d5f;
+    color: gray;
     letter-spacing: normal;
+    font-size: 16px;
+    text-align: justify;
+    line-height: 1.75;
 }
