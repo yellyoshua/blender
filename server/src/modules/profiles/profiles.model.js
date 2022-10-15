@@ -9,7 +9,39 @@ const geolocationSchema = new mongoose.Schema({
     type: Number
   }
 });
+
+const tutorialSchema = new mongoose.Schema({
+  done_birthday: {
+    type: Boolean,
+    default: false
+  },
+  done_location_country: {
+    type: Boolean,
+    default: false
+  },
+  done_location_city: {
+    type: Boolean,
+    default: false
+  },
+  done_geolocation: {
+    type: Boolean,
+    default: false
+  },
+  done_interests: {
+    type: Boolean,
+    default: false
+  },
+  done_personalities: {
+    type: Boolean,
+    default: false
+  }
+});
+
 const profilesSchema = new mongoose.Schema({
+  tutorial: {
+    type: tutorialSchema,
+    default: {}
+  },
   birthday: {
     type: Date
   },
@@ -19,8 +51,10 @@ const profilesSchema = new mongoose.Schema({
   location_city: {
     type: String
   },
-  geolocation: geolocationSchema,
-
+  geolocation: {
+    type: geolocationSchema,
+    default: {}
+  },
   company_name: {
     type: String
   },
@@ -54,6 +88,6 @@ const profilesSchema = new mongoose.Schema({
 
 export const profiles = mongoose.model('profiles', profilesSchema);
 
-export default model(profiles, {
-  populate: ''
-});
+const profiles_crud = model(profiles, {populate: ''});
+
+export default profiles_crud;

@@ -1,30 +1,29 @@
-import mongoose from 'mongoose';
+import {generateObjectId} from '../../utils';
 
-const id = mongoose.Types.ObjectId;
 
 export const INTERESTS_REF = {
-  movie_action: id('60061926addb44461d868721'),
-  movie_adventure: id('629e658771b1ac638faf978f'),
-  movie_animation: id('629e80b471b1ac638faf9d9d'),
-  movie_biography: id('629f667011621b1014f98557'),
-  movie_comedy: id('629f68d48d232211ba5a6a9d'),
-  movie_crime: id('629f6ad48d232211ba5a6bad'),
-  movie_documentary: id('629f6b8dbbd0011459f24f4a'),
-  movie_drama: id('629f701abbd0011459f2510b'),
-  movie_family: id('629f7895bbd0011459f252db'),
-  movie_fantasy: id('53a200d451cfd2ec27000199'),
-  movie_film_noir: id('53a2011651cfd2ec270001d4'),
-  movie_history: id('53a2014d51cfd2ec2700020f'),
-  movie_horror: id('53a2018f51cfd2ec2700024a'),
-  movie_musical: id('53a201db51cfd2ec270002c0'),
-  movie_mystery: id('53a2021251cfd2ec270002fb'),
-  movie_news: id('53a2026d51cfd2ec27000336'),
-  movie_romance: id('558b2dc22bff8102610001bd'),
-  movie_sci_fi: id('558b2e0d2bff810261000253'),
-  movie_sport: id('558b2e0d2bff8102610002bd'),
-  movie_thriller: id('558b2e0d2bff810261000327'),
-  movie_war: id('558b2e0d2bff810261000391'),
-  movie_western: id('5f986b27925c9010138a4546')
+  movie_action: generateObjectId('movie_action'),
+  movie_adventure: generateObjectId('movie_adventure'),
+  movie_animation: generateObjectId('movie_animation'),
+  movie_biography: generateObjectId('movie_biography'),
+  movie_comedy: generateObjectId('movie_comedy'),
+  movie_crime: generateObjectId('movie_crime'),
+  movie_documentary: generateObjectId('movie_documentary'),
+  movie_drama: generateObjectId('movie_drama'),
+  movie_family: generateObjectId('movie_family'),
+  movie_fantasy: generateObjectId('movie_fantasy'),
+  movie_film_noir: generateObjectId('movie_film_noir'),
+  movie_history: generateObjectId('movie_history'),
+  movie_horror: generateObjectId('movie_horror'),
+  movie_musical: generateObjectId('movie_musical'),
+  movie_mystery: generateObjectId('movie_mystery'),
+  movie_news: generateObjectId('movie_news'),
+  movie_romance: generateObjectId('movie_romance'),
+  movie_sci_fi: generateObjectId('movie_sci_fi'),
+  movie_sport: generateObjectId('movie_sport'),
+  movie_thriller: generateObjectId('movie_thriller'),
+  movie_war: generateObjectId('movie_war'),
+  movie_western: generateObjectId('movie_western')
 };
 
 export default [

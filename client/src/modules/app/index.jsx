@@ -1,9 +1,12 @@
 import { useEffect } from 'react';
-import CompleteProfile from './CompleteProfile';
+import Tutorial from './tutorial';
 import AppMobile from './App.mobile';
+import {Ping} from '@uiball/loaders';
 import { useCurrentUserStore } from './stores';
+import { useResizeDeviceStore } from '../shared/components/ResizeDevice';
 
 export default function App () {
+  const isMobile = useResizeDeviceStore((state) => state.isMobile);
   const {currentUser, getCurrentUser} = useCurrentUserStore();
 
   useEffect(() => {
@@ -11,12 +14,22 @@ export default function App () {
   }, []);
 
   if (!currentUser) {
-    return null;
+    return <div className="flex items-center justify-center h-screen w-full">
+      <Ping size={45} speed={1} />
+    </div>;
+  }
+
+  if (isMobile) {
+    return (
+      <Tutorial user={currentUser}>
+        <AppMobile />
+      </Tutorial>
+    );
   }
 
   return (
-    <CompleteProfile user={currentUser}>
+    <Tutorial user={currentUser}>
       <AppMobile />
-    </CompleteProfile>
+    </Tutorial>
   );
 }
