@@ -1,9 +1,11 @@
 /* eslint-disable indent */
 import { useEffect, useState } from 'react';
 import { usePersonalitiesStores } from '../../stores';
+import Fuse from 'fuse.js';
 
 
 export default function SelectPersonalities ({ profile, updateProfile }) {
+  const [personalitiesFiltered, setPersonalitiesFiltered] = useState([]);
   const [selectedPersonalities, setSelectedPersonalities] = useState(() => [
     ...profile.personalities
   ]);
@@ -24,9 +26,19 @@ export default function SelectPersonalities ({ profile, updateProfile }) {
     }
   };
   
+  const fuse = new Fuse(personalities, {
+    keys: ['name']
+  });
+
   useEffect(() => {
     getPersonalities();
   }, []);
+
+  useEffect(() => {
+    if (personalities.length > 0) {
+      setPersonalitiesFiltered(personalities);
+    }
+  }, [personalities.length]);
 
   return (
     <div className="my-10 flex flex-col gap-3 items-center">
@@ -37,9 +49,18 @@ export default function SelectPersonalities ({ profile, updateProfile }) {
         className={`
           text-lg px-4 py-2 w-96 h-10 rounded-3xl bg-gray-200 text-primary font-roboto font-light
         `}
+        onChange={(event) => {
+          const { value } = event.target;
+          const results = fuse.search(value);
+          setPersonalitiesFiltered(results.map((result) => result.item));
+          if (personalitiesFiltered.length > 0) {
+            setPersonalitiesFiltered(personalities);
+          }
+        }}
+
       />
       <div className="mt-6 grid md:grid-cols-3 grid-cols-2  gap-3 justify-center">
-        {personalities.map((personality, index) => {
+        {personalitiesFiltered.map((personality, index) => {
           const isSelected = selectedPersonalities.includes(personality._id);
           return <div
             key={index}
