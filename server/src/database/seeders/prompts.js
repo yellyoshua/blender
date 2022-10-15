@@ -1,4 +1,4 @@
-import { generateObjectId } from '../utils';
+import {generateObjectId} from '../utils';
 
 export const PROMPTS_REF = {
   prompts_1: generateObjectId('prompt_1'),
@@ -15,16 +15,13 @@ export const PROMPTS_REF = {
   prompts_12: generateObjectId('prompt_12'),
   prompts_13: generateObjectId('prompt_13'),
   prompts_14: generateObjectId('prompt_14'),
-  prompts_15: generateObjectId('prompt_15'),
-  
-
-
+  prompts_15: generateObjectId('prompt_15')
 };
 
 export default [
   {
     _id: PROMPTS_REF.prompts_1,
-    prompt: 'If I knew I wouldn't get judged, I...'
+    prompt: 'If I knew I wouldn\'t get judged, I...'
   },
   {
     _id: PROMPTS_REF.prompts_2,
