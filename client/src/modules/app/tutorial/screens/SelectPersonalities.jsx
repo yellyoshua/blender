@@ -1,68 +1,66 @@
 /* eslint-disable indent */
 import { useEffect, useState } from 'react';
-import { useInterestsStores } from '../../stores';
+import { usePersonalitiesStores } from '../../stores';
 import {Ping} from '@uiball/loaders';
 import useSearch from '../../../shared/hooks/useSearch';
-
+// Mpqg2312
 const parameters = {
-  minInterests: 5,
-  maxInterests: 10
+  minPersonalities: 5,
+  maxPersonalities: 10
 };
 
-export default function SelectInterests ({ profile, updateProfile }) {
-  const [selectedInterests, setSelectedInterests] = useState(() => [
-    ...profile.interests
+export default function SelectPersonalities ({ profile, updateProfile }) {
+  const [selectedPersonalities, setSelectedPersonalities] = useState(() => [
+    ...profile.personalities
   ]);
 
-  const { interests, getInterests, loading } = useInterestsStores();
+  const { personalities, getPersonalities, loading } = usePersonalitiesStores();
 
   const {searchResults, setInputValue} = useSearch({
-    source: interests,
+    source: personalities,
     keys: ['name']
   });
 
-
-  const selectInterest = (interest) => {
-    if (selectedInterests.includes(interest._id)) {
-      setSelectedInterests(selectedInterests.filter((id) => id !== interest._id));
+  const selectPersonality = (personality) => {
+    if (selectedPersonalities.includes(personality._id)) {
+      setSelectedPersonalities(selectedPersonalities.filter((id) => id !== personality._id));
     }
 
-    if (selectedInterests.length + 1 > parameters.maxInterests) {
+    if (selectedPersonalities.length + 1 > parameters.maxPersonalities) {
       return;
     }
 
-    if (!selectedInterests.includes(interest._id)) {
-      setSelectedInterests([...selectedInterests, interest._id]);
+    if (!selectedPersonalities.includes(personality._id)) {
+      setSelectedPersonalities([...selectedPersonalities, personality._id]);
     }
   };
 
   useEffect(() => {
-    getInterests();
+    getPersonalities();
   }, []);
 
   return (
     <div className="my-10 flex flex-col gap-3 items-center">
-      <h1 className="text-3xl text-primary font-bold font-roboto">Interests</h1>
+      <h1 className="text-3xl text-primary font-bold font-roboto">Personalities</h1>
       <input
         type="text"
-        placeholder="Search for interests"
+        placeholder="Search for personalities"
         className={`
-        text-lg px-4 py-2 w-96 h-10 rounded-3xl bg-gray-200 text-primary font-roboto font-light 
+          text-lg px-4 py-2 w-96 h-10 rounded-3xl bg-gray-200 text-primary font-roboto font-light
         `}
         onChange={(event) => setInputValue(event.target.value)}
       />
       <div className="flex flex-wrap justify-center my-2">
-        {selectedInterests.length}/{parameters.maxInterests}
+        {selectedPersonalities.length}/{parameters.maxPersonalities}
       </div>
       {!loading && 
         <div className="grid md:grid-cols-3 grid-cols-2  gap-3 justify-center">
-          {searchResults.map((interest, index) => {
-            return <InterestsGrid
+          {searchResults.map((personality, index) => {
+            return <PersonalitiesGrid
               key={index}
-              interest={interest}
-              selectInterest={selectInterest}
-              
-              selectedInterests={selectedInterests}
+              personality={personality}
+              selectPersonality={selectPersonality}
+              selectedPersonalities={selectedPersonalities}
             />;
           })}
         </div>
@@ -74,24 +72,24 @@ export default function SelectInterests ({ profile, updateProfile }) {
       }
 
       <ContinueButton
-        selectedInterests={selectedInterests}
+        selectedPersonalities={selectedPersonalities}
         updateProfile={updateProfile}
-        minInterests={parameters.minInterests}
+        minPersonalities={parameters.minPersonalities}
       />
     </div>
   );
 }
 
-function InterestsGrid ({
-  interest,
-  selectInterest,
-  selectedInterests
+function PersonalitiesGrid ({
+  personality,
+  selectPersonality,
+  selectedPersonalities
 }) {
-  const isSelected = selectedInterests.includes(interest._id);
+  const isSelected = selectedPersonalities.includes(personality._id);
 
   return <div
     className="flex items-center gap-2 select-none"
-    onClick={() => selectInterest(interest)}
+    onClick={() => selectPersonality(personality)}
   >
     <p
       className={`
@@ -104,16 +102,16 @@ function InterestsGrid ({
         }
       `}
     >
-      {interest.name}</p>
+      {personality.name}</p>
   </div>;
 }
 
 function ContinueButton ({
-  minInterests,
-  selectedInterests,
+  minPersonalities,
+  selectedPersonalities,
   updateProfile
 }) {
-  const canContinue = selectedInterests.length >= minInterests;
+  const canContinue = selectedPersonalities.length >= minPersonalities;
 
   return <button
     className={
@@ -129,8 +127,8 @@ function ContinueButton ({
     }
     disabled={!canContinue}
     onClick={() => updateProfile({
-      interests: selectedInterests,
-      tutorial: {done_interests: true}
+      personalities: selectedPersonalities,
+      tutorial: {done_personalities: true}
     })}
   >
     Continue

@@ -30,6 +30,16 @@ export const useCurrentUserStore = createStore((set) => ({
     finally(() => set({loading: false}));
   }
 }));
+export const usePersonalitiesStores = createStore((set) => ({
+  personalities: [],
+  loading: false,
+  getPersonalities: () => {
+    set({loading: true});
+    services.personalities.get().
+    then((personalities) => set({personalities})).
+    finally(() => set({loading: false}));
+  }
+}));
 
 export const useInterestsStores = createStore((set) => ({
   interests: [],

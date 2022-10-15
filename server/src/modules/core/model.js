@@ -1,4 +1,5 @@
 import query_model from './query_model';
+import {objectToDotNotation} from '../shared/utils';
 
 /**
  * @param {import('mongoose').Model} Model
@@ -36,13 +37,18 @@ export default (Model) => {
 
       return data;
     },
-    async update (filter = {}, body = {}) {
+    async update (filter = {}, body = {}, options = {}) {
       if (!filter._id) {
         throw new Error('_id is required');
       }
       const mongooseInstance = Model.findByIdAndUpdate(
         filter._id,
-        {$set: body}
+        {
+          $set: 
+          options.dot_notation
+            ? objectToDotNotation(body)
+            : body
+        }
       );
       await mongooseInstance.exec();
       const data = await Model.findById(filter._id)
