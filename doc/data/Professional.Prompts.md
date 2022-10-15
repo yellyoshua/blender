@@ -1,10 +1,8 @@
-* Si fueran un objeto de una oficina, ¿cual serias?
 * ¿Cual es tu mayor miedo?
-* ¿Cuales son tus pasatiempos?
+The greatest fear I have is...
 * ¿Cual es tu filosofia laboral?
+My work philosophy is...
 * ¿Te consideras una persona exitosa?
-* ¿Como te defines tu en 2 palabras?
-* ¿Como manejas las criticas?
-* ¿Que quisieras cambiar de ti?
-* ¿Cual es tu color favorito?
+I look at myself as a successful person because...
 * Si fueras un animal ¿Cual serias?
+If I were an animal, I might be...

@@ -1,0 +1,29 @@
+.tittle {
+    text-align: center;
+    color: #ffffff;
+    background-color: #473d5f;
+    margin-top: 0px;
+    height: 90px;
+    font-family: 'Grand Hotel', cursive;
+    padding-top: 50px;
+    font-size: 3rem;
+
+}
+
+body {
+    background-color: #ffff;
+}
+.subtitulo{
+    text-align: center;
+    color: #006A74;
+    margin: 8px;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: normal;
+}
+.parrafo {
+    /*text-align: justify;*/
+    margin: 8px;
+    font-family: 'Roboto', sans-serif;
+    color: #473d5f;
+    letter-spacing: normal;
+}

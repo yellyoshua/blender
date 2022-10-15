@@ -100,7 +100,7 @@
       "max-lines": 2,
       "max-lines-per-function": [
         "error",
-        100
+        200
       ],
       "max-nested-callbacks": 2,
       "max-params": 2,
