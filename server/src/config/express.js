@@ -29,7 +29,7 @@ routes_setup(routes, {
 })(app);
 
 // Mount [/api/upload] route
-app.use('/api/upload', authMiddleware(), upload_route.handler);
+app.post('/api/upload', authMiddleware(), upload_route.handler);
 
 // Mount errors middleware
 app.use(errorsMiddleware());
