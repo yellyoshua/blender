@@ -18,7 +18,7 @@ export default function SelectInterests({ profile, updateProfile }) {
         text-lg px-4 py-2 w-96 h-10 rounded-3xl bg-gray-200 text-primary font-roboto font-light 
         `}
       />
-      <div className="mt-6 grid grid-cols-3 gap-3 justify-center">
+      <div className="mt-6 grid md:grid-cols-3 grid-cols-2 gap-3 justify-center">
         {interests.map((interest, index) => (
           <div key={index} className="flex items-center gap-2">
             <p

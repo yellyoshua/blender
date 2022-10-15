@@ -7,7 +7,6 @@ export default function SelectPersonalities({ profile, updateProfile }) {
   useEffect(() => {
     getPersonalities();
   }, []);
-
   return (
     <div className="my-10 flex flex-col gap-3 items-center">
       <h1 className="text-3xl text-primary font-bold font-roboto">Personalities</h1>
@@ -18,7 +17,7 @@ export default function SelectPersonalities({ profile, updateProfile }) {
         text-lg px-4 py-2 w-96 h-10 rounded-3xl bg-gray-200 text-primary font-roboto font-light 
         `}
       />
-      <div className="mt-6 grid grid-cols-3 gap-3 justify-center">
+      <div className="mt-6 grid md:grid-cols-3 grid-cols-2  gap-3 justify-center">
         {personalities.map((personalities, index) => (
           <div key={index} className="flex items-center gap-2">
             <p

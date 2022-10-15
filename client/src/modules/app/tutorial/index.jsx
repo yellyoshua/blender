@@ -21,13 +21,13 @@ export default function Tutorial({ user, children }) {
     />;
   }
 
-  if (!user.profile.tutorial.done_personalities) {
+  if (user.profile.tutorial.done_personalities) {
     return <SelectPersonalities
       profile={user.profile}
       updateProfile={updateProfile}
     />;
   }
-  
+
   if (!user.profile.tutorial.done_interests) {
     return <SelectInterests
       profile={user.profile}
