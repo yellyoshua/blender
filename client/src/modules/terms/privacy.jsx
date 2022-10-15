@@ -2,7 +2,7 @@ import './styles.css';
 
 export default function Privacy () {
   return (
-    <div className="">
+    <div className="mb-20 mx-6 my-6">
       <div className="tittle">
         <h1 className="font-roboto">
           Privacy Policy
