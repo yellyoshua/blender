@@ -34,8 +34,7 @@ export default function EnableLocation ({profile, updateProfile}) {
       <div className="flex flex-col gap-3 items-center justify-center min-h-screen">
         <div
           className={`
-            flex items-center justify-center w-28 h-28 rounded-full
-            from-primary-light to-primary-dark bg-gradient-to-br
+            flex items-center justify-center w-28 h-28 rounded-full bg-primary
           `}
         >
           <LocationIcon
@@ -61,13 +60,12 @@ export default function EnableLocation ({profile, updateProfile}) {
 
   return (
     <div className="flex flex-col gap-3 items-center justify-center min-h-screen">
-      <div className="max-w-sm flex flex-col gap 3 min-h-screen py-3">
+      <div className="max-w-sm flex flex-col gap 3 mx-6 min-h-screen py-3">
         <div className="grow"></div>
         <div className="grow">
           <div
             className={`
-              flex items-center justify-center w-28 h-28 rounded-full
-              from-primary-light to-primary-dark bg-gradient-to-br
+              flex items-center justify-center w-28 h-28 rounded-full bg-primary
             `}
           >
             <LocationIcon
@@ -87,9 +85,9 @@ export default function EnableLocation ({profile, updateProfile}) {
           </p>
         </div>
         <div className="grow"></div>
-        <div className="grow flex flex-col justify-end">
+        <div className="grow flex flex-col justify-end items-center">
           <button
-            className="bg-primary text-white p-2 rounded-3xl px-4"
+            className="p-3 w-60 bg-primary text-white text-base rounded-3xl px-4"
             onClick={handleEnableLocation}
           >
             Set location services

@@ -104,7 +104,7 @@
       ],
       "max-nested-callbacks": 2,
       "max-params": 2,
-      "max-statements": 2,
+      "max-statements": 0,
       "max-statements-per-line": 2,
       "multiline-comment-style": 2,
       "multiline-ternary": 2,
