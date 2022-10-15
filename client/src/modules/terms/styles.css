@@ -1,0 +1,128 @@
+.tittle {
+    text-align: center;
+    color: #ffffff;
+    background-color: #473d5f;
+    margin-top: 0px;
+    height: 90px;
+    font-family: 'Grand Hotel', cursive;
+    padding-top: 50px;
+    font-size: 3rem;
+
+}
+
+body {
+    background-color: #ffff;
+}
+.subtitulo{
+    text-align: center;
+    color: #006A74;
+    margin: 8px;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: normal;
+}
+
+.parrafo1 {
+    text-align: justify;
+    height: 900px;
+    margin: 8px;
+    font-family: 'Roboto', sans-serif;
+    color: #473d5f;
+    letter-spacing: normal;
+}
+
+.parrafo {
+    /*text-align: justify;*/
+    margin: 8px;
+    font-family: 'Roboto', sans-serif;
+    color: #473d5f;
+    letter-spacing: normal;
+}
+
+.subtitulo2 {
+    text-align: center;
+    color: #006A74;
+    margin: 8px;
+    margin-top: -850px;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: normal;
+
+}
+
+.parrafo2 {
+    text-align: justify;
+    height: 900px;
+    margin: 8px;
+    font-family: 'Roboto', sans-serif;
+    color: #473d5f;
+    letter-spacing: normal;
+
+}
+
+.subtitulo3 {
+    text-align: center;
+    color: #006A74;
+    margin: 8px;
+    margin-top: -889px;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: normal;
+
+}
+
+.parrafo3 {
+    text-align: justify;
+    height: 900px;
+    margin: 8px;
+    font-family: 'Roboto', sans-serif;
+    color: #473d5f;
+    letter-spacing: normal;
+}
+
+.subtitulo4 {
+    text-align: center;
+    color: #006A74;
+    margin: 8px;
+    margin-top: -850px;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: normal;
+
+}
+
+.parrafo4 {
+    text-align: justify;
+    height: 900px;
+    margin: 8px;
+    margin-top: 10px;
+    font-family: 'Roboto', sans-serif;
+    color: #473d5f;
+    letter-spacing: normal;
+}
+
+.subtitulo5 {
+    text-align: center;
+    color: #006A74;
+    margin: 8px;
+    /*margin-top: -850px;*/
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: normal;
+
+}
+
+.parrafo5 {
+    text-align: justify;
+    height: 900px;
+    margin: 8px;
+    margin-top: 10px;
+    font-family: 'Roboto', sans-serif;
+    color: #473d5f;
+    letter-spacing: normal;
+}
+
+.parrafo6 {
+    text-align: justify;
+    height: 900px;
+    margin: 8px;
+    margin-top: -870px;
+    font-family: 'Roboto', sans-serif;
+    color: #473d5f;
+    letter-spacing: normal;
+}
