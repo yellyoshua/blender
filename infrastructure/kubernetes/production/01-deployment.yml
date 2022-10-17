@@ -1,0 +1,55 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "weblend-production"
+  namespace: "default"
+  labels:
+    app: "weblend-production"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "weblend-production"
+  template:
+    metadata:
+      labels:
+        app: "weblend-production"
+    spec:
+      containers:
+      - name: "weblend-production"
+        image: "us.gcr.io/blender-364018/weblend/server-production:15"
+        imagePullPolicy: Always
+        env:
+          - name: NODE_ENV
+            value: "production"
+          - name: PORT
+            value: "3000"
+          - name: FRONTEND_URL
+            value: ""
+          - name: DATABASE_URL
+            value: ""
+          - name: JWT_SECRET
+            value: ""
+          - name: APP_GOOGLE_REDIRECT_URI
+            value: ""
+          - name: APP_GOOGLE_CLIENT_SECRET
+            value: ""
+          - name: APP_GOOGLE_CLIENT_ID
+            value: ""
+        resources:
+          requests:
+            cpu: 100m
+            ephemeral-storage: 200Mi
+            memory: 128Mi
+          limits:
+            cpu: 400m
+            ephemeral-storage: 200Mi
+            memory: 256Mi
+        readinessProbe:
+          httpGet:
+            path: "/api/health"
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 5

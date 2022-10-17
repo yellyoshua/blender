@@ -1,0 +1,16 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: weblend-production-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "weblend-kubernetes-service-ip"
+    networking.gke.io/managed-certificates: "weblend-production-certificate"
+    kubernetes.io/ingress.class: "gce"
+    kubernetes.io/ingress.allow-http: "false"
+spec:
+  defaultBackend:
+    service:
+      name: weblend-production-service
+      port:
+        number: 80
