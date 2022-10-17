@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     // eslint-disable-next-line new-cap
     VitePWA({
-      includeAssets: ['favicon.ico'],
+      includeAssets: ['favicon.svg', 'robots.txt'],
       manifest: {
         name: 'Weblend',
         short_name: 'Weblend',
@@ -70,7 +70,12 @@ export default defineConfig({
       registerType: 'autoUpdate',
       injectRegister: 'inline',
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+        globPatterns: [
+          '**/*.{html,ico,woff2}',
+          'assets/icons/*.{png,svg}',
+          'illustrations/*.{png,svg}',
+          'images/*.{png,svg}'
+        ],
         cleanupOutdatedCaches: true,
         sourcemap: true
       },
