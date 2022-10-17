@@ -20,6 +20,9 @@ app.use(helmet({hidePoweredBy: true}));
 // Enable CORS
 app.use(cors());
 
+app.get('/', (req, res) => res.send('OK'));
+app.post('/', (req, res) => res.send('OK'));
+
 // Mount [/api] routes
 routes_setup(routes, {
   path_prefix: '/api',
