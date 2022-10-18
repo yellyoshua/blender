@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom';
 import { useCurrentUserStore } from './stores';
 
 export default function AppMobile () {
@@ -5,7 +6,7 @@ export default function AppMobile () {
 
   return (
     <div className="text-center">
-      <h1>Welcome {currentUser.first_name} with email {currentUser.email}</h1>
+      <Outlet />
     </div>
   );
 }

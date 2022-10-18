@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import Tutorial from './tutorial';
 import AppMobile from './App.mobile';
+import AppDesktop from './App.desktop';
 import {Ping} from '@uiball/loaders';
 import { useCurrentUserStore } from './stores';
 import { useResizeDeviceStore } from '../shared/components/ResizeDevice';
@@ -29,7 +30,7 @@ export default function App () {
 
   return (
     <Tutorial user={currentUser}>
-      <AppMobile />
+      <AppDesktop />
     </Tutorial>
   );
 }
