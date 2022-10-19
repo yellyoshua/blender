@@ -7,7 +7,7 @@ export const useCurrentUserStore = createStore((set) => ({
   loading: false,
   getCurrentUser: () => {
     set({loading: true});
-    services.users.get({___populate: 'profile'}).
+    services.users.get({___populate: 'profile profile.interests'}).
     then(([user]) => set({currentUser: user})).
     finally(() => set({loading: false}));
   },
