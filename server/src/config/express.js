@@ -2,6 +2,7 @@ import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import routes from '../modules/routes';
+import upload_route from '../modules/upload/upload.routes';
 import authMiddleware from '../middlewares/auth.middleware.js';
 import errorsMiddleware from '../middlewares/errors.middleware.js';
 import localeMiddleware from '../middlewares/locale.middleware.js';
@@ -19,13 +20,19 @@ app.use(helmet({hidePoweredBy: true}));
 // Enable CORS
 app.use(cors());
 
+app.get('/', (req, res) => res.send('OK'));
+app.post('/', (req, res) => res.send('OK'));
+
 // Mount [/api] routes
 routes_setup(routes, {
   path_prefix: '/api',
-  auth_middlewares: [authMiddleware(routes)],
+  auth_middlewares: [authMiddleware()],
   before_middlewares: [],
   after_middlewares: [localeMiddleware()]
 })(app);
+
+// Mount [/api/upload] route
+app.post('/api/upload', authMiddleware(), upload_route.handler);
 
 // Mount errors middleware
 app.use(errorsMiddleware());
