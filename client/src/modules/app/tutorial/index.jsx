@@ -4,6 +4,7 @@ import SelectInterests from './screens/SelectInterests';
 import SelectPersonalities from './screens/SelectPersonalities';
 import {Ping} from '@uiball/loaders';
 import PersonalizeExperience from './screens/PersonalizeExperience';
+import Birthday from './screens/Birthday';
 
 export default function Tutorial ({ user, children }) {
   const { updateProfile, loading } = useCurrentUserStore();
@@ -38,6 +39,13 @@ export default function Tutorial ({ user, children }) {
 
   if (!user.profile.tutorial.done_interests) {
     return <SelectInterests
+      profile={user.profile}
+      updateProfile={updateProfile}
+    />;
+  }
+
+  if (!user.profile.tutorial.done_birthday) {
+    return <Birthday
       profile={user.profile}
       updateProfile={updateProfile}
     />;

@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import Tutorial from './tutorial';
 import AppMobile from './App.mobile';
+import AppDesktop from './App.desktop';
 import {Ping} from '@uiball/loaders';
 import { useCurrentUserStore } from './stores';
 import { useResizeDeviceStore } from '../shared/components/ResizeDevice';
+import ProfileMenu from './components/ProfileMenu';
 
 export default function App () {
   const isMobile = useResizeDeviceStore((state) => state.isMobile);
@@ -22,6 +24,7 @@ export default function App () {
   if (isMobile) {
     return (
       <Tutorial user={currentUser}>
+        <ProfileMenu />
         <AppMobile />
       </Tutorial>
     );
@@ -29,7 +32,8 @@ export default function App () {
 
   return (
     <Tutorial user={currentUser}>
-      <AppMobile />
+      <ProfileMenu />
+      <AppDesktop />
     </Tutorial>
   );
 }
