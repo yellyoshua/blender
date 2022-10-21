@@ -4,6 +4,8 @@ import profilesRoutes from './profiles/profiles.routes';
 import interestsRoutes from './interests/interests.routes';
 import personalitiesRoutes from './personalities/personalities.routes';
 import healthRoutes from './health/health.routes';
+import discoverRoutes from './discover/discover.routes';
+import matchesRoutes from './matches/matches.routes';
 
 export default [
   ...usersRoutes,
@@ -11,5 +13,7 @@ export default [
   ...profilesRoutes,
   ...interestsRoutes,
   ...personalitiesRoutes,
-  ...healthRoutes
+  ...healthRoutes,
+  ...discoverRoutes,
+  ...matchesRoutes
 ];
