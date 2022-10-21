@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: "weblend-production"
-        image: "us.gcr.io/blender-364018/weblend/server-production:15"
+        image: "us.gcr.io/blender-364018/weblend/server-production:20"
         imagePullPolicy: Always
         env:
           - name: NODE_ENV
@@ -26,17 +26,35 @@ spec:
           - name: PORT
             value: "3000"
           - name: FRONTEND_URL
-            value: ""
+            valueFrom:
+              secretKeyRef:
+                name: weblend-production-config
+                key: FRONTEND_URL
           - name: DATABASE_URL
-            value: ""
+            valueFrom:
+              secretKeyRef:
+                name: weblend-production-config
+                key: DATABASE_URL
           - name: JWT_SECRET
-            value: ""
+            valueFrom:
+              secretKeyRef:
+                name: weblend-production-config
+                key: JWT_SECRET
           - name: APP_GOOGLE_REDIRECT_URI
-            value: ""
+            valueFrom:
+              secretKeyRef:
+                name: weblend-production-config
+                key: APP_GOOGLE_REDIRECT_URI
           - name: APP_GOOGLE_CLIENT_SECRET
-            value: ""
+            valueFrom:
+              secretKeyRef:
+                name: weblend-production-config
+                key: APP_GOOGLE_CLIENT_SECRET
           - name: APP_GOOGLE_CLIENT_ID
-            value: ""
+            valueFrom:
+              secretKeyRef:
+                name: weblend-production-config
+                key: APP_GOOGLE_CLIENT_ID
         resources:
           requests:
             cpu: 100m
