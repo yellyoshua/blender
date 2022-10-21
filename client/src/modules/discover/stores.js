@@ -3,14 +3,13 @@ import createStore from 'zustand';
 import services from '../core/services';
 
 export const useDiscoverStores = createStore((set) => ({
-  matches: [],
+  potentialMatches: [],
   loading: false,
-  error: null,
-  getMatches: async (query) => {
+  discover: async () => {
     set({ loading: true, error: null });
     try {
-      const response = await services.matches.get(query);
-      set({ matches: response.data });
+      const potentialMatches = await services.discover.get();
+      set({ potentialMatches });
     } catch (error) {
       set({ error });
     } finally {
