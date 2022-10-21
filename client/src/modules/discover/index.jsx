@@ -1,12 +1,20 @@
 /* eslint-disable id-length */
+import { useEffect } from 'react';
 import _ from 'underscore';
 import { useCurrentUserStore } from '../app/stores';
+import { useDiscoverStores } from './stores';
 
 export default function Discover () {
   const { currentUser } = useCurrentUserStore();
-
   const interests_with_personalities = _(currentUser.profile.interests).
   union(currentUser.profile.personalities);
+
+  const {potentialMatches, discover} = useDiscoverStores();
+  console.log('potentialMatches :', potentialMatches);
+
+  useEffect(() => {
+    discover();
+  }, []);
 
   return (
     <div className="m-8">
