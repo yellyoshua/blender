@@ -9,8 +9,14 @@ metadata:
     kubernetes.io/ingress.class: "gce"
     kubernetes.io/ingress.allow-http: "false"
 spec:
-  defaultBackend:
-    service:
-      name: weblend-production-service
-      port:
-        number: 80
+  rules:
+    - host: api-gcp.weblend.app
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: weblend-production-service
+                port:
+                  number: 80
