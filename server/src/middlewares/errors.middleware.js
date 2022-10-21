@@ -6,7 +6,7 @@ export default () => {
     if (errors) {
       const parsed_errors = parseApiErrors(errors);
 
-      console.error('Errors :', parsed_errors);
+      console.error('Errors :', errors);
       
       return res.status(500).json({
         response: null, errors: parsed_errors
