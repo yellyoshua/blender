@@ -1,22 +1,22 @@
-import { useMemo } from 'react';
+import { Ping } from '@uiball/loaders';
+import { useState } from 'react';
 import LocationIcon from '../../../shared/icons/LocationIcon';
 
 // Get location with navigator.geolocation https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
 
-export default function EnableLocation ({profile, updateProfile}) {
-  const alreadyEnabled = useMemo(() => {
-    const {latitude, longitude} = profile.geolocation || {};
-    return latitude && longitude;
-  }, [profile]);
+export default function EnableLocation ({updateProfile}) {
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleEnableLocation = () => {
+    setIsLoading(true);
     navigator.geolocation.getCurrentPosition((position) => {
       updateProfile({
         geolocation: {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude
-        }
-      });
+        },
+        tutorial: {done_geolocation: true}
+      }).then(() => setIsLoading(false));
       navigator.geolocation.clearWatch(position);
     }, (error) => {
       if (error.code === 1) {
@@ -29,33 +29,10 @@ export default function EnableLocation ({profile, updateProfile}) {
     updateProfile({tutorial: {done_geolocation: true}});
   };
 
-  if (alreadyEnabled) {
-    return (
-      <div className="flex flex-col gap-3 items-center justify-center min-h-screen">
-        <div
-          className={`
-            flex items-center justify-center w-28 h-28 rounded-full bg-primary
-          `}
-        >
-          <LocationIcon
-            className="w-16 h-16 text-white"
-
-          />
-        </div>
-        <p className="text-lg mb-6">
-          You have already enabled location.
-        </p>
-        <button
-          onClick={handleDoneGeolocation}
-          className={`
-            bg-primary text-white px-4 py-2 rounded-md
-            hover:bg-primary-dark transition-colors shadow-md
-          `}
-        >
-          Continue
-        </button>
-      </div>
-    );
+  if (isLoading) {
+    return <div className="flex items-center justify-center h-screen w-full">
+      <Ping size={45} speed={1} />
+    </div>;
   }
 
   return (

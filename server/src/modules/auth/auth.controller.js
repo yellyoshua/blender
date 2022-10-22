@@ -2,6 +2,7 @@ import usersModel from '../users/users.model';
 import googleAuthService from '../../services/google-auth.service';
 import jsonwebtokenService from '../../services/jsonwebtoken.service';
 import sessionsModel from '../sessions/sessions.model';
+import requestService from '../shared/services/request.service';
 
 const jwt = jsonwebtokenService();
 
@@ -34,8 +35,8 @@ export default {
 };
 
 function get_request_details (req) {
-  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || 'unknown';
-  const user_agent = req.headers['user-agent'] || 'unknown';
+  const ip = requestService.get_ip(req);
+  const user_agent = requestService.get_user_agent(req);
   return {ip, user_agent};
 }
 

@@ -21,11 +21,15 @@ export default function Discover () {
       <h1 className="text-center text-4xl text-primary font-roboto p-3" >
         {currentUser.first_name}
       </h1>
-      <h2 className="text-center text-sm text-primary font-roboto uppercase p-2 font-bold">
-        from San francisco, ca
-      </h2>
+      {
+        false && (
+          <h2 className="text-center text-sm text-primary font-roboto uppercase p-2 font-bold">
+            from San francisco, ca
+          </h2>
+        )
+      }
       <h2 className="text-center text-sm text-teal-800 font-roboto uppercase font-bold">
-        in quito, ecu
+        in {currentUser.profile.location_city}, {currentUser.profile.location_country}
       </h2>
       <div className="
         grid gap-4 md:grid-cols-4 sm:grid-cols-3
