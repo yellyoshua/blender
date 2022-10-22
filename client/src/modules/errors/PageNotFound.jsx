@@ -1,8 +1,18 @@
-import React from 'react';
+import { useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
 import { useResizeDeviceStore } from '../shared/components/ResizeDevice';
 
 const PageNotFound = () => {
+  const navigate = useNavigate();
   const isMobile = useResizeDeviceStore((state) => state.isMobile);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      navigate('/');
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <div
