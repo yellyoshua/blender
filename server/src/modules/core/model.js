@@ -23,7 +23,8 @@ export default (Model) => {
     },
     async count (filter = {}) {
       const mongooseInstance = Model.countDocuments(filter, {
-        strictQuery: false
+        strictQuery: false,
+        lean: true
       });
       const data = await mongooseInstance.exec();
 

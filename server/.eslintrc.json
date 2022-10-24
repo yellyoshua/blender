@@ -85,7 +85,7 @@
 		"max-depth": 2,
 		"max-len": [
 			2,
-			100,
+			150,
 			2,
 			{
 				"ignoreUrls": true

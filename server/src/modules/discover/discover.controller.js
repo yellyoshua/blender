@@ -2,32 +2,26 @@
 import _ from 'underscore';
 import usersModel from '../users/users.model';
 import bumpingFistsModel from '../bumping_fists/bumping_fists.model';
+import users_matches from './services/users_matches';
 
 export default {
   get: async (query, options, req) => {
     const {user_id} = req.auth_payload;
 
+    const [current_user] = await usersModel.find(
+      {_id: user_id},
+      {populate: 'profile'}
+    );
+
     const bumpingFists = await bumpingFistsModel.find(
-      {emisor: user_id, status: 'pending'},
+      {emisor: current_user._id, status: 'pending'},
       {populate: 'receptor'}
     );
 
     const already_bumped = _(bumpingFists).pluck('receptor');
 
-    const [current_user] = await usersModel.find(
-      {_id: user_id},
-      {populate: 'profile,profile.interests,profile.personalities'}
-    );
-    
-    const potential_matches = await usersModel.find(
-      {
-        _id: {$nin: [user_id, ...already_bumped]},
-        'profile.interests': {$in: current_user.profile.interests},
-        'profile.personalities': {$in: current_user.profile.personalities}
-      },
-      {populate: 'profile,profile.interests,profile.personalities'}
-    );
-
-    return potential_matches;
+    const possible_matches = await users_matches.getMatches(current_user, already_bumped);
+  
+    return possible_matches;
   }
 };
