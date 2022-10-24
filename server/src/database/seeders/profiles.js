@@ -3,14 +3,14 @@ import {INTERESTS_REF} from './interests/index.js';
 import {PERSONALITIES_REF} from './personalities.js';
 
 export const PROFILES_REF = {
-  yoshua: generateObjectId('yoshua'),
-  laura: generateObjectId('laura'),
-  paz: generateObjectId('paz')
+  fernando: generateObjectId('fernando'),
+  lorena: generateObjectId('lorena'),
+  antonieta: generateObjectId('antonieta')
 };
 
 export default [
   {
-    _id: PROFILES_REF.yoshua,
+    _id: PROFILES_REF.fernando,
     birthday: new Date(2001, 6, 29),
     location_country: 'Ecuador',
     location_city: 'Quito',
@@ -46,7 +46,7 @@ export default [
     gender: 'M'
   },
   {
-    _id: PROFILES_REF.laura,
+    _id: PROFILES_REF.lorena,
     birthday: new Date(2001, 6, 29),
     location_country: 'Colombia',
     location_city: 'Bogota',
@@ -83,7 +83,7 @@ export default [
     gender: 'F'
   },
   {
-    _id: PROFILES_REF.paz,
+    _id: PROFILES_REF.antonieta,
     birthday: new Date(2001, 6, 29),
     location_country: 'Ecuador',
     location_city: 'Quito',

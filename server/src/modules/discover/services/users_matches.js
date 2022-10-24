@@ -54,6 +54,7 @@ export default {
             interests: 1,
             personalities: 1,
             gender: 1,
+            birthday: 1,
             location_city: 1,
             location_country: 1
           }

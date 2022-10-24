@@ -7,6 +7,8 @@ import './global.css';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
+deleteCache();
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -17,3 +19,15 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </LocalizationProvider>
   </React.StrictMode>
 );
+
+// Delete browser cache to see the new version of the app
+
+function deleteCache () {
+  if (window.caches && window.caches.keys) {
+    caches.keys().then((names) => {
+      for (const name of names) {
+        caches.delete(name);
+      }
+    });
+  }
+}

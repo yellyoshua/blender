@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import useAuthentication from '../../shared/hooks/useAuthentication';
-import { useCurrentUserStore } from '../stores';
+import ProfilePhoto from './ProfilePhoto';
 
 export default function ProfileMenu () {
   const [isOpen, setIsOpen] = useState(false);
   const {logout} = useAuthentication();
-  const {currentUser} = useCurrentUserStore();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -13,13 +12,9 @@ export default function ProfileMenu () {
 
   return (
     <div className="fixed top-0 right-0 z-50 mt-2 mr-2">
-      <img
-        className="w-10 h-10 rounded-full border border-gray-200 shadow-sm cursor-pointer"
-        src={currentUser.picture}
-        srcSet="/images/avatar-default.svg"
-        alt={currentUser.first_name}
-        onClick={toggleMenu}
-      />
+      <button onClick={toggleMenu}>
+        <ProfilePhoto />
+      </button>
       {isOpen && <div className="absolute top-0 right-0 mt-12 mr-2">
         <div className="bg-white rounded shadow-lg py-2">
           <a
