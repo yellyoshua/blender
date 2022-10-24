@@ -71,7 +71,7 @@ export default defineConfig({
       injectRegister: 'inline',
       workbox: {
         globPatterns: [
-          '**/*.{html,ico,woff2}',
+          '**/*.{ico,woff2}',
           'assets/icons/*.{png,svg}',
           'illustrations/*.{png,svg}',
           'images/*.{png,svg}'
