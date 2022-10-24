@@ -5,7 +5,7 @@ import AppDesktop from './App.desktop';
 import {Ping} from '@uiball/loaders';
 import { useCurrentUserStore } from './stores';
 import { useResizeDeviceStore } from '../shared/components/ResizeDevice';
-import ProfileMenu from './components/ProfileMenu';
+import Logout from './components/Logout';
 
 export default function App () {
   const isMobile = useResizeDeviceStore((state) => state.isMobile);
@@ -24,7 +24,7 @@ export default function App () {
   if (isMobile) {
     return (
       <Tutorial user={currentUser}>
-        <ProfileMenu />
+        <Logout />
         <AppMobile />
       </Tutorial>
     );
@@ -32,7 +32,7 @@ export default function App () {
 
   return (
     <Tutorial user={currentUser}>
-      <ProfileMenu />
+      <Logout />
       <AppDesktop />
     </Tutorial>
   );

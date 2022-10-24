@@ -80,7 +80,7 @@ export default function Profile () {
         <p className="text-left text-sm font-bold text-primary font-roboto p-3" >
           Photos
         </p>
-        <Link to="/profile/edit/personalities">
+        <Link to="/profile/edit/photos">
           <button
             className="text-primary text-sm font-bold py-1 px-4 rounded mx-auto block"
             type="button"
