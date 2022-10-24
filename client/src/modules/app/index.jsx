@@ -3,19 +3,19 @@ import Tutorial from './tutorial';
 import AppMobile from './App.mobile';
 import AppDesktop from './App.desktop';
 import {Ping} from '@uiball/loaders';
-import { useCurrentUserStore } from './stores';
 import { useResizeDeviceStore } from '../shared/components/ResizeDevice';
 import Logout from './components/Logout';
+import { useUserStore } from '../shared/store';
 
 export default function App () {
   const isMobile = useResizeDeviceStore((state) => state.isMobile);
-  const {currentUser, getCurrentUser} = useCurrentUserStore();
+  const {user, getUser} = useUserStore();
 
   useEffect(() => {
-    getCurrentUser();
+    getUser();
   }, []);
 
-  if (!currentUser) {
+  if (!user) {
     return <div className="flex items-center justify-center h-screen w-full">
       <Ping size={45} speed={1} />
     </div>;
@@ -23,7 +23,7 @@ export default function App () {
 
   if (isMobile) {
     return (
-      <Tutorial user={currentUser}>
+      <Tutorial user={user}>
         <Logout />
         <AppMobile />
       </Tutorial>
@@ -31,7 +31,7 @@ export default function App () {
   }
 
   return (
-    <Tutorial user={currentUser}>
+    <Tutorial user={user}>
       <Logout />
       <AppDesktop />
     </Tutorial>

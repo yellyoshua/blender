@@ -1,13 +1,13 @@
-import { useCurrentUserStore } from '../stores';
 import EnableLocation from './screens/EnableLocation';
 import SelectInterests from './screens/SelectInterests';
 import SelectPersonalities from './screens/SelectPersonalities';
 import {Ping} from '@uiball/loaders';
 import PersonalizeExperience from './screens/PersonalizeExperience';
 import Birthday from './screens/Birthday';
+import { useUserStore } from '../../shared/store';
 
 export default function Tutorial ({ user, children }) {
-  const { updateProfile, loading } = useCurrentUserStore();
+  const { updateProfile, loading } = useUserStore();
 
   if (loading) {
     return (

@@ -1,10 +1,7 @@
-import { useCurrentUserStore } from '../stores';
-
-// const defaultProfilePhoto = '/images/avatar-default.svg';
+import { useUserStore } from '../../shared/store';
 
 export default function ProfilePhoto ({ size = 40, className = '' }) {
-  const {currentUser} = useCurrentUserStore();
-  console.log('currentUser.picture :', currentUser.picture);
+  const {user} = useUserStore();
 
   return (
     <img
@@ -12,7 +9,7 @@ export default function ProfilePhoto ({ size = 40, className = '' }) {
         rounded-full border border-gray-200 shadow-sm cursor-pointer
         ${className}
       `}
-      src={currentUser.picture}
+      src={user.picture}
       alt="profile-pic"
       referrerPolicy="no-referrer"
       width={size}
