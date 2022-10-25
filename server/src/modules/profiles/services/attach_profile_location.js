@@ -4,9 +4,6 @@ import requestService from '../../shared/services/request.service';
 
 export default async function attach_profile_location (profile_changes, req) {
   const location_service = locationService();
-
-  const want_done_geolocation = Boolean(profile_changes.tutorial &&
-    profile_changes.tutorial.done_geolocation);
     
   const want_update_geolocation = Boolean(profile_changes.geolocation &&
       profile_changes.geolocation.latitude &&
@@ -22,6 +19,9 @@ export default async function attach_profile_location (profile_changes, req) {
 
     return profile;
   }
+
+  const want_done_geolocation = Boolean(profile_changes.tutorial &&
+    profile_changes.tutorial.done_geolocation);
 
   if (want_done_geolocation) {
     const ip = requestService.get_ip(req);
