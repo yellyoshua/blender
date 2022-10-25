@@ -6,7 +6,7 @@ export default function AppDesktop () {
 
   return (
     <div className="h-screen max-w-2xl flex justify-center mx-auto">
-      <div style={{marginBottom: bottomNavigatorHeight}}>
+      <div>
         <Outlet />
       </div>
       <BottomNavigator height={bottomNavigatorHeight} />

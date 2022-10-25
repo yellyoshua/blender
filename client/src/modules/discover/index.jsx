@@ -48,34 +48,82 @@ export default function Discover () {
 
   const firstPotentialMatch = potentialMatches[0];
 
-  const interests_with_personalities = _(firstPotentialMatch.profile.interests).
-  union(firstPotentialMatch.profile.personalities);
 
   const age = dayjs().diff(firstPotentialMatch.profile.birthday, 'year');
 
   return (
-    <div className="m-8">
+    <div className="m-5" style={{paddingBottom: 65}}>
+      <img
+        src={firstPotentialMatch.picture}
+        alt="avatar"
+        className="rounded-full mx-auto h-72"
+      />
       <h1 className="text-center text-4xl text-primary font-roboto p-3" >
         {firstPotentialMatch.first_name}, {age}
       </h1>
-      {
-        false && (
-          <h2 className="text-center text-sm text-primary font-roboto uppercase p-2 font-bold">
-            from San francisco, ca
-          </h2>
-        )
-      }
       <h2 className="text-center text-sm text-teal-800 font-roboto uppercase font-bold">
         in {firstPotentialMatch.profile.location_city},&nbsp;
         {firstPotentialMatch.profile.location_country}
       </h2>
-      <div className="
+
+      <div className="flex justify-between items-center px-2">
+        <p className="text-left text-sm font-bold text-primary font-roboto" >
+          Interests
+        </p>
+        <p className="text-primary text-sm font-bold rounded text-right">
+          {firstPotentialMatch.percentage_interests}% Alike
+        </p>
+      </div>
+      <div className={`
         grid gap-4 md:grid-cols-4 sm:grid-cols-3
-        grid-cols-2 text-center text-white py-2 px-2">
+        grid-cols-2 text-center text-white pb-6 px-2
+      `}
+      >
         {
-          interests_with_personalities.map((interest) => {
+          firstPotentialMatch.profile.interests.map((interest) => {
+            const isCommonMatch = _(firstPotentialMatch.common_interests).
+            findWhere({_id: interest._id});
+
             return (
-              <h1 key={interest._id} className="bg-primary px-2 rounded-2xl select-none">
+              <h1
+                key={interest._id}
+                className={`
+                  ${isCommonMatch ? 'bg-teal-800' : 'bg-primary'} px-2 rounded-2xl select-none
+                `}
+              >
+                {interest.name}
+              </h1>
+            );
+          })
+        }
+      </div>
+
+      <div className="flex justify-between items-center px-2">
+        <p className="text-left text-sm font-bold text-primary font-roboto" >
+          Personalities
+        </p>
+        <p className="text-primary text-sm font-bold rounded text-right">
+          {firstPotentialMatch.percentage_personalities}% Alike
+        </p>
+      </div>
+      <div
+        className={`
+          grid gap-4 md:grid-cols-4 sm:grid-cols-3
+          grid-cols-2 text-center text-white pb-6 px-2
+        `}
+      >
+        {
+          firstPotentialMatch.profile.personalities.map((interest) => {
+            const isCommonMatch = _(firstPotentialMatch.common_personalities).
+            findWhere({_id: interest._id});
+
+            return (
+              <h1
+                key={interest._id}
+                className={`
+                  ${isCommonMatch ? 'bg-teal-800' : 'bg-primary'} px-2 rounded-2xl select-none
+                `}
+              >
                 {interest.name}
               </h1>
             );
@@ -83,6 +131,5 @@ export default function Discover () {
         }
       </div>
     </div>
-
   );
 }
