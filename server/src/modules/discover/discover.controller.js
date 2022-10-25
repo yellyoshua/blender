@@ -22,6 +22,6 @@ export default {
 
     const possible_matches = await users_matches.getMatches(current_user, already_bumped);
   
-    return possible_matches;
+    return _(possible_matches).shuffle();
   }
 };
