@@ -9,7 +9,7 @@ export default function Profile () {
   const { user } = useUserStore();
 
   return (
-    <div className="m-8">
+    <div className="m-8" style={{paddingBottom: 65}}>
       <div className="flex justify-center">
         <ProfilePhoto className="w-20 h-20" />
       </div>

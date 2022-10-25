@@ -58,10 +58,10 @@ export default function Discover () {
         alt="avatar"
         className="rounded-full mx-auto h-72"
       />
-      <h1 className="text-center text-4xl text-primary font-roboto p-3" >
+      <h1 className="text-center text-4xl text-primary font-roboto px-3 pt-3" >
         {firstPotentialMatch.first_name}, {age}
       </h1>
-      <h2 className="text-center text-sm text-teal-800 font-roboto uppercase font-bold">
+      <h2 className="text-center text-sm text-teal-800 font-roboto uppercase font-bold pb-6">
         in {firstPotentialMatch.profile.location_city},&nbsp;
         {firstPotentialMatch.profile.location_country}
       </h2>
@@ -130,6 +130,15 @@ export default function Discover () {
           })
         }
       </div>
+      <ActionButtons potentialMatch={firstPotentialMatch} />
+    </div>
+  );
+}
+
+function ActionButtons () {
+  return (
+    <div className="fixed ">
+
     </div>
   );
 }
