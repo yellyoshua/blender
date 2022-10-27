@@ -12,7 +12,7 @@ const jwt = jsonwebtoken();
 
 const auth_payload_key = 'auth_payload';
 
-export default () => {
+export default function authMiddleware () {
   
   /**
    * @param {import('express').Request} req 
@@ -51,7 +51,7 @@ export default () => {
       return res.status(401).json({response: null, errors});
     }
   };
-};
+}
 
 function compose_authorization (authorization = {}) {
   const {user_id, session_id} = authorization;

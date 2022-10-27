@@ -1,5 +1,8 @@
+// eslint-disable-next-line id-length
+import _ from 'underscore';
 import query_model from './query_model';
 import {objectToDotNotation} from '../shared/utils';
+import mongoose from 'mongoose';
 
 /**
  * @param {import('mongoose').Model} Model
@@ -23,7 +26,8 @@ export default (Model) => {
     },
     async count (filter = {}) {
       const mongooseInstance = Model.countDocuments(filter, {
-        strictQuery: false
+        strictQuery: false,
+        lean: true
       });
       const data = await mongooseInstance.exec();
 
@@ -41,6 +45,7 @@ export default (Model) => {
       if (!filter._id) {
         throw new Error('_id is required');
       }
+
       const mongooseInstance = Model.findByIdAndUpdate(
         filter._id,
         {
@@ -48,7 +53,8 @@ export default (Model) => {
           options.dot_notation
             ? objectToDotNotation(body)
             : body
-        }
+        },
+        _(options).omit('dot_notation')
       );
       await mongooseInstance.exec();
       const data = await Model.findById(filter._id)
@@ -74,3 +80,29 @@ export default (Model) => {
     raw: Model
   };
 };
+
+function sanitize_update_query (data, query = {}) {
+  if (_(data).isArray()) {
+    query.$set = data;
+    return data;
+  }
+
+  const data_keys = Object.keys(data);
+
+  _(data_keys).each((key) => {
+    if (_(data[key]).isArray()) {
+      query.$addToSet = query.$addToSet || {};
+      query.$addToSet[key] = data[key];
+      return;
+    }
+    if (_(data[key]).isObject()) {
+      query.$set = query.$set || {};
+      query.$set = {
+        ...query.$set,
+        ...objectToDotNotation({[key]: data[key]})
+      };
+    }
+  });
+
+  return query;
+}

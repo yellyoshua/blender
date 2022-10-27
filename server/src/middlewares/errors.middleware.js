@@ -1,7 +1,7 @@
 /* eslint-disable max-params */
 import {parseApiErrors} from '../utils/errors';
 
-export default () => {
+export default function errorsMiddleware () {
   return (errors, req, res, next) => {
     if (errors) {
       const parsed_errors = parseApiErrors(errors);
@@ -15,4 +15,4 @@ export default () => {
 
     return next(errors);
   };
-};
+}

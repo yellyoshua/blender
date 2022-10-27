@@ -2,10 +2,10 @@ import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import routes from '../modules/routes';
-import upload_route from '../modules/upload/upload.routes';
 import authMiddleware from '../middlewares/auth.middleware.js';
 import errorsMiddleware from '../middlewares/errors.middleware.js';
 import localeMiddleware from '../middlewares/locale.middleware.js';
+import filesMiddleware from '../middlewares/files.middleware';
 import routes_setup from './routes_setup.js';
 
 const app = express();
@@ -28,11 +28,11 @@ routes_setup(routes, {
   path_prefix: '/api',
   auth_middlewares: [authMiddleware()],
   before_middlewares: [],
-  after_middlewares: [localeMiddleware()]
+  after_middlewares: [
+    localeMiddleware(),
+    filesMiddleware()
+  ]
 })(app);
-
-// Mount [/api/upload] route
-app.post('/api/upload', authMiddleware(), upload_route.handler);
 
 // Mount errors middleware
 app.use(errorsMiddleware());

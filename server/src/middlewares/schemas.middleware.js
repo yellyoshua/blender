@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-export default (schema) => {
+export default function schemasMiddleware (schema) {
   return (req, res, next) => {
     const {error} = Joi.object(schema).validate({
       body: req.body,
@@ -17,4 +17,4 @@ export default (schema) => {
 
     return next();
   };
-};
+}

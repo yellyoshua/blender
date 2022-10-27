@@ -5,7 +5,10 @@ import interestsRoutes from './interests/interests.routes';
 import personalitiesRoutes from './personalities/personalities.routes';
 import healthRoutes from './health/health.routes';
 import discoverRoutes from './discover/discover.routes';
-import matchesRoutes from './matches/matches.routes';
+import bumpingFistsRoutes from './bumping_fists/bumping_fists.routes';
+import communitiesRoutes from './communities/communities.routes';
+import uploadRoutes from './uploads/upload.routes';
+import postsRoutes from './posts/posts.routes';
 
 export default [
   ...usersRoutes,
@@ -15,5 +18,8 @@ export default [
   ...personalitiesRoutes,
   ...healthRoutes,
   ...discoverRoutes,
-  ...matchesRoutes
+  ...bumpingFistsRoutes,
+  ...communitiesRoutes,
+  ...uploadRoutes,
+  ...postsRoutes
 ];

@@ -13,6 +13,11 @@ const usersSchema = new mongoose.Schema({
   picture: {
     type: String
   },
+  profile_picture: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'uploads',
+    default: null
+  },
   email: {
     type: String,
     required: true

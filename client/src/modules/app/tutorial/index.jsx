@@ -1,13 +1,14 @@
-import { useCurrentUserStore } from '../stores';
+import {Ping} from '@uiball/loaders';
+import { useUserStore } from '../../shared/store';
 import EnableLocation from './screens/EnableLocation';
 import SelectInterests from './screens/SelectInterests';
 import SelectPersonalities from './screens/SelectPersonalities';
-import {Ping} from '@uiball/loaders';
 import PersonalizeExperience from './screens/PersonalizeExperience';
 import Birthday from './screens/Birthday';
+import AddPhotos from './screens/AddPhotos';
 
 export default function Tutorial ({ user, children }) {
-  const { updateProfile, loading } = useCurrentUserStore();
+  const { updateProfile, loading } = useUserStore();
 
   if (loading) {
     return (
@@ -30,15 +31,23 @@ export default function Tutorial ({ user, children }) {
       updateProfile={updateProfile}
     />;
   }
-  if (!user.profile.tutorial.done_personalities) {
-    return <SelectPersonalities
+
+  if (!user.profile.tutorial.done_interests) {
+    return <SelectInterests
       profile={user.profile}
       updateProfile={updateProfile}
     />;
   }
 
-  if (!user.profile.tutorial.done_interests) {
-    return <SelectInterests
+  if (!user.profile.tutorial.done_add_photos) {
+    return <AddPhotos
+      profile={user.profile}
+      updateProfile={updateProfile}
+    />;
+  }
+
+  if (!user.profile.tutorial.done_personalities) {
+    return <SelectPersonalities
       profile={user.profile}
       updateProfile={updateProfile}
     />;
