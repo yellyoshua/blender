@@ -6,5 +6,11 @@ export default [
     method: 'get',
     private: true,
     handler: communitiesController.communities.find
+  },
+  {
+    path: '/communities',
+    method: 'post',
+    private: true,
+    handler: communitiesController.communities.create
   }
 ];

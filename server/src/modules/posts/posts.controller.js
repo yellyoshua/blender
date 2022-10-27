@@ -41,8 +41,7 @@ export default {
   },
   async delete (filter, options, req) {
     const user_id = req.auth_payload.user_id;
-    console.log('filter :', filter);
-    console.log('user_id :', user_id);
+
     const [post] = await postsModel.find({
       _id: filter._id, user: user_id
     });
