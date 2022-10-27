@@ -8,7 +8,10 @@ import models from '../modules/models';
 import utils from '../utils';
 
 const skip_seeders_for_production = [
-  'users'
+  'users',
+  'profiles',
+  'communities',
+  'uploads'
 ];
 
 mongoose.connect(vars.databaseURL).
