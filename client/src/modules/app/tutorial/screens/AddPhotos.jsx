@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import FileUpload from '../../../shared/components/FileUpload';
+import ImagePostsGrid from '../../../shared/components/ImagePostsGrid';
 import AddIcon from '../../../shared/icons/AddIcon';
 import { useUserPostsStore } from '../../../shared/store/posts.store';
 
@@ -8,7 +9,7 @@ export default function AddPhotos ({user, profile, updateProfile}) {
     updateProfile({tutorial: {done_add_photos: true}});
   };
 
-  const {posts, getPosts} = useUserPostsStore();
+  const {posts, getPosts, deletePost, loading} = useUserPostsStore();
 
   const isLimitReached = posts.length >= 6;
 
@@ -37,35 +38,24 @@ export default function AddPhotos ({user, profile, updateProfile}) {
           open up, show yourself.
           </p>
         </div>
-        <div className="grid gap-4 sm:grid-cols-3 grid-cols-2 justify-center items-center pb-6 px-2">
+        <ImagePostsGrid
+          fixed
+          removable
+          posts={posts}
+          loading={loading}
+          removePost={deletePost}
+        >
           {
-            posts.map((post) => {
-              const pic = post.pics[0];
-              return (
-                <div key={post._id} className="flex flex-col items-center justify-center">
-                  <img
-                    src={pic.url}
-                    className="rounded-xl object-cover bg-white w-28 h-28 m-auto"
-                    referrerPolicy="no-referrer"
-                    alt="profile"
-                  />
-                </div>
-              );
-            })
+            !isLimitReached &&
+            <FileUpload
+              location="post_picture"
+              attachedTo={null}
+              fileType="image"
+              onUpload={() => getPosts({status: 'draft'})}>
+              {emptyImageBox}
+            </FileUpload>
           }
-          <div className="flex flex-col items-center justify-center">
-            {
-              !isLimitReached &&
-              <FileUpload
-                location="post_picture"
-                attachedTo={null}
-                fileType="image"
-                onUpload={() => getPosts({status: 'draft'})}>
-                {emptyImageBox}
-              </FileUpload>
-            }
-          </div>
-        </div>
+        </ImagePostsGrid>
         <div className="grow"></div>
         <div className="grow flex flex-col items-center justify-end mb-4">
           <button

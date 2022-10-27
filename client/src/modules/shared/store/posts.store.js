@@ -18,5 +18,10 @@ export const useUserPostsStore = createStore((set, get) => ({
     });
     set({posts});
     set({loading: false});
+  },
+  deletePost: async (post_id) => {
+    set({loading: true});
+    await services.posts.delete({_id: post_id});
+    set({loading: false, posts: get().posts.filter((post) => post._id !== post_id)});
   }
 }));

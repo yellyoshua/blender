@@ -18,5 +18,11 @@ export default [
     method: 'put',
     private: true,
     handler: postsController.update
+  },
+  {
+    path: '/posts',
+    method: 'delete',
+    private: true,
+    handler: postsController.delete
   }
 ];
