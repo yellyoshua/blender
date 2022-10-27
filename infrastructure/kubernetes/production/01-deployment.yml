@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: "weblend-production"
-        image: "us.gcr.io/blender-364018/weblend/server-production:20"
+        image: "us.gcr.io/blender-364018/weblend/server-production:21"
         imagePullPolicy: Always
         env:
           - name: NODE_ENV
@@ -55,6 +55,31 @@ spec:
               secretKeyRef:
                 name: weblend-production-config
                 key: APP_GOOGLE_CLIENT_ID
+          - name: GOOGLE_MAPS_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: weblend-production-config
+                key: GOOGLE_MAPS_API_KEY
+          - name: AWS_SERVER_BUCKET
+            valueFrom:
+              secretKeyRef:
+                name: weblend-production-config
+                key: AWS_SERVER_BUCKET
+          - name: AWS_SERVER_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: weblend-production-config
+                key: AWS_SERVER_SECRET_ACCESS_KEY
+          - name: AWS_SERVER_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                name: weblend-production-config
+                key: AWS_SERVER_ACCESS_KEY_ID
+          - name: AWS_SERVER_REGION
+            valueFrom:
+              secretKeyRef:
+                name: weblend-production-config
+                key: AWS_SERVER_REGION
         resources:
           requests:
             cpu: 100m
