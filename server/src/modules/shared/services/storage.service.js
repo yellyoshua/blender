@@ -3,10 +3,10 @@ import {S3Client, PutObjectCommand} from '@aws-sdk/client-s3';
 
 export default function storageService () {
   const s3 = new S3Client({
-    region: process.env.AWS_REGION,
+    region: process.env.AWS_SERVER_REGION,
     credentials: {
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+      accessKeyId: process.env.AWS_SERVER_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SERVER_SECRET_ACCESS_KEY
     }
   });
 
@@ -19,7 +19,7 @@ export default function storageService () {
         const bucket_path = composePath(user_id, folder, file_name);
 
         const params = {
-          Bucket: process.env.AWS_BUCKET,
+          Bucket: process.env.AWS_SERVER_BUCKET,
           Key: bucket_path,
           Body: file_data.data
         };
@@ -48,6 +48,6 @@ export default function storageService () {
   }
 
   function getSignedUrl (path) {
-    return `https://${process.env.AWS_BUCKET}.s3.${process.env.AWS_REGION}.amazonaws.com/${path}`;
+    return `https://${process.env.AWS_SERVER_BUCKET}.s3.${process.env.AWS_SERVER_REGION}.amazonaws.com/${path}`;
   }
 }
