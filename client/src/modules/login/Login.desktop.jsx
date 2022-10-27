@@ -21,7 +21,6 @@ export default function LoginDesktop () {
         }
         return prevPreview + 1;
       });
-      console.log(activePreview);
     }, 7000);
 
     return () => clearInterval(timer);

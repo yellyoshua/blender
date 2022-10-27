@@ -17,7 +17,6 @@ export default {
     filter_options.status = filter_options.status === 'all'
       ? ['published', 'draft', 'hidden']
       : filter_options.status;
-    console.log('filter_options.status :', filter_options.status);
     return postsModel.find(filter_options, options);
   },
   create (data, req) {

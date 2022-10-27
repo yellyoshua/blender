@@ -8,7 +8,6 @@ export default async function attachToUpload (upload, attached_to) {
     await usersModel.update({_id: attached_to}, {profile_picture: upload._id});
   }
 
-  console.log('location :', location);
   if (location === 'post_picture') {
     const pics = [upload._id];
     const [post] = await postsModel.find({_id: attached_to});

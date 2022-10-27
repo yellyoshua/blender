@@ -45,7 +45,7 @@ export default (Model) => {
       if (!filter._id) {
         throw new Error('_id is required');
       }
-      console.log('options :', options);
+
       const mongooseInstance = Model.findByIdAndUpdate(
         filter._id,
         {
