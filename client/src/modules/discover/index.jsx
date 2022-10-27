@@ -52,7 +52,7 @@ export default function Discover () {
   const age = dayjs().diff(firstPotentialMatch.profile.birthday, 'year');
 
   return (
-    <div className="m-5" style={{paddingBottom: 65}}>
+    <div className="my-5 px-5" style={{paddingBottom: 65}}>
       <img
         src={firstPotentialMatch.picture}
         alt="avatar"

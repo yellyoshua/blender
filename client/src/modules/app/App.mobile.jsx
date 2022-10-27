@@ -6,7 +6,7 @@ export default function AppMobile () {
 
   return (
     <div className="text-center">
-      <div>
+      <div className="w-full">
         <Outlet />
       </div>
       <BottomNavigator height={bottomNavigatorHeight} />

@@ -22,12 +22,12 @@ export default {
       {
         $unwind: '$profile'
       },
-      {
-        $match: {
-          'profile.interests': {$in: current_user.profile.interests},
-          'profile.personalities': {$in: current_user.profile.personalities}
-        }
-      },
+      // {
+      //   $match: {
+      //     'profile.interests': {$in: current_user.profile.interests},
+      //     'profile.personalities': {$in: current_user.profile.personalities}
+      //   }
+      // },
       {
         $lookup: {
           from: 'interests',

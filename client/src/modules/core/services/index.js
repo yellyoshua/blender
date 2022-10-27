@@ -6,6 +6,7 @@ import personalitiesService from './personalities.service';
 import discoverService from './discover.service';
 import uploadService from './upload.service';
 import postsService from './posts.service';
+import communitiesService from './communities.service';
 
 const services = {
   interests: interestsService,
@@ -15,7 +16,8 @@ const services = {
   personalities: personalitiesService,
   discover: discoverService,
   upload: uploadService,
-  posts: postsService
+  posts: postsService,
+  communities: communitiesService
 };
 
 export default services;

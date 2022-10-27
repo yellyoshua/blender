@@ -18,7 +18,7 @@ export default function Profile () {
   }, []);
 
   return (
-    <div className="m-8" style={{paddingBottom: 65}}>
+    <div className="my-8 px-8" style={{paddingBottom: 65}}>
       <div className="flex justify-center">
         <FileUpload
           location="profile_picture"
