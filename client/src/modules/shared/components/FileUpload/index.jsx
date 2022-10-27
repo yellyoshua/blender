@@ -19,6 +19,9 @@ export default function FileUpload ({
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = createRef();
 
+  const allowedExtensions = allowedExtensionsByFileType[fileType];
+  const acceptTypes = allowedExtensions.map((ext) => `${fileType}/${ext}`).join(', ');
+
   const selectFile = () => {
     fileInputRef.current.click();
   };
@@ -26,7 +29,6 @@ export default function FileUpload ({
   const onSelected = (files) => {
     const file = files[0];
     const extension = file.name.split('.').pop();
-    const allowedExtensions = allowedExtensionsByFileType[fileType];
 
     if (!allowedExtensions.includes(extension)) {
       // Render a toast with error message
@@ -54,6 +56,7 @@ export default function FileUpload ({
         ref={fileInputRef}
         style={{ display: 'none' }}
         type="file"
+        accept={acceptTypes}
         disabled={isUploading}
         onChange={(event) => {
           onSelected(event.target.files);
