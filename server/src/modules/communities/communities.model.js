@@ -4,7 +4,7 @@ import model from '../core/model.js';
 const communitiesSchema = new mongoose.Schema({
   name: {type: String, required: true},
   description: {type: String, required: true},
-  image: {type: String, required: true},
+  image: {type: mongoose.Schema.Types.ObjectId, ref: 'uploads', default: null},
   members: [{type: mongoose.Schema.Types.ObjectId, ref: 'users', default: []}],
   posts: [{type: mongoose.Schema.Types.ObjectId, ref: 'posts', default: []}],
   admins: [{type: mongoose.Schema.Types.ObjectId, ref: 'users', default: []}],
