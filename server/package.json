@@ -14,7 +14,7 @@
   "author": "yellyoshua",
   "license": "ISC",
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.194.0",
+    "@aws-sdk/client-s3": "^3.197.0",
     "@googlemaps/google-maps-services-js": "^3.3.16",
     "@vendia/serverless-express": "^4.10.1",
     "bcrypt": "^5.0.1",
