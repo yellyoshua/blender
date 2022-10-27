@@ -4,17 +4,24 @@ import PencilIcon from '../shared/icons/PencilIcon';
 import AddIcon from '../shared/icons/AddIcon';
 import ProfilePhoto from '../app/components/ProfilePhoto';
 import { useUserStore } from '../shared/store';
+import FileUpload from '../shared/components/FileUpload';
 
 export default function Profile () {
-  const { user } = useUserStore();
+  const { user, getUser } = useUserStore();
 
   return (
     <div className="m-8" style={{paddingBottom: 65}}>
       <div className="flex justify-center">
-        <ProfilePhoto className="w-20 h-20" />
+        <FileUpload
+          location="profile_picture"
+          attachedTo={user._id}
+          fileType="image"
+          onUpload={getUser}>
+          <ProfilePhoto className="h-40 w-full" />
+        </FileUpload>
       </div>
       <h1 className="text-center text-4xl text-primary font-roboto p-3" >
-        {user.first_name}
+        {user.first_name} {user?.last_name}
       </h1>
       <h2 className="text-center text-sm text-teal-800 font-roboto uppercase font-bold">
         in {user.profile.location_city}, {user.profile.location_country}

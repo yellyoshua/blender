@@ -56,6 +56,13 @@ function crud (axios_instance, route_path) {
       const {data = {}} = await axios_instance.get(parsed_route_path, { params });
       return data.response;
     },
+    async upload (formData, params) {
+      setup_headers(axios_instance);
+      const {data = {}} = await axios_instance.post(parsed_route_path, formData, {
+        params, headers: {'Content-Type': 'multipart/form-data'}
+      });
+      return data.response;
+    },
     async post (post_data = {}) {
       setup_headers(axios_instance);
       const {data = {}} = await axios_instance.post(parsed_route_path, post_data);

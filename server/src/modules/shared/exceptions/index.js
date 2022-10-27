@@ -17,3 +17,11 @@ export function InvalidTokenException () {
 export function NoTokenProvidedException () {
   return new CustomError(__t('exceptions.auth.no_token_provided'));
 }
+
+export function NoFileProvidedException () {
+  return new CustomError(__t('exceptions.upload.no_file_provided'));
+}
+
+export function InvalidFileException () {
+  return new CustomError(__t('exceptions.upload.invalid_file'));
+}

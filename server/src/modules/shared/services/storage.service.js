@@ -1,3 +1,4 @@
+import {v4 as uuidv4} from 'uuid';
 import {S3Client, PutObjectCommand} from '@aws-sdk/client-s3';
 
 export default function storageService () {
@@ -11,12 +12,16 @@ export default function storageService () {
 
   return (user_id) => {
     return {
-      async upload (file, folder, fileName) {
-        const bucket_path = composePath(user_id, folder, fileName);
+      async upload (file, folder) {
+        const file_data = sanitize_file_data(file);
+        const file_name = newFileName(file_data.name);
+
+        const bucket_path = composePath(user_id, folder, file_name);
+
         const params = {
           Bucket: process.env.AWS_BUCKET,
           Key: bucket_path,
-          Body: file
+          Body: file_data.data
         };
 
         const command = new PutObjectCommand(params);
@@ -26,6 +31,17 @@ export default function storageService () {
       }
     };
   };
+
+  function sanitize_file_data (file) {
+    const {name, size, mimetype, md5, data} = file;
+    return {name, size, mimetype, md5, data};
+  }
+
+  function newFileName (name) {
+    const ext = name.split('.').pop();
+    const new_name = uuidv4();
+    return `${new_name}.${ext}`;
+  }
 
   function composePath (user_id, folder, fileName) {
     return `${user_id}/${folder}/${fileName}`;

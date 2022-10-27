@@ -2,8 +2,9 @@ import interestsService from './interests.service';
 import authService from './auth.service';
 import usersService from './users.service';
 import profilesService from './profiles.service';
-import personalitiesService from './personalities';
+import personalitiesService from './personalities.service';
 import discoverService from './discover.service';
+import uploadService from './upload.service';
 
 const services = {
   interests: interestsService,
@@ -11,7 +12,8 @@ const services = {
   users: usersService,
   profiles: profilesService,
   personalities: personalitiesService,
-  discover: discoverService
+  discover: discoverService,
+  upload: uploadService
 };
 
 export default services;

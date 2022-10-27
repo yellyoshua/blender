@@ -70,7 +70,9 @@ function ProfileTabButton ({isActive, label, path}) {
       hover:opacity-100 hover:text-primary-dark transition-opacity duration-300
     `}>
       <Link to={path} className="text-primary-dark">
-        <ProfilePhoto className="m-auto" size={36} />
+        <div style={{height: 36}}>
+          <ProfilePhoto className="w-9 h-9" />
+        </div>
         <div className="text-xs text-center">{label}</div>
       </Link>
     </div>

@@ -1,5 +1,10 @@
 import uploadController from './upload.controller';
 
-export default {
-  handler: uploadController.upload
-};
+export default [
+  {
+    path: '/upload',
+    method: 'post',
+    private: true,
+    handler: uploadController.upload
+  }
+];
