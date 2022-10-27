@@ -15,6 +15,10 @@ const tutorialSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  done_add_photos: {
+    type: Boolean,
+    default: false
+  },
   done_personalize_experience: {
     type: Boolean,
     default: false

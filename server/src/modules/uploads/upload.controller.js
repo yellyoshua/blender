@@ -9,8 +9,7 @@ const bucket = storageService();
 
 export default {
   async upload (body, req) {
-    const user_id = req.auth_payload?.user_id || 'anonymous';
-    console.log('req.auth_payload :', req.auth_payload.user_id);
+    const user_id = req.auth_payload.user_id;
     const storage = bucket(user_id);
     const {location, attached_to} = req.query;
     
@@ -27,11 +26,11 @@ export default {
     const file_url = await storage.upload(req.files.file, 'profile');
 
     const upload = await uploadsModel.create({
-      attached_to,
       location,
+      user: user_id,
       url: file_url
     });
 
-    return attachToUpload(upload);
+    return attachToUpload(upload, attached_to);
   }
 };

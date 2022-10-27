@@ -3,11 +3,19 @@ import { Link } from 'react-router-dom';
 import PencilIcon from '../shared/icons/PencilIcon';
 import AddIcon from '../shared/icons/AddIcon';
 import ProfilePhoto from '../app/components/ProfilePhoto';
-import { useUserStore } from '../shared/store';
+import { useUserStore, useUserPostsStore } from '../shared/store';
 import FileUpload from '../shared/components/FileUpload';
+import { useEffect } from 'react';
+import { Ping } from '@uiball/loaders';
 
 export default function Profile () {
   const { user, getUser } = useUserStore();
+
+  const {posts, getPosts, loading: isLoadingPosts} = useUserPostsStore();
+
+  useEffect(() => {
+    getPosts({status: 'all'});
+  }, []);
 
   return (
     <div className="m-8" style={{paddingBottom: 65}}>
@@ -97,7 +105,28 @@ export default function Profile () {
           </button>
         </Link>
       </div>
+      {isLoadingPosts && (
+        <div className="flex justify-center">
+          <Ping size={45} speed={1} />
+        </div>
+      )}
+      <div className="grid gap-2 sm:grid-cols-3 grid-cols-2 justify-center items-center pb-6 px-2">
+        {
+          posts.map((post) => {
+            const pic = post.pics[0];
+            return (
+              <div key={post._id} className="flex flex-col items-center justify-center">
+                <img
+                  src={pic.url}
+                  className="rounded-xl object-cover bg-white w-28 h-28 m-auto"
+                  referrerPolicy="no-referrer"
+                  alt="profile"
+                />
+              </div>
+            );
+          })
+        }
+      </div>
     </div>
-
   );
 }

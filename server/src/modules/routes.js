@@ -7,7 +7,8 @@ import healthRoutes from './health/health.routes';
 import discoverRoutes from './discover/discover.routes';
 import bumpingFistsRoutes from './bumping_fists/bumping_fists.routes';
 import communitiesRoutes from './communities/communities.routes';
-import uploadRoutes from './upload/upload.routes';
+import uploadRoutes from './uploads/upload.routes';
+import postsRoutes from './posts/posts.routes';
 
 export default [
   ...usersRoutes,
@@ -19,5 +20,6 @@ export default [
   ...discoverRoutes,
   ...bumpingFistsRoutes,
   ...communitiesRoutes,
-  ...uploadRoutes
+  ...uploadRoutes,
+  ...postsRoutes
 ];

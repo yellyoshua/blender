@@ -25,3 +25,7 @@ export function NoFileProvidedException () {
 export function InvalidFileException () {
   return new CustomError(__t('exceptions.upload.invalid_file'));
 }
+
+export function PostNotFoundException () {
+  return new CustomError(__t('exceptions.post.not_found'));
+}

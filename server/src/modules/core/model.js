@@ -45,6 +45,7 @@ export default (Model) => {
       if (!filter._id) {
         throw new Error('_id is required');
       }
+      console.log('options :', options);
       const mongooseInstance = Model.findByIdAndUpdate(
         filter._id,
         {
@@ -52,7 +53,8 @@ export default (Model) => {
           options.dot_notation
             ? objectToDotNotation(body)
             : body
-        }
+        },
+        _(options).omit('dot_notation')
       );
       await mongooseInstance.exec();
       const data = await Model.findById(filter._id)

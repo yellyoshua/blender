@@ -15,9 +15,10 @@ const uploadsSchema = new mongoose.Schema({
       'chat' 
     ]
   },
-  attached_to: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true
+    required: true,
+    ref: 'users'
   },
   url: {
     type: String,
