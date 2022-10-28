@@ -63,7 +63,7 @@ export default function Discover () {
         className="rounded-full mx-auto h-72"
       />
       <h1 className="text-center text-4xl text-primary font-roboto px-3 pt-3" >
-        {firstPotentialMatch.first_name}, {age}
+        {firstPotentialMatch.first_name}{age && `, ${age}`}
       </h1>
       {has_location && <h2 className="text-center text-sm text-teal-800 font-roboto uppercase font-bold pb-6">
         in {firstPotentialMatch.profile.location_city},&nbsp;
