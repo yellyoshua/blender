@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 import _ from 'underscore';
 import { useDiscoverStores } from './stores';
 import dayjs from 'dayjs';
+import BumpingFistsIcon from '../shared/icons/BumpingFistsIcon';
+import {HiArrowPath} from 'react-icons/hi2';
 
 export default function Discover () {
   const {potentialMatches, loading, discover} = useDiscoverStores();
@@ -50,6 +52,8 @@ export default function Discover () {
 
 
   const age = dayjs().diff(firstPotentialMatch.profile.birthday, 'year');
+  const has_location = firstPotentialMatch.profile.location_city &&
+  firstPotentialMatch.profile.location_country;
 
   return (
     <div className="my-5 px-5" style={{paddingBottom: 65}}>
@@ -61,10 +65,10 @@ export default function Discover () {
       <h1 className="text-center text-4xl text-primary font-roboto px-3 pt-3" >
         {firstPotentialMatch.first_name}, {age}
       </h1>
-      <h2 className="text-center text-sm text-teal-800 font-roboto uppercase font-bold pb-6">
+      {has_location && <h2 className="text-center text-sm text-teal-800 font-roboto uppercase font-bold pb-6">
         in {firstPotentialMatch.profile.location_city},&nbsp;
         {firstPotentialMatch.profile.location_country}
-      </h2>
+      </h2>}
 
       <div className="flex justify-between items-center px-2">
         <p className="text-left text-sm font-bold text-primary font-roboto" >
@@ -111,6 +115,7 @@ export default function Discover () {
           grid gap-4 md:grid-cols-4 sm:grid-cols-3
           grid-cols-2 text-center text-white pb-6 px-2
         `}
+        style={{paddingBottom: 65}}
       >
         {
           firstPotentialMatch.profile.personalities.map((interest) => {
@@ -130,15 +135,32 @@ export default function Discover () {
           })
         }
       </div>
-      <ActionButtons potentialMatch={firstPotentialMatch} />
+      <ActionButtons
+        discover={discover}
+        bumpingFist={() => {}}
+      />
     </div>
   );
 }
 
-function ActionButtons () {
+function ActionButtons ({discover, bumpingFist}) {
   return (
-    <div className="fixed ">
-
+    <div className="fixed left-0 right-0 flex justify-center" style={{bottom: 70, height: 80}}>
+      <div className="rounded-l-2xl rounded-r-2xl flex items-center justify-center bg-white px-2 shadow-xl">
+        <button
+          className="text-white font-bold rounded-full mr-1"
+          type="button"
+        >
+          <BumpingFistsIcon className="w-14 h-14" />
+        </button>
+        <button
+          className="bg-primary text-white font-bold py-2 px-2 rounded-full ml-1"
+          type="button"
+          onClick={discover}
+        >
+          <HiArrowPath className="w-9 h-9" />
+        </button>
+      </div>
     </div>
   );
 }

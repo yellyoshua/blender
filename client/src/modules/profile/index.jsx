@@ -17,6 +17,9 @@ export default function Profile () {
     getPosts({status: 'all'});
   }, []);
 
+  const has_location = user.profile.location_city &&
+  user.profile.location_country;
+
   return (
     <div className="my-8 px-8" style={{paddingBottom: 65}}>
       <div className="flex justify-center">
@@ -31,9 +34,12 @@ export default function Profile () {
       <h1 className="text-center text-4xl text-primary font-roboto p-3" >
         {user.first_name} {user?.last_name}
       </h1>
-      <h2 className="text-center text-sm text-teal-800 font-roboto uppercase font-bold">
-        in {user.profile.location_city}, {user.profile.location_country}
-      </h2>
+      {
+        has_location &&
+        <h2 className="text-center text-sm text-teal-800 font-roboto uppercase font-bold">
+          in {user.profile.location_city}, {user.profile.location_country}
+        </h2>
+      }
 
       <div className="flex justify-between items-center">
         <p className="text-left text-sm font-bold text-primary font-roboto p-3" >
