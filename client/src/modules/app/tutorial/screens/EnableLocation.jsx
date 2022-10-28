@@ -62,19 +62,19 @@ export default function EnableLocation ({updateProfile}) {
           </p>
         </div>
         <div className="grow"></div>
-        <div className="grow flex flex-col justify-end items-center">
+        <div className="grow flex flex-col justify-end items-center mb-3">
           <button
             className="p-3 w-60 bg-primary text-white text-base rounded-3xl px-4"
             onClick={handleEnableLocation}
           >
             Set location services
           </button>
-          <button
+          {/* <button
             onClick={handleDoneGeolocation}
             className="text-primary-light p-2"
           >
             Skip
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
