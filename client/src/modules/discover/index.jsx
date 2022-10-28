@@ -52,6 +52,7 @@ export default function Discover () {
 
 
   const age = dayjs().diff(firstPotentialMatch.profile.birthday, 'year');
+  const isValidAge = age >= 18 && age <= 99;
   const has_location = firstPotentialMatch.profile.location_city &&
   firstPotentialMatch.profile.location_country;
 
@@ -63,7 +64,7 @@ export default function Discover () {
         className="rounded-full mx-auto h-72"
       />
       <h1 className="text-center text-4xl text-primary font-roboto px-3 pt-3" >
-        {firstPotentialMatch.first_name}{age && `, ${age}`}
+        {firstPotentialMatch.first_name}{isValidAge && `, ${age}`}
       </h1>
       {has_location && <h2 className="text-center text-sm text-teal-800 font-roboto uppercase font-bold pb-6">
         in {firstPotentialMatch.profile.location_city},&nbsp;
@@ -115,7 +116,7 @@ export default function Discover () {
           grid gap-4 md:grid-cols-4 sm:grid-cols-3
           grid-cols-2 text-center text-white pb-6 px-2
         `}
-        style={{paddingBottom: 65}}
+        style={{paddingBottom: 95}}
       >
         {
           firstPotentialMatch.profile.personalities.map((interest) => {
