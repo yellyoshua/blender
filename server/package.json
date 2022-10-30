@@ -9,7 +9,9 @@
     "eslint": "eslint --ext .js,.jsx .",
     "dev": "nodemon",
     "build": "babel src --out-dir dist",
-    "seed": "babel-node src/database/seeder.js"
+    "seed": "babel-node src/database/seeder.js",
+    "migration:generate": "babel-node src/database/migration.js generate",
+    "migration:execute": "babel-node src/database/migration.js execute"
   },
   "author": "yellyoshua",
   "license": "ISC",
