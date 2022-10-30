@@ -10,6 +10,8 @@ const bumpingFistsSchema = new mongoose.Schema({
   messages: [{type: mongoose.Schema.Types.ObjectId, ref: 'messages', default: []}]
 }, {collection: 'bumping_fists', strictQuery: false, timestamps: true, strict: true});
 
+bumpingFistsSchema.index({emisor: 1, receptor: 1}, {unique: true});
+
 export const bumping_fists = mongoose.model('bumping_fists', bumpingFistsSchema);
 
 const bumping_fists_crud = model(bumping_fists, {populate: ''});
