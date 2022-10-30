@@ -13,15 +13,12 @@ export default {
       {populate: 'profile'}
     );
 
-    const bumpingFists = await bumpingFistsModel.find(
-      {emisor: current_user._id, status: 'pending'},
-      {populate: 'receptor'}
-    );
+    const bumpingFists = await bumpingFistsModel.find({
+      emisor: current_user._id, status: ['pending', 'accepted', 'rejected']
+    });
 
     const already_bumped = _(bumpingFists).pluck('receptor');
-
-    const possible_matches = await users_matches.getMatches(current_user, already_bumped);
   
-    return _(possible_matches).shuffle();
+    return users_matches.getPotentialMatch(current_user, already_bumped);
   }
 };

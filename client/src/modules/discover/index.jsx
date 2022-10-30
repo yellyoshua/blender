@@ -6,9 +6,11 @@ import { useDiscoverStores } from './stores';
 import dayjs from 'dayjs';
 import BumpingFistsIcon from '../shared/icons/BumpingFistsIcon';
 import {HiArrowPath} from 'react-icons/hi2';
+import { useBumpingFistsStore } from '../shared/store/bumpingFists.store';
 
 export default function Discover () {
-  const {potentialMatches, loading, discover} = useDiscoverStores();
+  const {potentialMatch, loading, discover} = useDiscoverStores();
+  const {addBumpingFist} = useBumpingFistsStore();
 
   useEffect(() => {
     discover();
@@ -22,7 +24,7 @@ export default function Discover () {
     );
   }
 
-  if (!potentialMatches.length) {
+  if (!potentialMatch) {
     return (
       <div className="h-screen flex justify-center items-center mx-auto">
         <div>
@@ -48,27 +50,25 @@ export default function Discover () {
     );
   }
 
-  const firstPotentialMatch = potentialMatches[0];
 
-
-  const age = dayjs().diff(firstPotentialMatch.profile.birthday, 'year');
+  const age = dayjs().diff(potentialMatch.profile.birthday, 'year');
   const isValidAge = age >= 18 && age <= 99;
-  const has_location = firstPotentialMatch.profile.location_city &&
-  firstPotentialMatch.profile.location_country;
+  const has_location = potentialMatch.profile.location_city &&
+  potentialMatch.profile.location_country;
 
   return (
     <div className="my-5 px-5" style={{paddingBottom: 65}}>
       <img
-        src={firstPotentialMatch.picture}
+        src={potentialMatch.picture}
         alt="avatar"
         className="rounded-full mx-auto h-72"
       />
       <h1 className="text-center text-4xl text-primary font-roboto px-3 pt-3" >
-        {firstPotentialMatch.first_name}{isValidAge && `, ${age}`}
+        {potentialMatch.first_name}{isValidAge && `, ${age}`}
       </h1>
       {has_location && <h2 className="text-center text-sm text-teal-800 font-roboto uppercase font-bold pb-6">
-        in {firstPotentialMatch.profile.location_city},&nbsp;
-        {firstPotentialMatch.profile.location_country}
+        in {potentialMatch.profile.location_city},&nbsp;
+        {potentialMatch.profile.location_country}
       </h2>}
 
       <div className="flex justify-between items-center px-2">
@@ -76,7 +76,7 @@ export default function Discover () {
           Interests
         </p>
         <p className="text-primary text-sm font-bold rounded text-right">
-          {firstPotentialMatch.percentage_interests}% Alike
+          {potentialMatch.percentage_interests}% Alike
         </p>
       </div>
       <div className={`
@@ -85,8 +85,8 @@ export default function Discover () {
       `}
       >
         {
-          firstPotentialMatch.profile.interests.map((interest) => {
-            const isCommonMatch = _(firstPotentialMatch.common_interests).
+          potentialMatch.profile.interests.map((interest) => {
+            const isCommonMatch = _(potentialMatch.common_interests).
             findWhere({_id: interest._id});
 
             return (
@@ -108,7 +108,7 @@ export default function Discover () {
           Personalities
         </p>
         <p className="text-primary text-sm font-bold rounded text-right">
-          {firstPotentialMatch.percentage_personalities}% Alike
+          {potentialMatch.percentage_personalities}% Alike
         </p>
       </div>
       <div
@@ -119,8 +119,8 @@ export default function Discover () {
         style={{paddingBottom: 95}}
       >
         {
-          firstPotentialMatch.profile.personalities.map((interest) => {
-            const isCommonMatch = _(firstPotentialMatch.common_personalities).
+          potentialMatch.profile.personalities.map((interest) => {
+            const isCommonMatch = _(potentialMatch.common_personalities).
             findWhere({_id: interest._id});
 
             return (
@@ -138,7 +138,7 @@ export default function Discover () {
       </div>
       <ActionButtons
         discover={discover}
-        bumpingFist={() => {}}
+        bumpingFist={() => addBumpingFist(potentialMatch._id)}
       />
     </div>
   );
@@ -151,6 +151,7 @@ function ActionButtons ({discover, bumpingFist}) {
         <button
           className="text-white font-bold rounded-full mr-1"
           type="button"
+          onClick={bumpingFist}
         >
           <BumpingFistsIcon className="w-14 h-14" />
         </button>

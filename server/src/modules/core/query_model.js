@@ -2,7 +2,13 @@ export default (mongooseInstance) => {
   return {
     populate: (fields) => {
       if (fields) {
-        const populateFields = fields.split(',');
+        const splittedByComma = fields.split(',');
+        const splittedBySpace = fields.split(' ');
+
+        const populateFields = splittedByComma.length
+          ? splittedByComma
+          : splittedBySpace;
+
         populateFields.forEach((field) => {
           const populate = {};
           const [parent, child] = field.split('.');
