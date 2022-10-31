@@ -1,0 +1,43 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "weblend-migrations"
+  namespace: "default"
+  labels:
+    app: "weblend-migrations"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "weblend-migrations"
+  template:
+    metadata:
+      labels:
+        app: "weblend-migrations"
+    spec:
+      containers:
+      - name: "weblend-migrations"
+        image: "us.gcr.io/blender-364018/weblend/migrations:latest"
+        imagePullPolicy: Always
+        env:
+          - name: DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: weblend-migrations-config
+                key: DATABASE_URL
+          - name: JWT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: weblend-migrations-config
+                key: JWT_SECRET
+        resources:
+          requests:
+            cpu: 100m
+            ephemeral-storage: 200Mi
+            memory: 128Mi
+          limits:
+            cpu: 400m
+            ephemeral-storage: 200Mi
+            memory: 256Mi
+          

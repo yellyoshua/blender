@@ -1,0 +1,47 @@
+name: Migrations workflow
+on:
+  push:
+    branches: [development, staging, production]
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    name: Build image and push to GCR
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.13.x
+      - uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+      - uses: 'google-github-actions/setup-gcloud@v0'
+
+      - name: Build image and push to GCR
+        working-directory: server
+        run: |
+          cp ../infrastructure/docker/Migrations.Dockerfile Dockerfile
+          gcloud auth configure-docker
+          docker build -t us.gcr.io/${GCP_PROJECT_ID}/weblend/migrations:latest .
+          docker push us.gcr.io/${GCP_PROJECT_ID}/weblend/migrations:latest
+        env:
+          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+
+  tests-migrations:
+    runs-on: ubuntu-latest
+    name: Server tests migrations
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.13.x
+
+      - name: Install dependencies
+        working-directory: server
+        run: npm install
+
+      - name: Execute migrations tests
+        working-directory: server
+        run: npm run test:migrations
+        env:
+          DATABASE_URL_TESTS: ${{ secrets.DATABASE_URL_TESTS }}
