@@ -10,6 +10,8 @@
 	},
 	"globals": {
 		"logger": "readonly",
+    "setupFixtures": "readonly",
+    "closeOpenHandles": "readonly",
     "__t": "readonly"
 	},
 	"parserOptions": {
@@ -92,10 +94,6 @@
 			}
 		],
 		"max-lines": 2,
-		"max-lines-per-function": [
-			"error",
-			100
-		],
 		"max-nested-callbacks": 2,
 		"max-params": 2,
 		"max-statements": 0,

@@ -21,6 +21,24 @@ export default {
 };
 `;
 
+const migration_test_script = (migration_name) => `
+/* eslint-disable */
+// Migration: ${migration_name}
+import { afterAll, beforeEach, describe } from "@jest/globals";
+
+afterAll(closeOpenHandles);
+
+describe("Migration: users_update", () => {
+  beforeEach(async () => {
+    await setupFixtures([
+      \`\${__dirname}/fixtures.js\`,
+    ]);
+  });
+
+
+});
+`;
+
 export default function generate_migration (migration_name, migrations_path) {
   const migrations = utils.folder_contents(migrations_path);
 
@@ -40,11 +58,14 @@ export default function generate_migration (migration_name, migrations_path) {
   const migration_folder_name = `${migration_number}_${migration_identity}`;
   const migration_folder = `${migrations_path}/${migration_folder_name}`;
 
-  const migration_file_content = migration_script(migration_identity);
   fs.mkdirSync(migration_folder);
 
-  const migration_file = `${migration_folder}/migration.js`;
-  fs.writeFileSync(migration_file, migration_file_content, {encoding: 'utf8'});
+  const migration_file_content = migration_script(migration_identity);
+  const migration_test_file_content = migration_test_script(migration_identity);
+
+  fs.writeFileSync(`${migration_folder}/migration.js`, migration_file_content, {encoding: 'utf8'});
+  fs.writeFileSync(`${migration_folder}/migration.spec.js`, migration_test_file_content, {encoding: 'utf8'});
+  fs.writeFileSync(`${migration_folder}/fixtures.js`, '', {encoding: 'utf8'});
 
   console.log(`Migration '${migration_folder_name}' created`);
 }
