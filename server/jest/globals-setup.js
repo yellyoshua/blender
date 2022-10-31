@@ -5,9 +5,11 @@ import _ from 'underscore';
 import mongoose from '../src/config/mongoose';
 import database from 'mongoose';
 
+const database_url = process.env.DATABASE_URL_TESTS || 'mongodb://localhost:27017/weblender_test';
+
 globalThis.setupFixtures = async (fixturesPath) => {
   if (!database.connection.readyState) {
-    await mongoose.connect('mongodb://localhost:27017/weblender_test', {
+    await mongoose.connect(database_url, {
       disableLogs: true
     });
   }

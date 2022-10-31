@@ -7,7 +7,7 @@ import generate_migration from './services/generate_migration.js';
 import execute_migration from './services/execute_migration.js';
 
 const migrations_path = path.resolve(__dirname, 'migrations');
-const database_url = process.env.DATABASE_URL_TESTS || 'mongodb://localhost:27017/blender_tests';
+const database_url = process.env.DATABASE_URL_MIGRATION || 'mongodb://localhost:27017/blender_tests';
 
 /**
  * Generate migration
