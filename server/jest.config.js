@@ -10,5 +10,6 @@ module.exports = {
     '/dist/',
     '/jest/',
     '/src/database/migrations/'
-  ]
+  ],
+  testTimeout: 15000
 };

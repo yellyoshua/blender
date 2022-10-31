@@ -9,5 +9,6 @@ module.exports = {
     '/node_modules/',
     '/dist/',
     '/jest/'
-  ]
+  ],
+  testTimeout: 15000
 };
