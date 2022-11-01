@@ -2,7 +2,7 @@
 /* eslint-disable id-length */
 import _ from 'underscore';
 import usersModel from '../../users/users.model';
-import math from '../../shared/utils/math';
+import math from '../../shared/lib/math';
 
 export default {
   async getPotentialMatch (current_user, already_bumped_users) {
