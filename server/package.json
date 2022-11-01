@@ -13,7 +13,8 @@
     "migration:generate": "babel-node src/database/migration.js generate",
     "migration:execute": "babel-node src/database/migration.js execute",
     "test:migrations": "jest --config=migrations.jest.config.js",
-    "test:migrations:watch": "jest --config=migrations.jest.config.js --watch"
+    "test:migrations:watch": "jest --config=migrations.jest.config.js --watch",
+    "module:generate": "babel-node src/scripts/module-generator.js"
   },
   "author": "yellyoshua",
   "license": "ISC",
