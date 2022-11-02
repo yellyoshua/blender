@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: "weblend-production"
-        image: "us.gcr.io/blender-364018/weblend/server-production:21"
+        image: "us.gcr.io/blender-364018/weblend/server-production:latest"
         imagePullPolicy: Always
         env:
           - name: NODE_ENV
@@ -86,9 +86,9 @@ spec:
             ephemeral-storage: 200Mi
             memory: 128Mi
           limits:
-            cpu: 400m
+            cpu: 200m
             ephemeral-storage: 200Mi
-            memory: 256Mi
+            memory: 128Mi
         readinessProbe:
           httpGet:
             path: "/api/health"

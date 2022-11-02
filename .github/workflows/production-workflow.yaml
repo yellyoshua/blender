@@ -44,7 +44,7 @@ jobs:
           docker push us.gcr.io/${GCP_PROJECT_ID}/weblend/server-production:${RELEASE_VERSION}
         env:
           GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-          RELEASE_VERSION: ${{ github.run_number }}
+          RELEASE_VERSION: latest
   
   deploy:
     runs-on: ubuntu-latest
@@ -77,6 +77,6 @@ jobs:
           GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
           GCP_CLUSTER_NAME: ${{ secrets.GCP_CLUSTER_NAME }}
           GCP_CLUSTER_ZONE: ${{ secrets.GCP_CLUSTER_ZONE }}
-          RELEASE_VERSION: ${{ github.run_number }}
+          RELEASE_VERSION: latest
           DEPLOYMENT_NAME: weblend-production
           CONTAINER_NAME: weblend-production
