@@ -15,15 +15,5 @@ export const useBumpingFistsStore = createStore((set) => ({
       ___populate: bumping_fists_populate
     });
     set({bumpingFists, loading: false});
-  },
-  addBumpingFist: async (receptor) => {
-    set({loading: true});
-    const bumpingFist = await services.bumpingFists.post({
-      receptor
-    });
-    set((state) => ({
-      bumpingFists: [...state.bumpingFists, bumpingFist],
-      loading: false
-    }));
   }
 }));

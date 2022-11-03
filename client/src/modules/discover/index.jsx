@@ -1,16 +1,13 @@
 /* eslint-disable id-length */
-import { Ping } from '@uiball/loaders';
 import { useEffect } from 'react';
-import _ from 'underscore';
-import { useDiscoverStores } from './stores';
 import dayjs from 'dayjs';
-import BumpingFistsIcon from '../shared/icons/BumpingFistsIcon';
-import {HiArrowPath} from 'react-icons/hi2';
-import { useBumpingFistsStore } from '../shared/store/bumpingFists.store';
+import _ from 'underscore';
+import { Ping } from '@uiball/loaders';
+import { useDiscoverStores } from './stores';
+import ActionButtons from './components/ActionButtons';
 
 export default function Discover () {
   const {potentialMatch, loading, discover} = useDiscoverStores();
-  const {addBumpingFist} = useBumpingFistsStore();
 
   useEffect(() => {
     discover();
@@ -61,12 +58,12 @@ export default function Discover () {
       <img
         src={potentialMatch.picture}
         alt="avatar"
-        className="rounded-full mx-auto h-72"
+        className="md:rounded-full rounded-xl mx-auto md:h-72 h-60 w-56 object-cover"
       />
-      <h1 className="text-center text-4xl text-primary font-roboto px-3 pt-3" >
+      <h1 className="text-center text-3xl text-primary font-roboto px-3 pt-3" >
         {potentialMatch.first_name}{isValidAge && `, ${age}`}
       </h1>
-      {has_location && <h2 className="text-center text-sm text-teal-800 font-roboto uppercase font-bold pb-6">
+      {has_location && <h2 className="text-center text-xs text-teal-800 font-roboto uppercase font-bold pb-6">
         in {potentialMatch.profile.location_city},&nbsp;
         {potentialMatch.profile.location_country}
       </h2>}
@@ -138,31 +135,8 @@ export default function Discover () {
       </div>
       <ActionButtons
         discover={discover}
-        bumpingFist={() => addBumpingFist(potentialMatch._id)}
+        potentialMatchId={potentialMatch._id}
       />
-    </div>
-  );
-}
-
-function ActionButtons ({discover, bumpingFist}) {
-  return (
-    <div className="fixed left-0 right-0 flex justify-center" style={{bottom: 70, height: 80}}>
-      <div className="rounded-l-2xl rounded-r-2xl flex items-center justify-center bg-white px-2 shadow-xl">
-        <button
-          className="text-white font-bold rounded-full mr-1"
-          type="button"
-          onClick={bumpingFist}
-        >
-          <BumpingFistsIcon className="w-14 h-14" />
-        </button>
-        <button
-          className="bg-primary text-white font-bold py-2 px-2 rounded-full ml-1"
-          type="button"
-          onClick={discover}
-        >
-          <HiArrowPath className="w-9 h-9" />
-        </button>
-      </div>
     </div>
   );
 }
