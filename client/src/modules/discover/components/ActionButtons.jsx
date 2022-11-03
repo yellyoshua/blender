@@ -5,13 +5,16 @@ import { Ping } from '@uiball/loaders';
 import Punched from './Punched';
 
 export default function ActionButtons ({discover, potentialMatchId}) {
-  const {bumpFist, loading, addBumpFist} = useBumpFistsStore();
+  const {punched, loading, addBumpFist, reset} = useBumpFistsStore();
 
-  if (bumpFist) {
+  if (punched) {
     return (
       <Punched
-        bumpFist={bumpFist}
-        discover={discover}
+        punched={punched[0]}
+        discover={() => {
+          reset();
+          discover();
+        }}
       />
     );
   }
@@ -30,7 +33,10 @@ export default function ActionButtons ({discover, potentialMatchId}) {
             <button
               className="text-white font-bold rounded-full mr-1"
               type="button"
-              onClick={() => addBumpFist(potentialMatchId)}
+              onClick={() => {
+                addBumpFist(potentialMatchId).
+                then(discover);
+              }}
             >
               <BumpingFistsIcon className="w-14 h-14" />
             </button>

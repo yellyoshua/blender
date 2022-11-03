@@ -19,11 +19,14 @@ export const useDiscoverStores = createStore((set) => ({
 }));
 
 export const useBumpFistsStore = createStore((set) => ({
-  bumpFist: null,
+  punched: null,
   loading: false,
   addBumpFist: async (receptor) => {
     set({loading: true});
-    const bumpFist = await services.bumpingFists.post({receptor});
-    set({bumpFist, loading: false});
+    const punched = await services.bumpingFists.post({receptor});
+    set({punched, loading: false});
+  },
+  reset: () => {
+    set({punched: null, loading: false});
   }
 }));
