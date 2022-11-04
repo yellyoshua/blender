@@ -41,7 +41,7 @@ export default function BottomNavigator ({height = 60}) {
       className={`
         grid grid-cols-4 w-full justify-center items-center 
         fixed bottom-0 max-w-2xl left-0 right-0 mx-auto py-1 border-t border-t-gray-200
-        bg-white z-10
+        bg-white z-10 select-none
       `}
       style={{height}}
     >

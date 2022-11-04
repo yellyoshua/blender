@@ -5,6 +5,7 @@ import _ from 'underscore';
 import { Ping } from '@uiball/loaders';
 import { useDiscoverStores } from './stores';
 import ActionButtons from './components/ActionButtons';
+import EmptyDiscover from './components/EmptyDiscover';
 
 export default function Discover () {
   const {potentialMatch, loading, discover} = useDiscoverStores();
@@ -22,29 +23,7 @@ export default function Discover () {
   }
 
   if (!potentialMatch) {
-    return (
-      <div className="h-screen flex justify-center items-center mx-auto">
-        <div>
-          <h1 className="text-center text-4xl text-primary font-roboto p-3" >
-            !Oops
-          </h1>
-          <h2 className="text-center text-sm text-primary font-roboto uppercase p-2 font-bold">
-            We couldn&apos;t find any matches for you
-          </h2>
-
-          <h2 className="text-center text-sm text-teal-800 font-roboto uppercase font-bold">
-            Try again later
-          </h2>
-          <button
-            className="bg-primary text-white font-bold py-2 px-4 rounded mt-4 mx-auto block"
-            type="button"
-            onClick={discover}
-          >
-            Refresh
-          </button>
-        </div>
-      </div>
-    );
+    return <EmptyDiscover refresh={discover} />;
   }
 
 
