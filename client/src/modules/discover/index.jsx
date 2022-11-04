@@ -27,7 +27,7 @@ export default function Discover () {
   }
 
 
-  const age = dayjs().diff(potentialMatch.profile.birthday, 'year');
+  const age = dayjs().diff(potentialMatch.profile.birthdate, 'year');
   const isValidAge = age >= 18 && age <= 99;
   const has_location = potentialMatch.profile.location_city &&
   potentialMatch.profile.location_country;

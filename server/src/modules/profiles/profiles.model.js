@@ -11,7 +11,7 @@ const geolocationSchema = new mongoose.Schema({
 });
 
 const tutorialSchema = new mongoose.Schema({
-  done_birthday: {
+  done_birthdate: {
     type: Boolean,
     default: false
   },
@@ -50,7 +50,7 @@ const profilesSchema = new mongoose.Schema({
     type: tutorialSchema,
     default: {}
   },
-  birthday: {
+  birthdate: {
     type: Date
   },
   location_country: {

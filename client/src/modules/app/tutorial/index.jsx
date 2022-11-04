@@ -4,7 +4,7 @@ import EnableLocation from './screens/EnableLocation';
 import SelectInterests from './screens/SelectInterests';
 import SelectPersonalities from './screens/SelectPersonalities';
 import PersonalizeExperience from './screens/PersonalizeExperience';
-import Birthday from './screens/Birthday';
+import Birthdate from './screens/Birthdate';
 import AddPhotos from './screens/AddPhotos';
 
 export default function Tutorial ({ user, children }) {
@@ -53,8 +53,8 @@ export default function Tutorial ({ user, children }) {
     />;
   }
 
-  if (!user.profile.tutorial.done_birthday) {
-    return <Birthday
+  if (!user.profile.tutorial.done_birthdate) {
+    return <Birthdate
       profile={user.profile}
       updateProfile={updateProfile}
     />;

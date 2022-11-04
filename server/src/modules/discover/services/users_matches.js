@@ -26,7 +26,7 @@ export default {
       },
       {
         $match: {
-          'profile.tutorial.done_birthday': true,
+          'profile.tutorial.done_birthdate': true,
           'profile.tutorial.done_geolocation': true,
           'profile.tutorial.done_interests': true,
           'profile.tutorial.done_personalities': true,
@@ -77,7 +77,7 @@ export default {
             interests: 1,
             personalities: 1,
             gender: 1,
-            birthday: 1,
+            birthdate: 1,
             location_city: 1,
             location_country: 1
           }
