@@ -10,7 +10,7 @@ export default function ActionButtons ({discover, potentialMatchId}) {
   if (punched) {
     return (
       <Punched
-        punched={punched[0]}
+        punched={punched}
         discover={() => {
           reset();
           discover();
