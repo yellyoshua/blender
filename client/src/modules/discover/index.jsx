@@ -6,6 +6,7 @@ import { Ping } from '@uiball/loaders';
 import { useDiscoverStores } from './stores';
 import ActionButtons from './components/ActionButtons';
 import EmptyDiscover from './components/EmptyDiscover';
+import BadgesList from '../shared/components/BadgesList';
 
 export default function Discover () {
   const {potentialMatch, loading, discover} = useDiscoverStores();
@@ -55,29 +56,14 @@ export default function Discover () {
           {potentialMatch.percentage_interests}% Alike
         </p>
       </div>
-      <div className={`
-        grid gap-4 md:grid-cols-4 sm:grid-cols-3
-        grid-cols-2 text-center text-white pb-6 px-2
-      `}
-      >
-        {
-          potentialMatch.profile.interests.map((interest) => {
-            const isCommonMatch = _(potentialMatch.common_interests).
-            findWhere({_id: interest._id});
-
-            return (
-              <h1
-                key={interest._id}
-                className={`
-                  ${isCommonMatch ? 'bg-teal-800' : 'bg-primary'} px-2 rounded-2xl select-none
-                `}
-              >
-                {interest.name}
-              </h1>
-            );
-          })
-        }
-      </div>
+      <BadgesList
+        badges={potentialMatch.profile.interests}
+        beforeRender={(interest) => {
+          return _(potentialMatch.common_interests).findWhere({_id: interest._id})
+            ? _(interest).extend({color: 'teal-800'})
+            : interest;
+        }}
+      />
 
       <div className="flex justify-between items-center px-2">
         <p className="text-left text-sm font-bold text-primary font-roboto" >
@@ -87,31 +73,16 @@ export default function Discover () {
           {potentialMatch.percentage_personalities}% Alike
         </p>
       </div>
-      <div
-        className={`
-          grid gap-4 md:grid-cols-4 sm:grid-cols-3
-          grid-cols-2 text-center text-white pb-6 px-2
-        `}
-        style={{paddingBottom: 95}}
-      >
-        {
-          potentialMatch.profile.personalities.map((interest) => {
-            const isCommonMatch = _(potentialMatch.common_personalities).
-            findWhere({_id: interest._id});
 
-            return (
-              <h1
-                key={interest._id}
-                className={`
-                  ${isCommonMatch ? 'bg-teal-800' : 'bg-primary'} px-2 rounded-2xl select-none
-                `}
-              >
-                {interest.name}
-              </h1>
-            );
-          })
-        }
-      </div>
+      <BadgesList
+        badges={potentialMatch.profile.personalities}
+        beforeRender={(personality) => {
+          return _(potentialMatch.common_personalities).findWhere({_id: personality._id})
+            ? _(personality).extend({color: 'teal-800'})
+            : personality;
+        }}
+      />
+      <div className="pb-20 w-full h-1"/>
       <ActionButtons
         discover={discover}
         potentialMatchId={potentialMatch._id}
