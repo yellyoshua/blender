@@ -8,6 +8,7 @@ import uploadService from './upload.service';
 import postsService from './posts.service';
 import communitiesService from './communities.service';
 import bumpingFistsService from './bumpingFists.service';
+import meService from './me.service';
 
 const services = {
   interests: interestsService,
@@ -19,7 +20,8 @@ const services = {
   upload: uploadService,
   posts: postsService,
   communities: communitiesService,
-  bumpingFists: bumpingFistsService
+  bumpingFists: bumpingFistsService,
+  me: meService
 };
 
 export default services;

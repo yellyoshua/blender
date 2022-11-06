@@ -1,5 +1,5 @@
 import {Ping} from '@uiball/loaders';
-import { useUserStore } from '../../shared/store';
+import { useMeStore } from '../../shared/store';
 import EnableLocation from './screens/EnableLocation';
 import SelectInterests from './screens/SelectInterests';
 import SelectPersonalities from './screens/SelectPersonalities';
@@ -8,7 +8,7 @@ import Birthdate from './screens/Birthdate';
 import AddPhotos from './screens/AddPhotos';
 
 export default function Tutorial ({ user, children }) {
-  const { updateProfile, loading } = useUserStore();
+  const { updateMeProfile, loading } = useMeStore();
 
   if (loading) {
     return (
@@ -21,42 +21,42 @@ export default function Tutorial ({ user, children }) {
   if (!user.profile.tutorial.done_geolocation) {
     return <EnableLocation
       profile={user.profile}
-      updateProfile={updateProfile}
+      updateProfile={updateMeProfile}
     />;
   }
 
   if (!user.profile.tutorial.done_personalize_experience) {
     return <PersonalizeExperience
       profile={user.profile}
-      updateProfile={updateProfile}
+      updateProfile={updateMeProfile}
     />;
   }
 
   if (!user.profile.tutorial.done_interests) {
     return <SelectInterests
       profile={user.profile}
-      updateProfile={updateProfile}
+      updateProfile={updateMeProfile}
     />;
   }
 
   if (!user.profile.tutorial.done_add_photos) {
     return <AddPhotos
       profile={user.profile}
-      updateProfile={updateProfile}
+      updateProfile={updateMeProfile}
     />;
   }
 
   if (!user.profile.tutorial.done_personalities) {
     return <SelectPersonalities
       profile={user.profile}
-      updateProfile={updateProfile}
+      updateProfile={updateMeProfile}
     />;
   }
 
   if (!user.profile.tutorial.done_birthdate) {
     return <Birthdate
       profile={user.profile}
-      updateProfile={updateProfile}
+      updateProfile={updateMeProfile}
     />;
   }
 

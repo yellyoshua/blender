@@ -3,11 +3,11 @@
 import _ from 'underscore';
 import { useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
-import { usePersonalitiesStores, useUserStore } from '../../shared/store';
+import { usePersonalitiesStores, useMeStore } from '../../shared/store';
 import OptionsSelector from '../../shared/components/OptionsSelector';
 
 export default function ProfileEditPersonalities () {
-  const {user: {profile}, updateProfile} = useUserStore();
+  const {me: {profile}, updateMeProfile} = useMeStore();
   const navigate = useNavigate();
 
   const [selectedPersonalities, setSelectedPersonalities] = useState(() => {
@@ -55,7 +55,7 @@ export default function ProfileEditPersonalities () {
         return (
           <SaveButton
             selectedPersonalities={selectedPersonalities}
-            updateProfile={updateProfile}
+            updateProfile={updateMeProfile}
             redirect={() => navigate('/profile')}
             disabled={disabled}
           />

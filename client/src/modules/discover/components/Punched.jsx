@@ -1,6 +1,6 @@
 import FireworksConfetti from '../../shared/components/FireworksConfetti';
 import BumpingFistsIcon from '../../shared/icons/BumpingFistsIcon';
-import { useUserStore } from '../../shared/store';
+import { useMeStore } from '../../shared/store';
 
 export default function Punched ({
   punched = {
@@ -11,8 +11,7 @@ export default function Punched ({
   },
   discover
 }) {
-  console.log('punched :', punched);
-  const {user} = useUserStore();
+  const {me} = useMeStore();
 
   return (
     <div className={`
@@ -27,7 +26,7 @@ export default function Punched ({
         <h1 className="text-center text-2xl text-primary font-roboto p-3" >
           <div className="flex justify-center">
             <img
-              src={user.profile_picture ? user.profile_picture.url : user.picture}
+              src={me.profile_picture ? me.profile_picture.url : me.picture}
               alt="profile"
               className="w-28 h-28 rounded-full mx-auto object-cover -mr-2"
             />
