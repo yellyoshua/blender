@@ -57,9 +57,9 @@ export default function Profile () {
           value={me.first_name}
           onUpdate={(value) => updateMe({first_name: value}, true)}
           type="text"
-          className="text-4xl text-right text-primary font-roboto p-3"
+          className="text-2xl md:text-4xl text-right text-primary font-roboto p-3"
         >
-          <h1 className="text-right text-4xl text-primary font-roboto p-3" >
+          <h1 className="text-right text-2xl md:text-4xl text-primary font-roboto p-3" >
             {me.first_name}
           </h1>
         </AutosaveInput>
@@ -70,9 +70,9 @@ export default function Profile () {
           value={me.last_name}
           onUpdate={(value) => updateMe({last_name: value}, true)}
           type="text"
-          className="text-4xl text-left text-primary font-roboto p-3"
+          className="text-2xl md:text-4xl text-left text-primary font-roboto p-3"
         >
-          <h1 className="text-left text-4xl text-primary font-roboto p-3" >
+          <h1 className="text-left text-2xl md:text-4xl text-primary font-roboto p-3" >
             {me?.last_name}
           </h1>
         </AutosaveInput>
@@ -85,7 +85,7 @@ export default function Profile () {
       }
 
       <div className="flex justify-between items-center">
-        <p className="text-left text-sm font-bold text-primary font-roboto p-3" >
+        <p className="text-left text-xl font-bold text-primary font-roboto p-3" >
           Interests
         </p>
         <Link to="/profile/edit/interests">
@@ -101,7 +101,7 @@ export default function Profile () {
       <BadgesList badges={me.profile.interests} />
 
       <div className="flex justify-between items-center">
-        <p className="text-left text-sm font-bold text-primary font-roboto p-3" >
+        <p className="text-left text-xl font-bold text-primary font-roboto p-3" >
           Personalities
         </p>
         <Link to="/profile/edit/personalities">
