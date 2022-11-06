@@ -1,8 +1,7 @@
+/* eslint-disable require-atomic-updates */
 import profilesModel from './profiles.model';
 import usersModel from '../users/users.model';
-import attach_profile_location from './services/attach_profile_location';
-import attach_profile_interests from './services/attach_profile_interests';
-import attach_profile_personalities from './services/attach_profile_personalities';
+import attach_profile from './services/attach_profile';
 
 export default {
   find: profilesModel.find,
@@ -11,10 +10,26 @@ export default {
       _id: req.auth_payload.user_id
     }, {populate: 'profile'});
 
-    const profile_with_location = await attach_profile_location(data, req);
-    const profile_with_interests = await attach_profile_interests(profile_with_location);
-    const profile_with_personalities = await attach_profile_personalities(profile_with_interests);
+    if (attach_profile.want_update_geolocation({data})) {
+      const location = await attach_profile.get_geolocation(data);
+      data.location_country = location.location_country;
+      data.location_city = location.location_city;
+    }
 
-    return profilesModel.update({_id: user.profile._id}, profile_with_personalities, {dot_notation: true});
+    if (attach_profile.want_done_geolocation(data)) {
+      const location = await attach_profile.get_ip_geolocation(req);
+      data.location_country = location.location_country;
+      data.location_city = location.location_city;
+    }
+
+    if (attach_profile.want_update_interests(data)) {
+      data.interests = await attach_profile.get_interests(data);
+    }
+
+    if (attach_profile.want_update_personalities(data)) {
+      data.personalities = await attach_profile.get_personalities(data);
+    }
+
+    return profilesModel.update({_id: user.profile._id}, data, {dot_notation: true});
   }
 };
