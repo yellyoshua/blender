@@ -1,4 +1,6 @@
 import {Navigate} from 'react-router-dom';
+import Privacy from '../modules/terms/privacy';
+import Terms from '../modules/terms';
 import ErrorBoundary from '../modules/errors/ErrorBoundary';
 import UnderConstruction from '../modules/errors/UnderConstruction';
 import App from '../modules/app';
@@ -14,6 +16,16 @@ const errorElement = <ErrorBoundary />;
  * @type {import('react-router').RouteObject[]}
  */
 export default [
+  {
+    path: '/terms-page',
+    errorElement: <ErrorBoundary />,
+    element: <Terms />
+  },
+  {
+    path: '/privacy-page',
+    errorElement: <ErrorBoundary />,
+    element: <Privacy />
+  },
   {
     path: '/',
     element: <App />,
