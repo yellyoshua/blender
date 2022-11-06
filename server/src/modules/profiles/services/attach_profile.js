@@ -15,7 +15,8 @@ export default {
   },
   want_done_geolocation (profile_changes = {}) {
     return Boolean(profile_changes.tutorial &&
-      profile_changes.tutorial.done_geolocation);
+      profile_changes.tutorial.done_geolocation &&
+      !this.want_update_geolocation(profile_changes));
   },
   want_update_interests (profile_changes = {}) {
     return Boolean(profile_changes.interests && 

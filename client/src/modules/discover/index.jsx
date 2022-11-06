@@ -49,7 +49,7 @@ export default function Discover () {
       </h2>}
 
       <div className="flex justify-between items-center px-2">
-        <p className="text-left text-sm font-bold text-primary font-roboto" >
+        <p className="text-left text-base font-bold text-primary font-roboto" >
           Interests
         </p>
         <p className="text-primary text-sm font-bold rounded text-right">
@@ -59,14 +59,15 @@ export default function Discover () {
       <BadgesList
         badges={potentialMatch.profile.interests}
         beforeRender={(interest) => {
+          console.log('potentialMatch.common_interests :', _(potentialMatch.common_interests).findWhere({_id: interest._id}));
           return _(potentialMatch.common_interests).findWhere({_id: interest._id})
-            ? _(interest).extend({color: 'teal-800'})
+            ? _(interest).extend({active: true})
             : interest;
         }}
       />
 
       <div className="flex justify-between items-center px-2">
-        <p className="text-left text-sm font-bold text-primary font-roboto" >
+        <p className="text-left text-base font-bold text-primary font-roboto" >
           Personalities
         </p>
         <p className="text-primary text-sm font-bold rounded text-right">
@@ -78,7 +79,7 @@ export default function Discover () {
         badges={potentialMatch.profile.personalities}
         beforeRender={(personality) => {
           return _(potentialMatch.common_personalities).findWhere({_id: personality._id})
-            ? _(personality).extend({color: 'teal-800'})
+            ? _(personality).extend({active: true})
             : personality;
         }}
       />

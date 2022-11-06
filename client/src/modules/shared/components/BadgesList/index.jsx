@@ -12,7 +12,7 @@ export default function BadgesList ({
           return (
             <h1 key={badgeToRender._id} className={`
               bg-primary px-4 py-2 rounded-2xl select-none
-              ${badgeToRender?.color ? `bg-${badgeToRender.color}` : ''}
+              ${badgeToRender?.active ? 'bg-teal-800' : ''}
             `}>
               {badgeToRender.name}
             </h1>

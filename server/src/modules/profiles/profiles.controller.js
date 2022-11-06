@@ -10,7 +10,7 @@ export default {
       _id: req.auth_payload.user_id
     }, {populate: 'profile'});
 
-    if (attach_profile.want_update_geolocation({data})) {
+    if (attach_profile.want_update_geolocation(data)) {
       const location = await attach_profile.get_geolocation(data);
       data.location_country = location.location_country;
       data.location_city = location.location_city;
