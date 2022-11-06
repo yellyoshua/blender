@@ -14,10 +14,9 @@ export default {
     const [me] = await usersModel.find({_id: user_id}, options);
     return me;
   },
-  async update_me (filter, data, req) {
+  update_me (filter, data, req) {
     const {user_id} = req.auth_payload;
     const update_data = _(data || {}).pick('first_name', 'last_name');
-    const [me_updated] = await usersModel.update({_id: user_id}, update_data);
-    return me_updated;
+    return usersModel.update({_id: user_id}, update_data);
   }
 };

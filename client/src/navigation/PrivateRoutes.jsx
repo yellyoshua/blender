@@ -20,6 +20,8 @@ export default [
     errorElement,
     children: [
       { index: true, element: <Discover />, errorElement },
+      { path: 'security', element: <UnderConstruction />, errorElement },
+      { path: 'settings', element: <UnderConstruction />, errorElement },
       { path: 'profile/edit/photos', element: <UnderConstruction />, errorElement },
       { path: 'profile/edit/interests', element: <ProfileEditInterests />, errorElement },
       { path: 'profile/edit/personalities', element: <ProfileEditPersonalities />, errorElement },

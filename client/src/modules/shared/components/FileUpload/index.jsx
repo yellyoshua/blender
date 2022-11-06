@@ -1,4 +1,5 @@
 import { useState, createRef } from 'react';
+import {Ping} from '@uiball/loaders';
 import services from '../../../core/services';
 
 // When I add file inmediatly upload it to server
@@ -51,7 +52,7 @@ export default function FileUpload ({
   };
 
   return (
-    <div onClick={selectFile}>
+    <div onClick={selectFile} className="relative">
       <input
         ref={fileInputRef}
         style={{ display: 'none' }}
@@ -63,7 +64,16 @@ export default function FileUpload ({
           event.target.value = null;
         }}
       />
-      {children}
+      {isUploading && 
+        <div className="absolute w-full top-0 bottom-0 left-0 right-0">
+          <div className="flex items-center justify-center h-full">
+            <Ping size={45} speed={1} />
+          </div>
+        </div>
+      }
+      <div className={isUploading && 'opacity-40'}>
+        {children}
+      </div>
     </div>
   );
 }

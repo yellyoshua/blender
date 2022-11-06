@@ -12,9 +12,11 @@ export const useMeStore = createStore(persist((set, get) => ({
     set({me});
     set({loading: false});
   },
-  updateMe: async (data) => {
-    set({loading: true});
-    const me = await services.me.update(data);
+  updateMe: async (data, disableLoading = false) => {
+    if (!disableLoading) {
+      set({loading: true});
+    }
+    const me = await services.me.put(data);
     set({me});
     set({loading: false});
   },

@@ -28,7 +28,7 @@ export default function ImagePostsGrid ({
               <img
                 src={pic.url}
                 className={`
-                  rounded-xl object-cover bg-white w-full
+                  rounded-xl object-cover bg-white w-full m-auto
                   ${fixed ? 'w-28 h-28' : 'h-auto m-auto'}
                 `}
                 referrerPolicy="no-referrer"
