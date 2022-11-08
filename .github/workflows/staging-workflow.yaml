@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Build image
     needs:
-      - tests-server
+      - tests
     steps:
       - uses: actions/checkout@master
       - uses: actions/setup-node@v2
