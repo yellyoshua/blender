@@ -1,7 +1,7 @@
 name: Migrations workflow
 on:
   push:
-    branches: [development, staging, production]
+    branches: [staging, production]
 
 jobs:
   build-and-push-image:
