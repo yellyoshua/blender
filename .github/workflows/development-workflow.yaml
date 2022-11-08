@@ -22,10 +22,10 @@ jobs:
         run: npm run test
         env:
           DATABASE_URL_TESTS: ${{ secrets.DATABASE_URL_TESTS }}
-
-  deploys-server:
+  
+  build:
     runs-on: ubuntu-latest
-    name: Server push image & deploy
+    name: Build image
     needs:
       - tests-server
     steps:
@@ -33,33 +33,40 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16.13.x
-      
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+      - uses: 'google-github-actions/auth@v0'
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-      
-      - name: Install seeds
-        working-directory: server
-        run: |
-          npm install
-          npm run seed
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL_DEVELOPMENT }}
-          NODE_ENV: development
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+      - uses: 'google-github-actions/setup-gcloud@v0'
 
-      - name: Push to AWS ECR
+      - name: Build image and push to GCR
         working-directory: server
         run: |
-          aws ecr get-login-password --region ${region}  | docker login --username AWS --password-stdin ${accountid}.dkr.ecr.${region}.amazonaws.com
-          docker build --tag ${accountid}.dkr.ecr.${region}.amazonaws.com/${ecr_repository}:v1.${GITHUB_RUN_NUMBER} .
-          echo "::set-output name=tag::v1.${GITHUB_RUN_NUMBER}"
-          docker push ${accountid}.dkr.ecr.${region}.amazonaws.com/${ecr_repository}:v1.${GITHUB_RUN_NUMBER}
-          aws lambda update-function-code --function-name ${lambda_function_name} --image-uri ${accountid}.dkr.ecr.${region}.amazonaws.com/${ecr_repository}:v1.${GITHUB_RUN_NUMBER}
+          cp ../infrastructure/docker/Server.Dockerfile Dockerfile
+          gcloud auth configure-docker
+          docker build -t us.gcr.io/${GCP_PROJECT_ID}/weblend/server-development:latest .
+          docker push us.gcr.io/${GCP_PROJECT_ID}/weblend/server-development:latest
         env:
-          accountid: ${{ secrets.AWS_ACCOUNT_ID}}
-          region: ${{ secrets.AWS_REGION }}
-          lambda_function_name: blender-app-dev
-          ecr_repository: blender-app-dev
+          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+
+    deploy:
+      runs-on: ubuntu-latest
+      name: Deploy to cloud run
+      needs:
+        - build
+      steps:
+        - uses: actions/checkout@master
+        - uses: actions/setup-node@v2
+          with:
+            node-version: 16.13.x
+        - uses: 'google-github-actions/auth@v0'
+          with:
+            credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+        - uses: 'google-github-actions/setup-gcloud@v0'
+
+        - name: Deploy to cloud run
+          working-directory: server
+          run: |
+            gcloud run deploy weblend-development --image us.gcr.io/${GCP_PROJECT_ID}/weblend/server-development:latest --platform managed --region ${GCP_CLOUD_RUN_REGION} --allow-unauthenticated --project ${GCP_PROJECT_ID}
+          env:
+            GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+            GCP_CLOUD_RUN_REGION: us-central1
