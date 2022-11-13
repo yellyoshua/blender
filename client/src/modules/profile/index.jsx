@@ -86,7 +86,7 @@ export default function Profile () {
             </h2>
           }
         </div>
-        <div className="flex justify-end items-center">
+        {/* <div className="flex justify-end items-center">
           <div className="h-20 w-20 rounded-lg border-2 border-primary text-primary flex items-center justify-center">
             <div className="text-center">
               <p className="text-base">20</p>
@@ -95,7 +95,7 @@ export default function Profile () {
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className="flex justify-between items-center">
