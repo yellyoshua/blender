@@ -1,16 +1,15 @@
 /* eslint-disable id-length */
-import { Ping } from '@uiball/loaders';
 import { useEffect } from 'react';
-import _ from 'underscore';
-import { useDiscoverStores } from './stores';
 import dayjs from 'dayjs';
-import BumpingFistsIcon from '../shared/icons/BumpingFistsIcon';
-import {HiArrowPath} from 'react-icons/hi2';
-import { useBumpingFistsStore } from '../shared/store/bumpingFists.store';
+import _ from 'underscore';
+import { Ping } from '@uiball/loaders';
+import { useDiscoverStores } from './stores';
+import ActionButtons from './components/ActionButtons';
+import EmptyDiscover from './components/EmptyDiscover';
+import BadgesList from '../shared/components/BadgesList';
 
 export default function Discover () {
   const {potentialMatch, loading, discover} = useDiscoverStores();
-  const {addBumpingFist} = useBumpingFistsStore();
 
   useEffect(() => {
     discover();
@@ -25,33 +24,11 @@ export default function Discover () {
   }
 
   if (!potentialMatch) {
-    return (
-      <div className="h-screen flex justify-center items-center mx-auto">
-        <div>
-          <h1 className="text-center text-4xl text-primary font-roboto p-3" >
-            !Oops
-          </h1>
-          <h2 className="text-center text-sm text-primary font-roboto uppercase p-2 font-bold">
-            We couldn&apos;t find any matches for you
-          </h2>
-
-          <h2 className="text-center text-sm text-teal-800 font-roboto uppercase font-bold">
-            Try again later
-          </h2>
-          <button
-            className="bg-primary text-white font-bold py-2 px-4 rounded mt-4 mx-auto block"
-            type="button"
-            onClick={discover}
-          >
-            Refresh
-          </button>
-        </div>
-      </div>
-    );
+    return <EmptyDiscover refresh={discover} />;
   }
 
 
-  const age = dayjs().diff(potentialMatch.profile.birthday, 'year');
+  const age = dayjs().diff(potentialMatch.profile.birthdate, 'year');
   const isValidAge = age >= 18 && age <= 99;
   const has_location = potentialMatch.profile.location_city &&
   potentialMatch.profile.location_country;
@@ -61,108 +38,56 @@ export default function Discover () {
       <img
         src={potentialMatch.picture}
         alt="avatar"
-        className="rounded-full mx-auto h-72"
+        className="md:rounded-full rounded-xl mx-auto md:h-72 h-60 w-56 object-cover"
       />
-      <h1 className="text-center text-4xl text-primary font-roboto px-3 pt-3" >
+      <h1 className="text-center text-3xl text-primary font-roboto px-3 pt-3" >
         {potentialMatch.first_name}{isValidAge && `, ${age}`}
       </h1>
-      {has_location && <h2 className="text-center text-sm text-teal-800 font-roboto uppercase font-bold pb-6">
+      {has_location && <h2 className="text-center text-xs text-teal-800 font-roboto uppercase font-bold pb-6">
         in {potentialMatch.profile.location_city},&nbsp;
         {potentialMatch.profile.location_country}
       </h2>}
 
       <div className="flex justify-between items-center px-2">
-        <p className="text-left text-sm font-bold text-primary font-roboto" >
+        <p className="text-left text-base font-bold text-primary font-roboto" >
           Interests
         </p>
         <p className="text-primary text-sm font-bold rounded text-right">
           {potentialMatch.percentage_interests}% Alike
         </p>
       </div>
-      <div className={`
-        grid gap-4 md:grid-cols-4 sm:grid-cols-3
-        grid-cols-2 text-center text-white pb-6 px-2
-      `}
-      >
-        {
-          potentialMatch.profile.interests.map((interest) => {
-            const isCommonMatch = _(potentialMatch.common_interests).
-            findWhere({_id: interest._id});
-
-            return (
-              <h1
-                key={interest._id}
-                className={`
-                  ${isCommonMatch ? 'bg-teal-800' : 'bg-primary'} px-2 rounded-2xl select-none
-                `}
-              >
-                {interest.name}
-              </h1>
-            );
-          })
-        }
-      </div>
+      <BadgesList
+        badges={potentialMatch.profile.interests}
+        beforeRender={(interest) => {
+          console.log('potentialMatch.common_interests :', _(potentialMatch.common_interests).findWhere({_id: interest._id}));
+          return _(potentialMatch.common_interests).findWhere({_id: interest._id})
+            ? _(interest).extend({active: true})
+            : interest;
+        }}
+      />
 
       <div className="flex justify-between items-center px-2">
-        <p className="text-left text-sm font-bold text-primary font-roboto" >
+        <p className="text-left text-base font-bold text-primary font-roboto" >
           Personalities
         </p>
         <p className="text-primary text-sm font-bold rounded text-right">
           {potentialMatch.percentage_personalities}% Alike
         </p>
       </div>
-      <div
-        className={`
-          grid gap-4 md:grid-cols-4 sm:grid-cols-3
-          grid-cols-2 text-center text-white pb-6 px-2
-        `}
-        style={{paddingBottom: 95}}
-      >
-        {
-          potentialMatch.profile.personalities.map((interest) => {
-            const isCommonMatch = _(potentialMatch.common_personalities).
-            findWhere({_id: interest._id});
 
-            return (
-              <h1
-                key={interest._id}
-                className={`
-                  ${isCommonMatch ? 'bg-teal-800' : 'bg-primary'} px-2 rounded-2xl select-none
-                `}
-              >
-                {interest.name}
-              </h1>
-            );
-          })
-        }
-      </div>
+      <BadgesList
+        badges={potentialMatch.profile.personalities}
+        beforeRender={(personality) => {
+          return _(potentialMatch.common_personalities).findWhere({_id: personality._id})
+            ? _(personality).extend({active: true})
+            : personality;
+        }}
+      />
+      <div className="pb-20 w-full h-1"/>
       <ActionButtons
         discover={discover}
-        bumpingFist={() => addBumpingFist(potentialMatch._id)}
+        potentialMatchId={potentialMatch._id}
       />
-    </div>
-  );
-}
-
-function ActionButtons ({discover, bumpingFist}) {
-  return (
-    <div className="fixed left-0 right-0 flex justify-center" style={{bottom: 70, height: 80}}>
-      <div className="rounded-l-2xl rounded-r-2xl flex items-center justify-center bg-white px-2 shadow-xl">
-        <button
-          className="text-white font-bold rounded-full mr-1"
-          type="button"
-          onClick={bumpingFist}
-        >
-          <BumpingFistsIcon className="w-14 h-14" />
-        </button>
-        <button
-          className="bg-primary text-white font-bold py-2 px-2 rounded-full ml-1"
-          type="button"
-          onClick={discover}
-        >
-          <HiArrowPath className="w-9 h-9" />
-        </button>
-      </div>
     </div>
   );
 }

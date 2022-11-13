@@ -1,4 +1,3 @@
-/* eslint-disable id-length */
 import _ from 'underscore';
 import mongoose from 'mongoose';
 
@@ -11,18 +10,32 @@ export class CustomError extends Error {
   }
 }
 
-export const objectToDotNotation = (args) => {
-  const setObject = {};
-  Object.keys(args).forEach((key) => {
-    if (typeof args[key] === 'object') {
-      Object.keys(args[key]).forEach((subkey) => {
-        setObject[`${key}.${subkey}`] = args[key][subkey];
-      });
+export const objectToDotNotation = (objToDotNotation) => {
+  const result = {};
+
+  const recurse = (cur, prop) => {
+    if (Object(cur) !== cur) {
+      result[prop] = cur;
+    } else if (Array.isArray(cur)) {
+      result[prop] = cur;
     } else {
-      setObject[key] = args[key];
+      let isEmpty = true;
+      _(Object.keys(cur)).each((propKey) => {
+        isEmpty = false;
+        const propDotKey = prop
+          ? `${prop}.${propKey}`
+          : propKey;
+
+        recurse(cur[propKey], propDotKey);
+      });
+
+      if (isEmpty && prop) {
+        result[prop] = {};
+      }
     }
-  });
-  return setObject;
+  };
+  recurse(objToDotNotation, '');
+  return result;
 };
 
 export const toString = (data) => {

@@ -1,11 +1,11 @@
-import { useUserStore } from '../../shared/store';
+import { useMeStore } from '../../shared/store';
 
 export default function ProfilePhoto ({ size = 40, width, height, className = '' }) {
-  const {user} = useUserStore();
+  const {me} = useMeStore();
 
-  const picture = user.profile_picture
-    ? user.profile_picture.url
-    : user.picture;
+  const picture = me.profile_picture
+    ? me.profile_picture.url
+    : me.picture;
 
   return (
     <img

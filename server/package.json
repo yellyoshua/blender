@@ -4,12 +4,17 @@
   "description": "",
   "scripts": {
     "start": "npm run build && node dist/app.js",
-    "test": "jest",
+    "test": "jest --config=jest.config.js",
     "test:watch": "jest --watch",
     "eslint": "eslint --ext .js,.jsx .",
     "dev": "nodemon",
     "build": "babel src --out-dir dist",
-    "seed": "babel-node src/database/seeder.js"
+    "seed": "babel-node src/database/seeder.js",
+    "migration:generate": "babel-node src/database/migration.js generate",
+    "migration:execute": "babel-node src/database/migration.js execute",
+    "test:migrations": "jest --config=migrations.jest.config.js",
+    "test:migrations:watch": "jest --config=migrations.jest.config.js --watch",
+    "module:generate": "babel-node src/scripts/module-generator.js"
   },
   "author": "yellyoshua",
   "license": "ISC",

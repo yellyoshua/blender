@@ -8,7 +8,10 @@ import mongoose from 'mongoose';
  * @param {import('mongoose').Model} Model
  */
 
-export default (Model) => {
+export default (Model, defaults = {}) => {
+  const defaultPopulate = defaults.populate || '';
+  const defaultSelect = defaults.select || '';
+
   return {
     async find (filter = {}, options = {}) {
       const mongooseInstance = Model.find(filter, null, {
@@ -17,8 +20,8 @@ export default (Model) => {
       });
       const query = query_model(mongooseInstance);
       query.paginate(options.page, options.size);
-      query.populate(options.populate);
-      query.select(options.select);
+      query.populate(options.populate || defaultPopulate);
+      query.select(options.select || defaultSelect);
       query.sort(options.sort);
       const data = await mongooseInstance.exec();
 
@@ -57,9 +60,11 @@ export default (Model) => {
         _(options).omit('dot_notation')
       );
       await mongooseInstance.exec();
-      const data = await Model.findById(filter._id)
-      .lean()
-      .exec();
+
+      const [data] = await this.find(
+        {_id: filter._id},
+        _(options || {}).pick('populate', 'select')
+      );
 
       return data;
     },

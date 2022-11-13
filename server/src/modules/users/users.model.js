@@ -45,7 +45,7 @@ const usersSchema = new mongoose.Schema({
 
 export const users = mongoose.model('users', usersSchema);
 
-const users_crud = model(users, {populate: ''});
+const users_crud = model(users, {populate: 'profile_picture,profile,profile.interests,profile.personalities'});
 
 const users_create_parent = users_crud.create;
 users_crud.create = async (data) => {

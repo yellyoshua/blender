@@ -18,7 +18,7 @@ export default function AddPhotos ({user, profile, updateProfile}) {
   }, []);
 
   const emptyImageBox = (
-    <div className="w-28 h-28 border border-white rounded-xl flex flex-col items-center justify-center cursor-pointer">
+    <div className="w-28 h-28 border border-white rounded-xl flex flex-col items-center justify-center cursor-pointer m-auto">
       <AddIcon className="w-12 h-12 text-white" />
     </div>
   );
@@ -28,7 +28,7 @@ export default function AddPhotos ({user, profile, updateProfile}) {
       <div className="max-w-sm flex flex-col gap 3 mx-6 min-h-screen py-3">
         <div className="grow">
           <h1
-            className="text-4xl md:text-2xl font-bold text-left mb-4 text-white font-roboto"
+            className="text-4xl pt-3 md:text-2xl font-bold text-left mb-4 text-white font-roboto"
           >
             More photos than ever
           </h1>

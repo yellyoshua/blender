@@ -20,6 +20,9 @@ jobs:
       - name: Execute Tests
         working-directory: server
         run: npm run test
+        env:
+          DATABASE_URL_TESTS: ${{ secrets.DATABASE_URL_TESTS }}
+
   build:
     runs-on: ubuntu-latest
     name: Build image
@@ -40,13 +43,36 @@ jobs:
         run: |
           cp ../infrastructure/docker/Server.Dockerfile Dockerfile
           gcloud auth configure-docker
-          docker build -t us.gcr.io/${GCP_PROJECT_ID}/weblend/server-production:${RELEASE_VERSION} .
-          docker push us.gcr.io/${GCP_PROJECT_ID}/weblend/server-production:${RELEASE_VERSION}
+          docker build -t us.gcr.io/${GCP_PROJECT_ID}/weblend/server-production:latest .
+          docker push us.gcr.io/${GCP_PROJECT_ID}/weblend/server-production:latest
         env:
           GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-          RELEASE_VERSION: ${{ github.run_number }}
   
   deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to cloud run
+    needs:
+      - build
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.13.x
+      - uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+      - uses: 'google-github-actions/setup-gcloud@v0'
+
+      - name: Deploy to cloud run
+        working-directory: server
+        run: |
+          gcloud run deploy weblend-production --image us.gcr.io/${GCP_PROJECT_ID}/weblend/server-production:latest --platform managed --region ${GCP_CLOUD_RUN_REGION} --allow-unauthenticated --project ${GCP_PROJECT_ID}
+        env:
+          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+          GCP_CLOUD_RUN_REGION: us-central1
+
+  deploy-k8s:
+    if: ${{ false }}  # disable for now
     runs-on: ubuntu-latest
     name: Deploy to GKE
     needs:
@@ -72,11 +98,10 @@ jobs:
       - name: Deploy to GKE
         run: |
           gcloud container clusters get-credentials ${GCP_CLUSTER_NAME} --zone ${GCP_CLUSTER_ZONE} --project ${GCP_PROJECT_ID}
-          kubectl set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}=us.gcr.io/${GCP_PROJECT_ID}/weblend/server-production:${RELEASE_VERSION}
+          kubectl set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}=us.gcr.io/${GCP_PROJECT_ID}/weblend/server-production:latest
         env:
           GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
           GCP_CLUSTER_NAME: ${{ secrets.GCP_CLUSTER_NAME }}
           GCP_CLUSTER_ZONE: ${{ secrets.GCP_CLUSTER_ZONE }}
-          RELEASE_VERSION: ${{ github.run_number }}
           DEPLOYMENT_NAME: weblend-production
           CONTAINER_NAME: weblend-production

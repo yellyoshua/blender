@@ -2,6 +2,7 @@ import SocialLoginButton from './components/SocialLoginButton';
 import BlenderappLogo from '../shared/icons/BlenderappLogo';
 import BlenderappLabel from '../shared/icons/BlenderappLabel';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function LoginDesktop () {
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -53,8 +54,8 @@ export default function LoginDesktop () {
           </div>
           <div className="justify-center flex">
             <p className="max-w-xs text-xs">
-              By signing up, you agree to our Terms. See how we use your
-              data in our Privacy Policy.
+              By signing up, you agree to <Link to="/terms-page" className="underline">our Terms</Link>. See how we use your
+              data in our <Link to="/privacy-page" className="underline">Privacy Policy</Link>.
               We never post to Facebook, Twitter or Google.
             </p>
           </div>

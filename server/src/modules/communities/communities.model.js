@@ -16,6 +16,6 @@ const communitiesSchema = new mongoose.Schema({
 
 export const communities = mongoose.model('communities', communitiesSchema);
 
-const communities_crud = model(communities, {populate: ''});
+const communities_crud = model(communities, {populate: 'image,admins,interests,posts'});
 
 export default communities_crud;

@@ -10,6 +10,8 @@
 	},
 	"globals": {
 		"logger": "readonly",
+    "setupFixtures": "readonly",
+    "closeOpenHandles": "readonly",
     "__t": "readonly"
 	},
 	"parserOptions": {
@@ -62,7 +64,7 @@
 		"handle-callback-err": 2,
 		"id-blacklist": 2,
 		"id-denylist": 2,
-		"id-length": 2,
+		"id-length": 0,
 		"id-match": 2,
 		"implicit-arrow-linebreak": 2,
 		"indent": [
@@ -92,10 +94,6 @@
 			}
 		],
 		"max-lines": 2,
-		"max-lines-per-function": [
-			"error",
-			100
-		],
 		"max-nested-callbacks": 2,
 		"max-params": 2,
 		"max-statements": 0,

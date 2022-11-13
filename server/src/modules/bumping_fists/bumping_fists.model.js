@@ -14,6 +14,6 @@ bumpingFistsSchema.index({emisor: 1, receptor: 1}, {unique: true});
 
 export const bumping_fists = mongoose.model('bumping_fists', bumpingFistsSchema);
 
-const bumping_fists_crud = model(bumping_fists, {populate: ''});
+const bumping_fists_crud = model(bumping_fists, {populate: 'emisor,receptor'});
 
 export default bumping_fists_crud;

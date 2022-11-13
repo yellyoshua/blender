@@ -1,3 +1,4 @@
+import {updateProfileSchema} from './schemas';
 import profilesController from './profiles.controller';
 
 export default [
@@ -5,12 +6,13 @@ export default [
     path: '/profiles',
     method: 'get',
     private: true,
-    handler: profilesController.profiles.find
+    handler: profilesController.find
   },
   {
     path: '/profiles',
     method: 'put',
     private: true,
-    handler: profilesController.profiles.update
+    schema: updateProfileSchema,
+    handler: profilesController.update
   }
 ];

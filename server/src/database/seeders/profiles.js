@@ -11,11 +11,11 @@ export const PROFILES_REF = {
 export default [
   {
     _id: PROFILES_REF.fernando,
-    birthday: new Date(2001, 6, 29),
+    birthdate: new Date(2001, 6, 29),
     location_country: 'Ecuador',
     location_city: 'Quito',
     tutorial: {
-      done_birthday: true,
+      done_birthdate: true,
       done_personalize_experience: true,
       done_location_country: false,
       done_location_city: false,
@@ -47,11 +47,11 @@ export default [
   },
   {
     _id: PROFILES_REF.lorena,
-    birthday: new Date(2001, 6, 29),
+    birthdate: new Date(2001, 6, 29),
     location_country: 'Colombia',
     location_city: 'Bogota',
     tutorial: {
-      done_birthday: true,
+      done_birthdate: true,
       done_personalize_experience: true,
       done_location_country: false,
       done_location_city: false,
@@ -84,11 +84,11 @@ export default [
   },
   {
     _id: PROFILES_REF.antonieta,
-    birthday: new Date(2001, 6, 29),
+    birthdate: new Date(2001, 6, 29),
     location_country: 'Ecuador',
     location_city: 'Quito',
     tutorial: {
-      done_birthday: true,
+      done_birthdate: true,
       done_personalize_experience: true,
       done_location_country: false,
       done_location_city: false,

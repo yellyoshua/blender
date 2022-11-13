@@ -32,6 +32,6 @@ const postsSchema = new mongoose.Schema({
 
 export const posts = mongoose.model('posts', postsSchema);
 
-const posts_crud = model(posts, {populate: ''});
+const posts_crud = model(posts, {populate: 'pics'});
 
 export default posts_crud;

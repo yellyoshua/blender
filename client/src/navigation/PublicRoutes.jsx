@@ -1,8 +1,8 @@
 import ErrorBoundary from '../modules/errors/ErrorBoundary';
 import PageNotFound from '../modules/errors/PageNotFound';
 import Privacy from '../modules/terms/privacy';
-import Login from '../modules/login';
 import Terms from '../modules/terms';
+import Login from '../modules/login';
 
 
 /**
@@ -15,14 +15,14 @@ export default [
     element: <Login />
   },
   {
-    path: '/terms-page',
-    errorElement: <ErrorBoundary />,
-    element: <Terms />
-  },
-  {
     path: '*',
     errorElement: <ErrorBoundary />,
     element: <PageNotFound />
+  },
+  {
+    path: '/terms-page',
+    errorElement: <ErrorBoundary />,
+    element: <Terms />
   },
   {
     path: '/privacy-page',

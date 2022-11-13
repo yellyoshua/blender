@@ -1,7 +1,7 @@
 /* eslint-disable id-length */
 import _ from 'underscore';
 import {Client as MapsClient} from '@googlemaps/google-maps-services-js';
-import request from 'needle';
+import request from '../lib/request';
 
 function sanitize_ip_location (location) {
   return {
@@ -30,8 +30,8 @@ export default function location_service () {
   const maps_client = new MapsClient({});
   return {
     ip_based: async (ip) => {
-      const response = await request('get', `https://ipapi.co/${ip}/json/`);
-      return sanitize_ip_location(response.body);
+      const data = await request.get(`https://ipapi.co/${ip}/json/`);
+      return sanitize_ip_location(data);
     },
     lat_long_based: async (latitude, longitude) => {
       const response = await maps_client.reverseGeocode({

@@ -22,7 +22,8 @@ export default function routes_setup (routes = [], config = {}) {
       const {
         method,
         path,
-        handler
+        handler,
+        schema
       } = route;
 
       if (app[method] && handler) {
@@ -34,8 +35,8 @@ export default function routes_setup (routes = [], config = {}) {
           handlers.push(...auth_middlewares);
         }
 
-        if (route.schema) {
-          handlers.push(schemasMiddleware(route.schema));
+        if (schema) {
+          handlers.push(schemasMiddleware(schema));
         }
 
         handlers.push(...after_middlewares);
