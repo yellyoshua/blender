@@ -1,4 +1,4 @@
-import BumpingFistsIcon from '../../shared/icons/BumpingFistsIcon';
+import BumpingFistsIcon from '@/shared/icons/BumpingFistsIcon';
 import {HiArrowPath} from 'react-icons/hi2';
 import { useBumpFistsStore } from '../stores';
 import { Ping } from '@uiball/loaders';
@@ -34,8 +34,8 @@ export default function ActionButtons ({discover, potentialMatchId}) {
               className="text-white font-bold rounded-full mr-1"
               type="button"
               onClick={() => {
-                // addBumpFist(potentialMatchId).
-                // then(discover);
+                addBumpFist(potentialMatchId).
+                then(discover);
               }}
             >
               <BumpingFistsIcon className="w-14 h-14" />

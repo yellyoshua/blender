@@ -6,7 +6,7 @@ import { Ping } from '@uiball/loaders';
 import { useDiscoverStores } from './stores';
 import ActionButtons from './components/ActionButtons';
 import EmptyDiscover from './components/EmptyDiscover';
-import BadgesList from '../shared/components/BadgesList';
+import BadgesList from '@/shared/components/BadgesList';
 
 export default function Discover () {
   const {potentialMatch, loading, discover} = useDiscoverStores();
@@ -59,7 +59,6 @@ export default function Discover () {
       <BadgesList
         badges={potentialMatch.profile.interests}
         beforeRender={(interest) => {
-          console.log('potentialMatch.common_interests :', _(potentialMatch.common_interests).findWhere({_id: interest._id}));
           return _(potentialMatch.common_interests).findWhere({_id: interest._id})
             ? _(interest).extend({active: true})
             : interest;
