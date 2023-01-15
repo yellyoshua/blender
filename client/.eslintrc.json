@@ -71,7 +71,7 @@
       "handle-callback-err": 2,
       "id-blacklist": 2,
       "id-denylist": 2,
-      "id-length": 2,
+      "id-length": 0,
       "id-match": 2,
       "implicit-arrow-linebreak": 2,
       "indent": [
