@@ -1,9 +1,8 @@
-import ErrorBoundary from '../modules/errors/ErrorBoundary';
-import PageNotFound from '../modules/errors/PageNotFound';
-import Privacy from '../modules/terms/privacy';
-import Terms from '../modules/terms';
-import Login from '../modules/login';
-
+import ErrorBoundaryPage from '@/modules/errors/ErrorBoundaryPage';
+import NotFoundPage from '@/modules/errors/NotFoundPage';
+import PrivacyPage from '@/modules/terms/PrivacyPage';
+import TermsPage from '@/modules/terms/TermsPage';
+import LoginPage from '@/modules/login/LoginPage';
 
 /**
  * @type {import('react-router').RouteObject[]}
@@ -11,22 +10,22 @@ import Login from '../modules/login';
 export default [
   {
     path: '/',
-    errorElement: <ErrorBoundary />,
-    element: <Login />
+    errorElement: <ErrorBoundaryPage />,
+    element: <LoginPage />
   },
   {
     path: '*',
-    errorElement: <ErrorBoundary />,
-    element: <PageNotFound />
+    errorElement: <ErrorBoundaryPage />,
+    element: <NotFoundPage />
   },
   {
-    path: '/terms-page',
-    errorElement: <ErrorBoundary />,
-    element: <Terms />
+    path: '/terms',
+    errorElement: <ErrorBoundaryPage />,
+    element: <TermsPage />
   },
   {
-    path: '/privacy-page',
-    errorElement: <ErrorBoundary />,
-    element: <Privacy />
+    path: '/privacy',
+    errorElement: <ErrorBoundaryPage />,
+    element: <PrivacyPage />
   }
 ];

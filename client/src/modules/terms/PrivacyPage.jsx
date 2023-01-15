@@ -1,6 +1,6 @@
 import './styles.css';
 
-export default function Privacy () {
+export default function PrivacyPage () {
   return (
     <div className="mb-20 mx-6 my-6">
       <div className="tittle">

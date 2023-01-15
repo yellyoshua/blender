@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import {useNavigate} from 'react-router-dom';
 import { useResizeDeviceStore } from '../shared/components/ResizeDevice';
 
-const PageNotFound = () => {
+export default function NotFoundPage () {
   const navigate = useNavigate();
   const isMobile = useResizeDeviceStore((state) => state.isMobile);
 
@@ -32,6 +32,4 @@ const PageNotFound = () => {
       }
     </div>
   );
-};
-
-export default PageNotFound;
+}

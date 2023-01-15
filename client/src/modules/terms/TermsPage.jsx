@@ -1,6 +1,6 @@
 import './styles.css';
 
-export default function Terms () {
+export default function TermsPage () {
   return (
     <div className="mb-20 mx-6 my-6">
       <div className="tittle">

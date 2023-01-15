@@ -5,7 +5,7 @@ import LoginMobile from './Login.mobile';
 import { useResizeDeviceStore } from '../shared/components/ResizeDevice';
 import useAuthentication from '../shared/hooks/useAuthentication';
 
-export default function Login () {
+export default function LoginPage () {
   const [searchParams, setSearchParams] = useSearchParams();
   const isMobile = useResizeDeviceStore((state) => state.isMobile);
   const auth = useAuthentication();
