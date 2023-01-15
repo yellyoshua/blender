@@ -7,7 +7,7 @@ import { useResizeDeviceStore } from '@/shared/components/ResizeDevice';
 import Logout from './components/Logout';
 import { useMeStore } from '@/shared/store';
 
-export default function App () {
+export default function AppPage () {
   const isMobile = useResizeDeviceStore((state) => state.isMobile);
   const {me, getMe} = useMeStore();
 

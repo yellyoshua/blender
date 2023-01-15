@@ -3,10 +3,10 @@
 import _ from 'underscore';
 import { useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
-import { useInterestsStores, useMeStore } from '../../shared/store';
-import OptionsSelector from '../../shared/components/OptionsSelector';
+import { useInterestsStores, useMeStore } from '@/shared/store';
+import OptionsSelector from '@/shared/components/OptionsSelector';
 
-export default function ProfileEditInterests () {
+export default function ProfileEditInterestsPage () {
   const {me: {profile}, updateMeProfile} = useMeStore();
   const navigate = useNavigate();
 

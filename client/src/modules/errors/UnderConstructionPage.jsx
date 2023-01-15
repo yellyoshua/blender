@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export default function UnderConstruction () {
+export default function UnderConstructionPage () {
   return (
     <div className="flex items-center justify-center h-screen w-full">
       <div className="text-center">

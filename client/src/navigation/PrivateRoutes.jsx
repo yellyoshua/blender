@@ -1,45 +1,48 @@
 import {Navigate} from 'react-router-dom';
-import Privacy from '../modules/terms/privacy';
-import Terms from '../modules/terms';
-import ErrorBoundary from '../modules/errors/ErrorBoundary';
-import UnderConstruction from '../modules/errors/UnderConstruction';
-import App from '../modules/app';
-import Discover from '../modules/discover';
-import Community from '../modules/community';
-import Profile from '../modules/profile';
-import ProfileEditInterests from '../modules/profile/interests';
-import ProfileEditPersonalities from '../modules/profile/personalities';
 
-const errorElement = <ErrorBoundary />;
+import PrivacyPage from '@/modules/terms/PrivacyPage';
+import TermsPage from '@/modules/terms/TermsPage';
+import ErrorBoundaryPage from '@/modules/errors/ErrorBoundaryPage';
+import UnderConstructionPage from '@/modules/errors/UnderConstructionPage';
+
+import AppPage from '@/modules/app/AppPage';
+import DiscoverPage from '@/modules/discover/DiscoverPage';
+import CommunityPage from '@/modules/community/CommunityPage';
+import ProfilePage from '@/modules/profile/ProfilePage';
+import ProfileEditInterestsPage from '@/modules/profile/ProfileEditInterestsPage';
+import ProfileEditPersonalitiesPage from '@/modules/profile/ProfileEditPersonalitiesPage';
+
+const errorElement = <ErrorBoundaryPage />;
+const underConstruction = <UnderConstructionPage />;
 
 /**
  * @type {import('react-router').RouteObject[]}
  */
 export default [
   {
-    path: '/terms-page',
-    errorElement: <ErrorBoundary />,
-    element: <Terms />
+    path: '/terms',
+    errorElement,
+    element: <TermsPage />
   },
   {
-    path: '/privacy-page',
-    errorElement: <ErrorBoundary />,
-    element: <Privacy />
+    path: '/privacy',
+    errorElement,
+    element: <PrivacyPage />
   },
   {
     path: '/',
-    element: <App />,
+    element: <AppPage />,
     errorElement,
     children: [
-      { index: true, element: <Discover />, errorElement },
-      { path: 'security', element: <UnderConstruction />, errorElement },
-      { path: 'settings', element: <UnderConstruction />, errorElement },
-      { path: 'profile/edit/photos', element: <UnderConstruction />, errorElement },
-      { path: 'profile/edit/interests', element: <ProfileEditInterests />, errorElement },
-      { path: 'profile/edit/personalities', element: <ProfileEditPersonalities />, errorElement },
-      { path: 'profile', element: <Profile />, errorElement },
-      { path: 'community', element: <Community />, errorElement },
-      { path: 'chat', element: <UnderConstruction />, errorElement },
+      { index: true, element: <DiscoverPage />, errorElement },
+      { path: 'security', element: underConstruction, errorElement },
+      { path: 'settings', element: underConstruction, errorElement },
+      { path: 'profile/edit/photos', element: underConstruction, errorElement },
+      { path: 'profile/edit/interests', element: <ProfileEditInterestsPage />, errorElement },
+      { path: 'profile/edit/personalities', element: <ProfileEditPersonalitiesPage />, errorElement },
+      { path: 'profile', element: <ProfilePage />, errorElement },
+      { path: 'community', element: <CommunityPage />, errorElement },
+      { path: 'chat', element: underConstruction, errorElement },
       { path: '/*', element: <Navigate replace to="/" />, errorElement }
     ]
   }
