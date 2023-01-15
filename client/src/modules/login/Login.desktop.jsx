@@ -1,6 +1,6 @@
 import SocialLoginButton from './components/SocialLoginButton';
-import BlenderappLogo from '../shared/icons/BlenderappLogo';
-import BlenderappLabel from '../shared/icons/BlenderappLabel';
+import BlenderappLogo from '@/icons/BlenderappLogo';
+import BlenderappLabel from '@/icons/BlenderappLabel';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 

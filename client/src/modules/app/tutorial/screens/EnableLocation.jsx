@@ -1,6 +1,6 @@
 import { Ping } from '@uiball/loaders';
 import { useState } from 'react';
-import LocationIcon from '../../../shared/icons/LocationIcon';
+import LocationIcon from '@/icons/LocationIcon';
 
 // Get location with navigator.geolocation https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/getCurrentPosition
 

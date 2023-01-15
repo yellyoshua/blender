@@ -1,5 +1,5 @@
 import createStore from 'zustand';
-import GoogleIcon from '../shared/icons/GoogleIcon';
+import GoogleIcon from '@/icons/GoogleIcon';
 
 export const useAuthProvidersStore = createStore(() => ({
   google: {

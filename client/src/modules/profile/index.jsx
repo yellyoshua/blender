@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import PencilIcon from '../shared/icons/PencilIcon';
+import PencilIcon from '@/icons/PencilIcon';
 import ProfilePhoto from '../app/components/ProfilePhoto';
 import { useMeStore } from '../shared/store';
 import FileUpload from '../shared/components/FileUpload';

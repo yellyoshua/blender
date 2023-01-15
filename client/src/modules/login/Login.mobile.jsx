@@ -1,6 +1,6 @@
 import SocialLoginButton from './components/SocialLoginButton';
-import BlenderappLogo from '../shared/icons/BlenderappLogo';
-import BlenderappLabel from '../shared/icons/BlenderappLabel';
+import BlenderappLogo from '@/icons/BlenderappLogo';
+import BlenderappLabel from '@/icons/BlenderappLabel';
 
 export default function LoginMobile () {
   const apiUrl = import.meta.env.VITE_API_URL;

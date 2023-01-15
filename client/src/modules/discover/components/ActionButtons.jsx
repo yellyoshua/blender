@@ -1,4 +1,4 @@
-import BumpingFistsIcon from '@/shared/icons/BumpingFistsIcon';
+import BumpingFistsIcon from '@/icons/BumpingFistsIcon';
 import {HiArrowPath} from 'react-icons/hi2';
 import { useBumpFistsStore } from '../stores';
 import { Ping } from '@uiball/loaders';
