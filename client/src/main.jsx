@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Navigation from './navigation';
-import ResizeDevice from '@/shared/components/ResizeDevice';
-import PWA from '@/shared/components/PWA';
+import ResizeDevice from '@/components/ResizeDevice';
+import PWA from '@/components/PWA';
 import dayjs from 'dayjs';
 import isBetweenDayjs from 'dayjs/plugin/isBetween';
 dayjs.extend(isBetweenDayjs);
 import './global.css';
-import Script from '@/shared/components/Script';
+import Script from '@/components/Script';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 

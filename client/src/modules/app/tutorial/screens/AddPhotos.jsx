@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import FileUpload from '../../../shared/components/FileUpload';
-import ImagePostsGrid from '../../../shared/components/ImagePostsGrid';
+import FileUpload from '@/components/FileUpload';
+import ImagePostsGrid from '@/components/ImagePostsGrid';
 import AddIcon from '@/icons/AddIcon';
-import { useUserPostsStore } from '../../../shared/store';
+import { useUserPostsStore } from '@/shared/store';
 
 export default function AddPhotos ({user, profile, updateProfile}) {
   const handleDonePhotos = () => {

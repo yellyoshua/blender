@@ -4,7 +4,7 @@ import _ from 'underscore';
 import { useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import { usePersonalitiesStores, useMeStore } from '@/shared/store';
-import OptionsSelector from '@/shared/components/OptionsSelector';
+import OptionsSelector from '@/components/OptionsSelector';
 
 export default function ProfileEditPersonalitiesPage () {
   const {me: {profile}, updateMeProfile} = useMeStore();

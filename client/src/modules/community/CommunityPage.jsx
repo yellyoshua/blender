@@ -1,9 +1,9 @@
 import { Ping } from '@uiball/loaders';
 import { useEffect } from 'react';
 import {HiMagnifyingGlass} from 'react-icons/hi2';
-import { useResizeDeviceStore } from '../shared/components/ResizeDevice';
-import useSearch from '../shared/hooks/useSearch';
-import { useCommunitiesStores } from '../shared/store';
+import { useResizeDeviceStore } from '@/components/ResizeDevice';
+import useSearch from '@/shared/hooks/useSearch';
+import { useCommunitiesStores } from '@/shared/store';
 
 export default function Community () {
   const isMobile = useResizeDeviceStore((state) => state.isMobile);

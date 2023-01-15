@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 import PencilIcon from '@/icons/PencilIcon';
-import ProfilePhoto from '../app/components/ProfilePhoto';
-import { useMeStore } from '../shared/store';
-import FileUpload from '../shared/components/FileUpload';
-import AutosaveInput from '../shared/components/AutosaveInput';
+import ProfilePhoto from '@/modules/app/components/ProfilePhoto';
+import { useMeStore } from '@/shared/store';
+import FileUpload from '@/components/FileUpload';
+import AutosaveInput from '@/components/AutosaveInput';
 import {HiCog8Tooth, HiShieldCheck} from 'react-icons/hi2';
-import BadgesList from '../shared/components/BadgesList';
+import BadgesList from '@/components/BadgesList';
 import ProfileTabs from './ProfileTabs';
 
 export default function Profile () {

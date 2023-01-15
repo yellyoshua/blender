@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import {useNavigate} from 'react-router-dom';
-import { useResizeDeviceStore } from '../shared/components/ResizeDevice';
+import { useResizeDeviceStore } from '@/components/ResizeDevice';
 
 export default function NotFoundPage () {
   const navigate = useNavigate();

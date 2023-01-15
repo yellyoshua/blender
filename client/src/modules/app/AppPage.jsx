@@ -3,7 +3,7 @@ import Tutorial from './tutorial';
 import AppMobile from './App.mobile';
 import AppDesktop from './App.desktop';
 import {Ping} from '@uiball/loaders';
-import { useResizeDeviceStore } from '@/shared/components/ResizeDevice';
+import { useResizeDeviceStore } from '@/components/ResizeDevice';
 import Logout from './components/Logout';
 import { useMeStore } from '@/shared/store';
 

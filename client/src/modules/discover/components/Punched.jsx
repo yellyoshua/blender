@@ -1,6 +1,6 @@
-import FireworksConfetti from '../../shared/components/FireworksConfetti';
+import FireworksConfetti from '@/components/FireworksConfetti';
 import BumpingFistsIcon from '@/icons/BumpingFistsIcon';
-import { useMeStore } from '../../shared/store';
+import { useMeStore } from '@/shared/store';
 
 export default function Punched ({
   punched = {

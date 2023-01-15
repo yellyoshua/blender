@@ -6,7 +6,7 @@ import { Ping } from '@uiball/loaders';
 import { useDiscoverStores } from './stores';
 import ActionButtons from './components/ActionButtons';
 import EmptyDiscover from './components/EmptyDiscover';
-import BadgesList from '@/shared/components/BadgesList';
+import BadgesList from '@/components/BadgesList';
 
 export default function Discover () {
   const {potentialMatch, loading, discover} = useDiscoverStores();

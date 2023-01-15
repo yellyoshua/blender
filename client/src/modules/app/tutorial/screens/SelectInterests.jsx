@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import { useState } from 'react';
-import { useInterestsStores } from '../../../shared/store';
-import OptionsSelector from '../../../shared/components/OptionsSelector';
+import { useInterestsStores } from '@/shared/store';
+import OptionsSelector from '@/components/OptionsSelector';
 
 export default function SelectInterests ({ profile, updateProfile }) {
   const [selectedInterests, setSelectedInterests] = useState(() => {
