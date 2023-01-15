@@ -2,23 +2,9 @@ import BumpingFistsIcon from '@/icons/BumpingFistsIcon';
 import {HiArrowPath} from 'react-icons/hi2';
 import { useBumpFistsStore } from '../stores';
 import { Ping } from '@uiball/loaders';
-import Punched from './Punched';
 
-export default function ActionButtons ({discover, potentialMatchId}) {
-  const {punched, loading, addBumpFist, reset} = useBumpFistsStore();
-
-  if (punched) {
-    return (
-      <Punched
-        punched={punched}
-        discover={() => {
-          reset();
-          discover();
-        }}
-      />
-    );
-  }
-
+export default function DiscoverActions ({discover, match}) {
+  const {loading, addBumpFist} = useBumpFistsStore();
   return (
     <div className="fixed left-0 right-0 flex justify-center" style={{bottom: 70, height: 80}}>
       <div className="rounded-l-2xl rounded-r-2xl flex items-center justify-center bg-white px-2 shadow-xl">
@@ -34,7 +20,7 @@ export default function ActionButtons ({discover, potentialMatchId}) {
               className="text-white font-bold rounded-full mr-1"
               type="button"
               onClick={() => {
-                addBumpFist(potentialMatchId).
+                addBumpFist(match._id).
                 then(discover);
               }}
             >
