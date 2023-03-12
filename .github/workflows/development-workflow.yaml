@@ -70,3 +70,19 @@ jobs:
         env:
           GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
           GCP_CLOUD_RUN_REGION: us-central1
+  
+  deploy-mongo-atlas-triggers:
+    runs-on: ubuntu-latest
+    name: Deploy mongo atlas triggers/functions/data_sources
+    needs:
+      - deploy
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.13.x
+        working-directory: infrastructure/mongo-atlas
+        run: |
+          npm install -g mongodb-realm-cli
+          realm-cli login --api-key=${{ secrets.ATLAS_TRIGGER_DEPLOY_AGENT_API_KEY }} --private-api-key=${{ secrets.ATLAS_TRIGGER_DEPLOY_AGENT_PRIVATE_API_KEY }}
+          realm-cli push -y
