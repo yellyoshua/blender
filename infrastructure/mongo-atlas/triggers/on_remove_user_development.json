@@ -1,0 +1,18 @@
+{
+  "name": "on_remove_user_development",
+  "type": "DATABASE",
+  "config": {
+    "service_name": "development-cluster-svc",
+    "database": "blender",
+    "collection": "users",
+    "operation_types": ["DELETE"],
+    "full_document": false,
+    "full_document_before_change": true,
+    "tolerate_resume_errors": false,
+    "unordered": false,
+    "match": null,
+    "project": null
+  },
+  "function_name": "on_remove_user_development",
+  "disabled": false
+}
