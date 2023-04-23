@@ -26,8 +26,6 @@ const migration_test_script = (migration_name) => `
 // Migration: ${migration_name}
 import { afterAll, beforeEach, describe } from "@jest/globals";
 
-afterAll(closeOpenHandles);
-
 describe("Migration: users_update", () => {
   beforeEach(async () => {
     await setupFixtures([

@@ -1,8 +1,6 @@
-import {afterAll, beforeEach, describe, expect, it} from '@jest/globals';
+import {beforeEach, describe, expect, it} from '@jest/globals';
 import core_model from '../model';
 import models from '../../models';
-
-afterAll(closeOpenHandles);
 
 describe('Model core module', () => {
   beforeEach(async () => {

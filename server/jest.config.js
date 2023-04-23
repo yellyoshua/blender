@@ -2,7 +2,7 @@
 
 module.exports = {
   roots: ['<rootDir>/src'],
-  setupFiles: [
+  setupFilesAfterEnv: [
     '<rootDir>/jest/globals-setup.js'
   ],
   testPathIgnorePatterns: [

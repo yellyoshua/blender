@@ -1,9 +1,7 @@
 
 /* eslint-disable */
 // Migration: users_update
-import { afterAll, beforeEach, describe } from "@jest/globals";
-
-afterAll(closeOpenHandles);
+import { beforeEach, describe } from "@jest/globals";
 
 describe("Migration: users_update", () => {
   beforeEach(async () => {
