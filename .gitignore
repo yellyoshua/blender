@@ -104,3 +104,7 @@ dist
 
 # Env variables
 server/.env
+
+
+build/
+.dart_tool/
