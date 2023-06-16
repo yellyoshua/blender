@@ -1,3 +1,4 @@
+import 'package:app/services.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,25 +18,25 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.purpleAccent),
         useMaterial3: true,
       ),
-      home: const LoginPage(),
+      home: const App(),
     );
   }
 }
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class App extends StatefulWidget {
+  const App({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPage();
+  State<App> createState() => _App();
 }
 
-class _LoginPage extends State<LoginPage> {
-  int _counter = 0;
+class _App extends State<App> {
+  Future<dynamic> getCharacters() async {
+    print('getCharacters');
+    var query = {};
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+    var response = await WeblendServices.characters.get(query);
+    print(response);
   }
 
   @override
@@ -51,66 +52,37 @@ class _LoginPage extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text(
-                  'Weblend',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
+                Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    color: Colors.deepPurple,
                   ),
-                ),
-                const Text(
-                  'Blending cultures',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
+                  margin: const EdgeInsets.only(
+                    left: 40,
+                    right: 40,
+                    bottom: 10,
                   ),
-                ),
-                const Spacer(),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    // Component that allow me style the button
-                    Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        color: Colors.deepPurple,
+                  width: 250,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.fast_forward_rounded),
+                        color: Colors.white,
+                        onPressed: getCharacters,
                       ),
-                      margin: const EdgeInsets.only(
-                        left: 40,
-                        right: 40,
-                        bottom: 10,
-                      ),
-                      width: 250,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.facebook),
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text(
+                          'Get random character',
+                          style: TextStyle(
                             color: Colors.white,
-                            onPressed: () {},
                           ),
-                          TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              'Continue with Facebook',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 350,
-                      child: Text(
-                        'By signing up, you agree to our Terms. See how we use your data in our Privacy Policy. We never post to Facebook, Twitter or Google.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(letterSpacing: 0.1),
-                      ),
-                    )
-                  ],
-                ),
+                    ],
+                  ),
+                )
               ],
             ),
           ),
