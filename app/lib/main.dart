@@ -1,3 +1,4 @@
+import 'package:app/navigation/routes.dart';
 import 'package:app/services.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.purpleAccent),
         useMaterial3: true,
       ),
-      home: const App(),
+      routes: WeblendRoutes.routes,
+      initialRoute: '/login',
     );
   }
 }
