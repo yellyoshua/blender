@@ -1,3 +1,4 @@
+import 'package:app/config/icons.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -55,14 +56,14 @@ class _LoginScreen extends State<LoginScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           IconButton(
-                            icon: const Icon(Icons.facebook),
+                            icon: GoogleIcon,
                             color: Colors.white,
                             onPressed: () {},
                           ),
                           TextButton(
                             onPressed: () {},
                             child: const Text(
-                              'Continue with Facebook',
+                              'Continue with Google',
                               style: TextStyle(
                                 color: Colors.white,
                               ),

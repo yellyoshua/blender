@@ -19,8 +19,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.purpleAccent),
         useMaterial3: true,
       ),
+      // home: App(),
       routes: WeblendRoutes.routes,
-      initialRoute: '/login',
+      initialRoute: WeblendRoutes.login,
     );
   }
 }
@@ -33,9 +34,9 @@ class App extends StatefulWidget {
 }
 
 class _App extends State<App> {
-  Future<dynamic> getCharacters() async {
+  void getCharacters() async {
     print('getCharacters');
-    var query = {};
+    Map<String, dynamic> query = {};
 
     var response = await WeblendServices.characters.get(query);
     print(response);

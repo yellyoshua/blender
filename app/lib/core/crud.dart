@@ -1,81 +1,67 @@
 // Create a Object called crud that reuses the methods from the CRUDModel
 
 import 'dart:convert';
-import 'dart:io';
+import 'package:http/http.dart' as http;
 
 class CrudModel {
-  final String url;
-  final String endpoint;
+  Uri endpoint = Uri.parse('');
+  http.Client client = http.Client();
 
-  CrudModel({required this.url, required this.endpoint});
-
-  Future<dynamic> create(Map<dynamic, dynamic> data) async {
-    var request = await _createRequest(this, 'POST');
-    request.add(utf8.encode(json.encode(data)));
-    return _processRequest(request);
+  CrudModel(String url, String path) {
+    endpoint = Uri.parse('$url/$path');
   }
 
-  Future<dynamic> get(Map<dynamic, dynamic> query) async {
-    var request = await _createRequest(this, 'GET');
-    request.add(utf8.encode(json.encode(query)));
-    return _processRequest(request);
+  Future<dynamic> create(Map<dynamic, dynamic> data) async {
+    var headers = getHeaders();
+    var response = await client.post(endpoint, body: data, headers: headers);
+    return processResponse(response);
+  }
+
+  Future<dynamic> get(Map<String, dynamic> query) async {
+    var headers = getHeaders();
+    var newEndpoint = endpoint.replace(queryParameters: query);
+    var response = await client.get(newEndpoint, headers: headers);
+    return processResponse(response);
   }
 
   Future<dynamic> update(Map<dynamic, dynamic> data) async {
-    var request = await _createRequest(this, 'PUT');
-    request.add(utf8.encode(json.encode(data)));
-    return _processRequest(request);
+    var headers = getHeaders();
+    var response = await client.put(endpoint, body: data, headers: headers);
+    return processResponse(response);
   }
 
-  Future<dynamic> delete(Map<dynamic, dynamic> data) async {
-    var request = await _createRequest(this, 'DELETE');
-    request.add(utf8.encode(json.encode(data)));
-    return _processRequest(request);
+  Future<dynamic> delete(Map<String, dynamic> query) async {
+    var headers = getHeaders();
+    var newEndpoint = endpoint.replace(queryParameters: query);
+    var response = await client.delete(newEndpoint, headers: headers);
+    return processResponse(response);
   }
 
-  Future<int> count(Map<dynamic, dynamic> query) async {
-    var request = await _createRequest(this, 'GET');
-    request.add(utf8.encode(json.encode(query)));
-    var response = await _processRequest(request);
-    return int.parse(response);
+  Future<int> count(Map<String, dynamic> query) async {
+    var headers = getHeaders();
+    var newEndpoint = endpoint.replace(queryParameters: query);
+    var response = await client.get(newEndpoint, headers: headers);
+    return processResponse(response);
   }
 }
 
-void _setHeaders(HttpClientRequest client) {
+Map<String, String> getHeaders() {
   var token = 'token_value';
 
-  client.headers.set('content-type', 'application/json');
-  client.headers.set('accept', 'application/json');
-  client.headers.set('Authorization', 'Bearer $token');
+  return {
+    'content-type': 'application/json',
+    'accept': 'application/json',
+    'Authorization': 'Bearer $token',
+  };
 }
 
-Future<dynamic> _processRequest(HttpClientRequest request) async {
-  var response = await request.close();
-  var responseBody = await response.transform(utf8.decoder).join();
+dynamic processResponse(http.Response response) {
+  var responseBody = response.body;
   var jsonBody = json.decode(responseBody);
 
   if (response.statusCode == 200) {
     return jsonBody['results'];
   } else {
-    throw Exception(jsonBody['message']);
+    throw Exception(jsonBody['errors']);
   }
-}
-
-Future<HttpClientRequest> _createRequest(
-  CrudModel instance,
-  String method,
-) async {
-  String endpoint = instance.endpoint;
-  String url = instance.url;
-
-  print("Response: ${'$url/$endpoint'}");
-  var request = await HttpClient().openUrl(
-    method,
-    Uri.parse('$url/$endpoint'),
-  );
-
-  print('Setting headers');
-  _setHeaders(request);
-  print('Headers set');
-  return request;
 }
