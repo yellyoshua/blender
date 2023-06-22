@@ -8,14 +8,12 @@ export default {
   get: async (query, options, req) => {
     const {user_id} = req.auth_payload;
 
-    const [current_user] = await usersModel.find(
-      {_id: user_id},
-      {populate: 'profile'}
-    );
-
-    const bumpingFists = await bumpingFistsModel.find({
-      emisor: current_user._id, status: ['pending', 'accepted', 'rejected']
-    });
+    const [[current_user], bumpingFists] = await Promise.all([
+      usersModel.find({_id: user_id}, {populate: 'profile'}),
+      bumpingFistsModel.find({
+        emisor: user_id, status: ['pending', 'accepted', 'rejected']
+      })
+    ]);
 
     const already_bumped = _(bumpingFists).pluck('receptor');
   

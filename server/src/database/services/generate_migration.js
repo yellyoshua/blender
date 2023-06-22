@@ -25,6 +25,8 @@ const migration_test_script = (migration_name) => `
 /* eslint-disable */
 // Migration: ${migration_name}
 import { afterAll, beforeEach, describe } from "@jest/globals";
+import models from '../../../modules/models.js';
+import migration from "./migration.js";
 
 describe("Migration: users_update", () => {
   beforeEach(async () => {

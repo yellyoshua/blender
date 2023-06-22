@@ -16,5 +16,6 @@ globalThis.setupFixtures = async (fixturesPath = []) => {
 
   return applyFixture(fixturesPath);
 };
-
-afterAll(closeOpenHandles);
+if (afterAll) {
+  afterAll(closeOpenHandles);
+}
