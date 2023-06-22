@@ -1,10 +1,8 @@
 import 'package:app/config/colors.dart';
-import 'package:app/config/icons.dart';
 import 'package:app/config/logo.dart';
+import 'package:app/modules/login/components/sign_in_with_google.dart';
 import 'package:flutter/material.dart';
 
-// TODO: Implement Google Sign In
-// https://pub.dev/packages/google_sign_in
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -15,10 +13,10 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreen extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(
+          padding: EdgeInsets.only(
             top: 30,
             bottom: 20,
           ),
@@ -26,19 +24,19 @@ class _LoginScreen extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const SizedBox(
+                SizedBox(
                   height: 20,
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 200,
                   child: WeblendLogo96x96,
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 160,
                   height: 60,
                   child: WeblendLabel,
                 ),
-                const Text(
+                Text(
                   'Blending cultures',
                   textScaleFactor: 1.0,
                   style: TextStyle(
@@ -47,8 +45,8 @@ class _LoginScreen extends State<LoginScreen> {
                     color: primaryColor,
                   ),
                 ),
-                const Spacer(),
-                const Column(
+                Spacer(),
+                Column(
                   children: [
                     Text(
                       'Welcome!',
@@ -70,51 +68,15 @@ class _LoginScreen extends State<LoginScreen> {
                     )
                   ],
                 ),
-                const Spacer(),
+                Spacer(),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Ink(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
-                        color: primaryColor,
-                      ),
-                      child: InkWell(
-                        onTap: () {
-                          print('Sign up with email');
-                        },
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(25)),
-                        child: Container(
-                          padding: const EdgeInsets.only(
-                            top: 10,
-                            bottom: 10,
-                          ),
-                          width: 250,
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              GoogleIcon,
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'Continue with Google',
-                                textScaleFactor: 1.0,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
+                    SignInWithGoogle(),
+                    SizedBox(
                       height: 20,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 350,
                       child: Text(
                         'By signing up, you agree to our Terms. See how we use your data in our Privacy Policy. We never post to Facebook, Twitter or Google.',
