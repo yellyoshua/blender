@@ -11,7 +11,7 @@ class CrudModel {
     endpoint = Uri.parse('$url/$path');
   }
 
-  Future<dynamic> create(Map<dynamic, dynamic> data) async {
+  Future<dynamic> post(Map<dynamic, dynamic> data) async {
     var headers = getHeaders();
     var response = await client.post(endpoint, body: data, headers: headers);
     return processResponse(response);

@@ -1,7 +1,6 @@
-// Export that object or class with the content Map<String, Widget Function(BuildContext)>
-
 import 'package:app/modules/discover/discover_screen.dart';
 import 'package:app/modules/login/login_screen.dart';
+import 'package:app/navigation/protected_route.dart';
 import 'package:flutter/material.dart';
 
 class WeblendRoutes {
@@ -11,7 +10,7 @@ class WeblendRoutes {
   static const String login = '/login';
 
   static Map<String, Widget Function(BuildContext)> routes = {
-    discover: (context) => const DiscoverScreen(),
+    discover: (context) => const ProtectedRoute(child: DiscoverScreen()),
     login: (context) => const LoginScreen()
   };
 }
