@@ -12,7 +12,7 @@ export function clearCollections (connection) {
 }
 
 export async function closeOpenHandles (connection) {
-  if (connection.readyState) {
+  if (connection?.readyState) {
     await connection.close(true);
   }
 }
