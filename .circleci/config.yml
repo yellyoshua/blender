@@ -50,7 +50,7 @@ commands:
       - run: 
           name: Activate service account
           command: |
-            echo $GCLOUD_SERVICE_KEY > ~/gcloud-service-key.json
+            echo $GCLOUD_SERVICE_KEY_CI | base64 --decode --ignore-garbage > ~/gcloud-service-key.json
             gcloud auth activate-service-account --key-file ~/gcloud-service-key.json
             gcloud auth configure-docker --quiet
 
