@@ -63,7 +63,7 @@ commands:
       - activate-service-account
       - run: |
           docker ps -a
-          docker build -t us.gcr.io/${GCP_PROJECT_ID}/weblend/${CONTAINER}:latest ./infrastructure/docker/${CONTAINER_FILE}
+          docker build -t us.gcr.io/${GCP_PROJECT_ID}/weblend/${CONTAINER}:latest -f ./infrastructure/docker/${CONTAINER_FILE} .
           docker push us.gcr.io/${GCP_PROJECT_ID}/weblend/${CONTAINER}:latest
   
   test-client:
