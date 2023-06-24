@@ -1,5 +1,38 @@
 version: 2.1
 
+# Workflows are the top-level items in a CircleCI configuration file.
+workflows:
+  version: 2
+  development:
+    jobs:
+      - check-branch:
+          filters:
+            branches:
+              only:
+                - development
+      - server-test:
+          requires:
+            - check-branch
+      - client-test:
+          requires:
+            - check-branch
+      - development-server:
+          requires:
+            - check-branch
+
+  reset-development-data:
+    jobs:
+      - reset-development-data-approval:
+          type: approval
+          filters:
+            branches:
+              only:
+                - development
+      - reset-development-data:
+          requires:
+            - reset-development-data-approval
+
+# Executors are the virtual machines or containers that run your jobs.
 executors:
   container-executor:
     docker:
@@ -9,6 +42,52 @@ executors:
           JWT_SECRET: BA2F2F9F-9F9F-4F2B-BA2F-2F9F9F4F2BBA
     working_directory: ~/yellyoshua
 
+# Jobs are collections of steps that run in a virtual machine or container.
+jobs:
+  server-test:
+    executor: container-executor
+    steps:
+      - install-packages
+      - checkout
+      - setup_remote_docker
+      - run: mongod --fork --logpath /var/log/mongod.log
+      - test-server
+  
+  client-test:
+    executor: container-executor
+    steps:
+      - install-packages
+      - checkout
+      - test-client
+  
+  reset-development-data:
+    executor: container-executor
+    steps:
+      - install-packages
+      - checkout
+      - development-seed
+  
+  development-server:
+    executor: container-executor
+    environment:
+      CONTAINER: server-development
+      PROJECT_PATH: ./server
+      CONTAINER_FILE: Server.Dockerfile
+    steps:
+      - install-packages
+      - install-gcloud
+      - install-docker
+      - checkout
+      - setup_remote_docker
+      - build-image
+
+  check-branch:
+    executor: container-executor
+    resource_class: large
+    steps:
+      - run: echo "Checking branch"
+
+# Reusable commands that can be used across jobs and workflows.
 commands:
   install-packages:
     steps:
@@ -71,95 +150,24 @@ commands:
       - run:
           name: Client tests
           command: |
-            cd client && echo "Testing client"
+            cd client
+            echo "Testing client"
   
   test-server:
     steps:
       - run:
           name: Server tests
           command: |
-            cd server && npm install --save-dev
-            cd server && npm run test
+            cd server
+            npm install --save-dev
+            npm run test
 
   development-seed:
     steps:
       - run:
           name: Seed development data
           command: |
-            cd server && npm install --save-dev
-            cd server && DATABASE_URL=${DATABASE_URL_DEVELOPMENT} npm run seed
+            cd server
+            npm install --save-dev
+            DATABASE_URL=${DATABASE_URL_DEVELOPMENT} npm run seed
 
-jobs:
-  server-test:
-    executor: container-executor
-    steps:
-      - install-packages
-      - checkout
-      - setup_remote_docker
-      - run: mongod --fork --logpath /var/log/mongod.log
-      - test-server
-  
-  client-test:
-    executor: container-executor
-    steps:
-      - install-packages
-      - checkout
-      - test-client
-  
-  reset-development-data:
-    executor: container-executor
-    steps:
-      - install-packages
-      - checkout
-      - development-seed
-  
-  development-server:
-    executor: container-executor
-    environment:
-      CONTAINER: server-development
-      PROJECT_PATH: ./server
-      CONTAINER_FILE: Server.Dockerfile
-    steps:
-      - install-packages
-      - install-gcloud
-      - install-docker
-      - checkout
-      - setup_remote_docker
-      - build-image
-
-  check-branch:
-    executor: container-executor
-    resource_class: large
-    steps:
-      - run: echo "Checking branch"
-
-workflows:
-  version: 2
-  development:
-    jobs:
-      - check-branch:
-          filters:
-            branches:
-              only:
-                - development
-      - server-test:
-          requires:
-            - check-branch
-      - client-test:
-          requires:
-            - check-branch
-      - development-server:
-          requires:
-            - check-branch
-
-  reset-development-data:
-    jobs:
-      - reset-development-data-approval:
-          type: approval
-          filters:
-            branches:
-              only:
-                - development
-      - reset-development-data:
-          requires:
-            - reset-development-data-approval
