@@ -74,10 +74,10 @@ commands:
       - run: cd server && npm install --save-dev
       - run: cd server && npm run test
 
-  reset-development-seed:
+  development-seed:
     steps:
       - run: cd server && npm install --save-dev
-      - run: cd server && npm run seed
+      - run: cd server && DATABASE_URL=${DATABASE_URL_DEVELOPMENT} npm run seed
 
 jobs:
   server-test:
@@ -90,15 +90,13 @@ jobs:
       - run: mongod --fork --logpath /var/log/mongod.log
       - test-server
   
-  development-seed:
+  reset-development-data:
     executor: container-executor
-    environment:
-      DATABASE_URL: "${DATABASE_URL_DEVELOPMENT}"
     steps:
       - install-packages
       - install-node
       - checkout
-      - reset-development-seed
+      - development-seed
   
   development-server:
     executor: container-executor
@@ -137,14 +135,14 @@ workflows:
           requires:
             - check-branch
 
-  development-seed:
+  reset-development-data:
     jobs:
-      - development-seed-approval:
+      - reset-development-data-approval:
           type: approval
           filters:
             branches:
               only:
                 - development
-      - development-seed:
+      - reset-development-data:
           requires:
-            - development-seed-approval
+            - reset-development-data-approval
