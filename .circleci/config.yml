@@ -13,16 +13,16 @@ commands:
   install-packages:
     steps:
       - run: |
-          sudo apt-get update -y
-          sudo apt-get install -y curl \
+          apt-get update -y
+          apt-get install -y curl \
           nano software-properties-common \
           git wget tar build-essential \
           libssl-dev libffi-dev -y
 
   install-node:
     steps:
-      - run: curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-      - run: sudo apt-get install -y nodejs
+      - run: curl -sL https://deb.nodesource.com/setup_18.x | bash
+      - run: apt-get install -y nodejs
 
   install-gcloud:
     steps:
