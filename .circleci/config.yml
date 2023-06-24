@@ -1,7 +1,7 @@
 version: 2.1
 
 executors:
-  server-executor:
+  container-executor:
     docker:
       - image: mongo:5.0.18
         environment:
@@ -62,7 +62,8 @@ commands:
     steps:
       - activate-service-account
       - run: |
-          docker build -t us.gcr.io/${PROJECT_ID}/weblend/${CONTAINER}:latest $CONTAINER_FILE
+          docker ps -a
+          docker build -t us.gcr.io/${PROJECT_ID}/weblend/${CONTAINER}:latest ./infraestructure/docker/${CONTAINER_FILE}
           docker push us.gcr.io/${PROJECT_ID}/weblend/${CONTAINER}:latest
   
   test-client:
@@ -81,36 +82,39 @@ commands:
 
 jobs:
   server-test:
-    executor: server-executor
+    executor: container-executor
     steps:
       - install-packages
       - install-node
       - checkout
+      - setup_remote_docker
       - test-server
   
   development-seed:
-    executor: server-executor
+    executor: container-executor
     steps:
       - install-packages
       - install-node
       - checkout
+      - setup_remote_docker
       - reset-development-seed
   
   development-server:
-    executor: server-executor
+    executor: container-executor
     environment:
       CONTAINER: server-development
-      CONTAINER_FILE: ./infraestructure/docker/Server.Dockerfile
+      CONTAINER_FILE: Server.Dockerfile
     steps:
       - install-packages
       - install-node
       - install-gcloud
       - install-docker
       - checkout
+      - setup_remote_docker
       - build-image
 
   check-branch:
-    executor: server-executor
+    executor: container-executor
     resource_class: large
     steps:
       - run: echo "Checking branch"
