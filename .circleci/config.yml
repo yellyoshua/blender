@@ -54,15 +54,6 @@ commands:
             gcloud auth activate-service-account --key-file ~/gcloud-service-key.json
             gcloud auth configure-docker --quiet
 
-  install-npm-packages-development:
-    steps:
-      - run: npm install --save-dev
-
-  install-npm-packages-production:
-    steps:
-      - run: npm install --save --production
-
-
   # install-playwright:
   #   steps:
   #     - run: npx playwright install-deps
@@ -80,10 +71,12 @@ commands:
   
   test-server:
     steps:
+      - run: cd server && npm install --save-dev
       - run: cd server && npm run test
-  
+
   reset-development-seed:
     steps:
+      - run: cd server && npm install --save-dev
       - run: cd server && npm run seed
 
 jobs:
@@ -139,4 +132,4 @@ workflows:
             - check-branch
       - development-seed:
           requires:
-            - check-branch
+            - development-server
