@@ -75,30 +75,16 @@ commands:
           docker push us.gcr.io/${PROJECT_ID}/weblend/${CONTAINER}:latest
   
   test-client:
-    working_directory: ~/yellyoshua/client
     steps:
-      - run: echo "Testing client"
+      - run: cd client && echo "Testing client"
   
   test-server:
-    working_directory: ~/yellyoshua/server
     steps:
-      - run: npm run test
+      - run: cd server && npm run test
   
-  server-docker:
-    environment:
-      CONTAINER: client
-      CONTAINER_FILE: ./client
-    steps:
-      - install-packages
-      - install-node
-      - install-gcloud
-      - install-docker
-      - build-image
-
   reset-development-seed:
-    working_directory: ~/yellyoshua/server
     steps:
-      - run: npm run seed
+      - run: cd server && npm run seed
 
 jobs:
   server-test:
@@ -115,7 +101,7 @@ jobs:
       - install-packages
       - install-node
       - checkout
-      # - reset-development-seed
+      - reset-development-seed
   
   development-server:
     executor: server-executor
@@ -125,6 +111,8 @@ jobs:
     steps:
       - install-packages
       - install-node
+      - install-gcloud
+      - install-docker
       - checkout
       - build-image
 
