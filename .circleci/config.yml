@@ -115,7 +115,7 @@ jobs:
       - install-packages
       - install-node
       - checkout
-      - reset-development-seed
+      # - reset-development-seed
   
   development-server:
     executor: server-executor
