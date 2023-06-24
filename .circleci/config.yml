@@ -16,9 +16,9 @@ workflows:
       - client-test:
           requires:
             - check-branch
-      - development-server:
+      - deploy-development-server:
           requires:
-            - check-branch
+            - server-test
 
   reset-development-data:
     jobs:
