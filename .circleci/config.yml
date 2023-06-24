@@ -63,8 +63,8 @@ commands:
       - activate-service-account
       - run: |
           docker ps -a
-          docker build -t us.gcr.io/${PROJECT_ID}/weblend/${CONTAINER}:latest ./infraestructure/docker/${CONTAINER_FILE}
-          docker push us.gcr.io/${PROJECT_ID}/weblend/${CONTAINER}:latest
+          docker build -t us.gcr.io/${GCP_PROJECT_ID}/weblend/${CONTAINER}:latest ./infraestructure/docker/${CONTAINER_FILE}
+          docker push us.gcr.io/${GCP_PROJECT_ID}/weblend/${CONTAINER}:latest
   
   test-client:
     steps:
@@ -102,7 +102,6 @@ jobs:
   development-server:
     executor: container-executor
     environment:
-      PROJECT_ID: ${PROJECT_ID}
       CONTAINER: server-development
       CONTAINER_FILE: Server.Dockerfile
     steps:

@@ -1,9 +1,8 @@
 /* eslint-disable global-require */
 import _ from 'underscore';
-import database from 'mongoose';
 
-export function clearCollections () {
-  const collections = database.connection.collections;
+export function clearCollections (connection) {
+  const collections = connection.collections;
 
   const promises = _(collections).map((collection) => {
     return collection.deleteMany({});
@@ -12,9 +11,9 @@ export function clearCollections () {
   return Promise.all(promises);
 }
 
-export async function closeOpenHandles () {
-  if (database.connection.readyState) {
-    await database.connection.close(true);
+export async function closeOpenHandles (connection) {
+  if (connection.readyState) {
+    await connection.close(true);
   }
 }
 
@@ -34,11 +33,11 @@ function readFixtures (fixturesPath) {
   });
 }
 
-function setupFixture (fixture) {
+function setupFixture (fixture, connection) {
   const collections = _(fixture).keys();
 
   const promises = _(collections).map((collection) => {
-    const model = database.connection.db.collection(collection);
+    const model = connection.db.collection(collection);
 
     if (_(fixture[collection]).isArray()) {
       return model.insertMany(fixture[collection]);

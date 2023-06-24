@@ -7,7 +7,7 @@ export default {
       useNewUrlParser: true
     }).then((db) => {
       if (!disableLogs) {
-        console.log('database url :', url);
+        console.log('database url :', url.split(''));
         console.log(`Connected to MongoDB at '${db.connection.name}' database`);
       }
         
