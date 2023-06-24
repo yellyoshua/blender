@@ -94,7 +94,7 @@ commands:
       - install-gcloud
       - install-docker
       - build-image
-  
+
   reset-development-seed:
     working_directory: ~/yellyoshua/server
     steps:
