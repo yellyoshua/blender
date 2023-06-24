@@ -149,5 +149,6 @@ jobs:
 
   check-branch:
     executor: server-executor
+    resource_class: small
     steps:
       - run: echo "Checking branch"
