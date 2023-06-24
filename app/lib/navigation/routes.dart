@@ -10,7 +10,16 @@ class WeblendRoutes {
   static const String login = '/login';
 
   static Map<String, Widget Function(BuildContext)> routes = {
-    discover: (context) => const ProtectedRoute(child: DiscoverScreen()),
-    login: (context) => const LoginScreen()
+    discover: (context) {
+      return const ProtectedRoute(
+        redirectToProtectedRoute: false,
+        child: DiscoverScreen(),
+      );
+    },
+    login: (context) {
+      return const RedirectToProtected(
+        child: LoginScreen(),
+      );
+    },
   };
 }

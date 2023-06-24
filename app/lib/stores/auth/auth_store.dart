@@ -9,7 +9,10 @@ class AuthStore {
   AuthStore()
       : store = Store<AuthState>(
           authReducer,
-          initialState: AuthState(isAuthenticated: false),
+          initialState: AuthState(
+            isAuthenticated: false,
+            token: null,
+          ),
         );
 
   void login(String username, String password) {
