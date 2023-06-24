@@ -1,24 +1,5 @@
 version: 2
 
-workflows:
-  version: 2
-  development:
-    jobs:
-      - check-branch:
-          filters:
-            branches:
-              only:
-                - development
-      - server-test:
-          requires:
-            - check-branch
-      - development-server:
-          requires:
-            - check-branch
-      - development-seed:
-          requires:
-            - check-branch
-
 executors:
   server-executor:
     docker:
@@ -152,3 +133,22 @@ jobs:
     resource_class: small
     steps:
       - run: echo "Checking branch"
+
+workflows:
+  version: 2
+  development:
+    jobs:
+      - check-branch:
+          filters:
+            branches:
+              only:
+                - development
+      - server-test:
+          requires:
+            - check-branch
+      - development-server:
+          requires:
+            - check-branch
+      - development-seed:
+          requires:
+            - check-branch
