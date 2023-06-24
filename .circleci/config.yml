@@ -146,3 +146,8 @@ jobs:
       - install-node
       - checkout
       - build-image
+
+  check-branch:
+    executor: server-executor
+    steps:
+      - run: echo "Checking branch"
