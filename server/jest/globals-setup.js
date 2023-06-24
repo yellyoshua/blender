@@ -3,14 +3,16 @@ import database from 'mongoose';
 import {applyFixture, clearCollections, closeOpenHandles} from './utils';
 import {afterAll} from '@jest/globals';
 
-const database_url = process.env.DATABASE_URL_TESTS || 'mongodb://localhost:27017/weblender_test';
+const database_url = 'mongodb://localhost:27017/weblender_test';
 
 globalThis.setupFixtures = async (fixturesPath = []) => {
+  console.log('Setting up fixtures...');
   if (!database.connection.readyState) {
-    await mongoose.connect(database_url, {
-      disableLogs: true
-    });
+    console.log('Connecting to database...');
+    await mongoose.connect(database_url);
   }
+
+  console.log('Clearing collections...');
 
   await clearCollections();
 
