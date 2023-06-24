@@ -1,0 +1,148 @@
+version: 2
+
+workflows:
+  version: 2
+  development:
+    jobs:
+      - check-branch:
+          filters:
+            branches:
+              only:
+                - development
+      - server-test:
+          requires:
+            - check-branch
+      - development-server:
+          requires:
+            - check-branch
+      - development-seed:
+          requires:
+            - check-branch
+
+executors:
+  server-executor:
+    docker:
+      - image: mongo:5.0.9-bionic
+        environment:
+          ENVIRONMENT: development
+          JWT_SECRET: BA2F2F9F-9F9F-4F2B-BA2F-2F9F9F4F2BBA
+    working_directory: ~/yellyoshua
+
+commands:
+  install-packages:
+    steps:
+      - run: |
+          sudo apt-get update -y
+          sudo apt-get install -y curl \
+          nano software-properties-common \
+          git wget tar build-essential \
+          libssl-dev libffi-dev -y
+
+  install-node:
+    steps:
+      - run: curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+      - run: sudo apt-get install -y nodejs
+
+  install-gcloud:
+    steps:
+      - run: 
+          name: Install gcloud
+          command: |
+            echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+            curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+            apt-get update -yq
+            apt-get install google-cloud-sdk -yq
+            apt-get install google-cloud-sdk-gke-gcloud-auth-plugin -yq
+
+  install-docker:
+    steps:
+      - run: 
+          name: Install docker
+          command: |
+            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+            add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+            apt-get update -yq
+            apt-get install docker-ce -yq
+
+  activate-service-account:
+    steps:
+      - run: 
+          name: Activate service account
+          command: |
+            echo $GCLOUD_SERVICE_KEY > ~/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file ~/gcloud-service-key.json
+            gcloud auth configure-docker --quiet
+
+  install-npm-packages-development:
+    steps:
+      - run: npm install --save-dev
+
+  install-npm-packages-production:
+    steps:
+      - run: npm install --save --production
+
+
+  # install-playwright:
+  #   steps:
+  #     - run: npx playwright install-deps
+
+  build-image:
+    steps:
+      - activate-service-account
+      - run: |
+          docker build -t us.gcr.io/${PROJECT_ID}/weblend/${CONTAINER}:latest $CONTAINER_FILE
+          docker push us.gcr.io/${PROJECT_ID}/weblend/${CONTAINER}:latest
+  
+  test-client:
+    working_directory: ~/yellyoshua/client
+    steps:
+      - run: echo "Testing client"
+  
+  test-server:
+    working_directory: ~/yellyoshua/server
+    steps:
+      - run: npm run test
+  
+  server-docker:
+    environment:
+      CONTAINER: client
+      CONTAINER_FILE: ./client
+    steps:
+      - install-packages
+      - install-node
+      - install-gcloud
+      - install-docker
+      - build-image
+  
+  reset-development-seed:
+    working_directory: ~/yellyoshua/server
+    steps:
+      - run: npm run seed
+
+jobs:
+  server-test:
+    executor: server-executor
+    steps:
+      - install-packages
+      - install-node
+      - checkout
+      - test-server
+  
+  development-seed:
+    executor: server-executor
+    steps:
+      - install-packages
+      - install-node
+      - checkout
+      - reset-development-seed
+  
+  development-server:
+    executor: server-executor
+    environment:
+      CONTAINER: server-development
+      CONTAINER_FILE: ./infraestructure/docker/Server.Dockerfile
+    steps:
+      - install-packages
+      - install-node
+      - checkout
+      - build-image
