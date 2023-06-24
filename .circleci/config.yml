@@ -93,7 +93,7 @@ jobs:
   development-seed:
     executor: container-executor
     environment:
-      DATABASE_URL: ${DATABASE_URL_DEVELOPMENT}
+      DATABASE_URL: "${DATABASE_URL_DEVELOPMENT}"
     steps:
       - install-packages
       - install-node
