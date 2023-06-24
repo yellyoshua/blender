@@ -136,6 +136,9 @@ workflows:
       - development-server:
           requires:
             - check-branch
+
+  development-seed:
+    jobs:
       - development-seed:
           type: approval
           filters:
