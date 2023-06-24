@@ -3,7 +3,7 @@ version: 2.1
 executors:
   server-executor:
     docker:
-      - image: mongo:5.0.9-bionic
+      - image: mongo:5.0.18
         environment:
           ENVIRONMENT: development
           JWT_SECRET: BA2F2F9F-9F9F-4F2B-BA2F-2F9F9F4F2BBA
