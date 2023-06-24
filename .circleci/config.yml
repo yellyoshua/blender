@@ -67,19 +67,23 @@ jobs:
       - checkout
       - development-seed
   
-  development-server:
+  deploy-development-server:
     executor: container-executor
     environment:
       CONTAINER: server-development
+      GCP_CLOUD_RUN_REGION: us-central1
       PROJECT_PATH: ./server
       CONTAINER_FILE: Server.Dockerfile
+      SERVICE_NAME: weblend-development
     steps:
       - install-packages
       - install-gcloud
       - install-docker
       - checkout
       - setup_remote_docker
+      - activate-service-account
       - build-image
+      - depoy-server
 
   check-branch:
     executor: container-executor
@@ -138,13 +142,19 @@ commands:
 
   build-image:
     steps:
-      - activate-service-account
       - run:
           name: Build image
           command: |
             cd ${PROJECT_PATH} && docker build -t us.gcr.io/${GCP_PROJECT_ID}/weblend/${CONTAINER}:latest -f ../infrastructure/docker/${CONTAINER_FILE} .
             docker push us.gcr.io/${GCP_PROJECT_ID}/weblend/${CONTAINER}:latest
   
+  depoy-server:
+    steps:
+      - run:
+          name: Deploy server development
+          command: |
+            gcloud run deploy ${SERVICE_NAME} --image us.gcr.io/${GCP_PROJECT_ID}/weblend/${CONTAINER}:latest --platform managed --region ${GCP_CLOUD_RUN_REGION} --allow-unauthenticated --project ${GCP_PROJECT_ID}
+
   test-client:
     steps:
       - run:
