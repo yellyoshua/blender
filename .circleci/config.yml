@@ -62,8 +62,7 @@ commands:
     steps:
       - activate-service-account
       - run: |
-          docker ps -a
-          docker build -t us.gcr.io/${GCP_PROJECT_ID}/weblend/${CONTAINER}:latest -f ./infrastructure/docker/${CONTAINER_FILE} .
+          cd ${PROJECT_PATH} && docker build -t us.gcr.io/${GCP_PROJECT_ID}/weblend/${CONTAINER}:latest -f ./infrastructure/docker/${CONTAINER_FILE} .
           docker push us.gcr.io/${GCP_PROJECT_ID}/weblend/${CONTAINER}:latest
   
   test-client:
@@ -104,6 +103,7 @@ jobs:
     executor: container-executor
     environment:
       CONTAINER: server-development
+      PROJECT_PATH: ./server
       CONTAINER_FILE: Server.Dockerfile
     steps:
       - install-packages
