@@ -12,17 +12,16 @@ executors:
 commands:
   install-packages:
     steps:
-      - run: |
-          apt-get update -y
-          apt-get install -y curl \
-          nano software-properties-common \
-          git wget tar build-essential \
-          libssl-dev libffi-dev -y
-
-  install-node:
-    steps:
-      - run: curl -sL https://deb.nodesource.com/setup_18.x | bash
-      - run: apt-get install -y nodejs
+      - run:
+          name: Install full packages
+          command: |
+            apt-get update -y
+            apt-get install -y curl \
+            nano software-properties-common \
+            git wget tar build-essential \
+            libssl-dev libffi-dev -y
+            curl -sL https://deb.nodesource.com/setup_18.x | bash
+            apt-get install -y nodejs
 
   install-gcloud:
     steps:
@@ -61,40 +60,56 @@ commands:
   build-image:
     steps:
       - activate-service-account
-      - run: |
-          cd ${PROJECT_PATH} && docker build -t us.gcr.io/${GCP_PROJECT_ID}/weblend/${CONTAINER}:latest -f ../infrastructure/docker/${CONTAINER_FILE} .
-          docker push us.gcr.io/${GCP_PROJECT_ID}/weblend/${CONTAINER}:latest
+      - run:
+          name: Build image
+          command: |
+            cd ${PROJECT_PATH} && docker build -t us.gcr.io/${GCP_PROJECT_ID}/weblend/${CONTAINER}:latest -f ../infrastructure/docker/${CONTAINER_FILE} .
+            docker push us.gcr.io/${GCP_PROJECT_ID}/weblend/${CONTAINER}:latest
   
   test-client:
     steps:
-      - run: cd client && echo "Testing client"
+      - run:
+          name: Client tests
+          command: |
+            cd client && echo "Testing client"
   
   test-server:
     steps:
-      - run: cd server && npm install --save-dev
-      - run: cd server && npm run test
+      - run:
+          name: Server tests
+          command: |
+            cd server && npm install --save-dev
+            cd server && npm run test
 
   development-seed:
     steps:
-      - run: cd server && npm install --save-dev
-      - run: cd server && DATABASE_URL=${DATABASE_URL_DEVELOPMENT} npm run seed
+      - run:
+          name: Seed development data
+          command: |
+            cd server && npm install --save-dev
+            cd server && DATABASE_URL=${DATABASE_URL_DEVELOPMENT} npm run seed
 
 jobs:
   server-test:
     executor: container-executor
     steps:
       - install-packages
-      - install-node
       - checkout
       - setup_remote_docker
       - run: mongod --fork --logpath /var/log/mongod.log
       - test-server
   
+  client-test:
+    executor: container-executor
+    steps:
+      - install-packages
+      - checkout
+      - test-client
+  
   reset-development-data:
     executor: container-executor
     steps:
       - install-packages
-      - install-node
       - checkout
       - development-seed
   
@@ -106,7 +121,6 @@ jobs:
       CONTAINER_FILE: Server.Dockerfile
     steps:
       - install-packages
-      - install-node
       - install-gcloud
       - install-docker
       - checkout
@@ -129,6 +143,9 @@ workflows:
               only:
                 - development
       - server-test:
+          requires:
+            - check-branch
+      - client-test:
           requires:
             - check-branch
       - development-server:
