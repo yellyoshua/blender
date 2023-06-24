@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 executors:
   server-executor:
@@ -130,7 +130,7 @@ jobs:
 
   check-branch:
     executor: server-executor
-    resource_class: small
+    resource_class: large
     steps:
       - run: echo "Checking branch"
 
