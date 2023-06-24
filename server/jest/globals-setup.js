@@ -7,7 +7,7 @@ const database_url = 'mongodb://localhost:27017/weblender_test';
 
 globalThis.setupFixtures = async (fixturesPath = []) => {
   console.log('Setting up fixtures...');
-  if (!database.connection.readyState) {
+  if (database.connection.readyState !== database.STATES.connected) {
     console.log('Connecting to database...');
     await mongoose.connect(database_url);
   }
