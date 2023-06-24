@@ -3,27 +3,19 @@ import database from 'mongoose';
 import {applyFixture, clearCollections, closeOpenHandles} from './utils';
 import {afterAll} from '@jest/globals';
 
-let connection = null;
+const database_url = 'mongodb://localhost:27017/weblender_test';
 
 globalThis.setupFixtures = async (fixturesPath = []) => {
-  console.log('Setting up fixtures...');
-  if (database.connection.readyState !== database.STATES.connected) {
-    console.log('Connecting to database...');
-    try {
-      connection = await mongoose.connect('mongodb://localhost:27017/weblender_test');
-    } catch (error) {
-      console.log('error Connecting why? :', error);
-    }
+  if (!database.connection.readyState) {
+    await mongoose.connect(database_url, {
+      disableLogs: true
+    });
   }
 
-  console.log('Clearing collections...');
+  await clearCollections();
 
-  await clearCollections(connection);
-
-  return applyFixture(fixturesPath, connection);
+  return applyFixture(fixturesPath);
 };
 if (afterAll) {
-  afterAll(async () => {
-    await closeOpenHandles(connection);
-  });
+  afterAll(closeOpenHandles);
 }
