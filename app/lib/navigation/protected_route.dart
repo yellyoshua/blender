@@ -6,12 +6,12 @@ import 'package:flutter_redux/flutter_redux.dart';
 
 class ProtectedRoute extends StatefulWidget {
   final Widget child;
-  final bool redirectToProtectedRoute;
+  final bool isPublicProtectedRoute;
 
   const ProtectedRoute({
     super.key,
     required this.child,
-    required this.redirectToProtectedRoute,
+    this.isPublicProtectedRoute = false,
   });
 
   @override
@@ -21,29 +21,12 @@ class ProtectedRoute extends StatefulWidget {
 class _ProtectedRouteState extends State<ProtectedRoute> {
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AuthState, AuthState>(
-      converter: (store) => store.state,
-      onInitialBuild: (state) {
-        if (!state.isAuthenticated) {
-          Navigator.pushNamed(context, WeblendRoutes.login);
-        }
-      },
-      onWillChange: (_, state) {
-        if (state.isAuthenticated) {
-          Navigator.pushNamed(context, WeblendRoutes.discover);
-        }
-
-        if (!state.isAuthenticated) {
-          Navigator.pushNamed(context, WeblendRoutes.login);
-        }
-      },
-      builder: (context, state) {
-        if (state.isAuthenticated) {
-          return widget.child;
-        }
-
-        return const ScreenLoading();
-      },
+    return Scaffold(
+      body: SafeArea(
+        child: widget.isPublicProtectedRoute
+            ? RedirectToProtected(child: widget.child)
+            : RedirectToLogin(child: widget.child),
+      ),
     );
   }
 }
@@ -72,6 +55,39 @@ class RedirectToProtected extends StatelessWidget {
         }
 
         return child;
+      },
+    );
+  }
+}
+
+class RedirectToLogin extends StatelessWidget {
+  final Widget child;
+  const RedirectToLogin({super.key, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return StoreConnector<AuthState, AuthState>(
+      converter: (store) => store.state,
+      onInitialBuild: (state) {
+        if (!state.isAuthenticated) {
+          Navigator.pushNamed(context, WeblendRoutes.login);
+        }
+      },
+      onWillChange: (_, state) {
+        if (state.isAuthenticated) {
+          Navigator.pushNamed(context, WeblendRoutes.discover);
+        }
+
+        if (!state.isAuthenticated) {
+          Navigator.pushNamed(context, WeblendRoutes.login);
+        }
+      },
+      builder: (context, state) {
+        if (state.isAuthenticated) {
+          return child;
+        }
+
+        return const ScreenLoading();
       },
     );
   }

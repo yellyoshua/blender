@@ -12,12 +12,12 @@ class WeblendRoutes {
   static Map<String, Widget Function(BuildContext)> routes = {
     discover: (context) {
       return const ProtectedRoute(
-        redirectToProtectedRoute: false,
         child: DiscoverScreen(),
       );
     },
     login: (context) {
-      return const RedirectToProtected(
+      return const ProtectedRoute(
+        isPublicProtectedRoute: true,
         child: LoginScreen(),
       );
     },

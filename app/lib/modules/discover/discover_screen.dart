@@ -8,29 +8,25 @@ class DiscoverScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(
-            top: 30,
-            bottom: 20,
-          ),
-          child: StoreConnector<AuthState, AuthState>(
-            converter: (store) => store.state,
-            builder: (context, state) {
-              return Center(
-                child: TextButton(
-                  onPressed: () {
-                    StoreProvider.of<AuthState>(context).dispatch(
-                      LogoutAction(),
-                    );
-                  },
-                  child: const Text('Discover'),
-                ),
-              );
-            },
-          ),
-        ),
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 30,
+        bottom: 20,
+      ),
+      child: StoreConnector<AuthState, AuthState>(
+        converter: (store) => store.state,
+        builder: (context, state) {
+          return Center(
+            child: TextButton(
+              onPressed: () {
+                StoreProvider.of<AuthState>(context).dispatch(
+                  LogoutAction(),
+                );
+              },
+              child: const Text('Discover'),
+            ),
+          );
+        },
       ),
     );
   }
