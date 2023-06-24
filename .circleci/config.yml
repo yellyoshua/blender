@@ -92,11 +92,12 @@ jobs:
   
   development-seed:
     executor: container-executor
+    environment:
+      DATABASE_URL: ${DATABASE_URL_DEVELOPMENT}
     steps:
       - install-packages
       - install-node
       - checkout
-      - setup_remote_docker
       - reset-development-seed
   
   development-server:
@@ -136,5 +137,8 @@ workflows:
           requires:
             - check-branch
       - development-seed:
-          requires:
-            - development-server
+          type: approval
+          filters:
+            branches:
+              only:
+                - development
