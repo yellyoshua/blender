@@ -139,9 +139,12 @@ workflows:
 
   development-seed:
     jobs:
-      - development-seed:
+      - development-seed-approval:
           type: approval
           filters:
             branches:
               only:
                 - development
+      - development-seed:
+          requires:
+            - development-seed-approval
