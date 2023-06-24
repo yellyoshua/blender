@@ -1,4 +1,4 @@
-package com.example.app
+package com.yoshualopez.weblend
 
 import io.flutter.embedding.android.FlutterActivity
 
