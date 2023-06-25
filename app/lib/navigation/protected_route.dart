@@ -1,6 +1,7 @@
 import 'package:app/components/loading_screen.dart';
 import 'package:app/navigation/routes.dart';
 import 'package:app/stores/auth/auth_state.dart';
+import 'package:app/stores/auth/auth_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
@@ -39,18 +40,20 @@ class RedirectToProtected extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AuthState, AuthState>(
       converter: (store) => store.state,
-      onInitialBuild: (state) {
-        if (state.isAuthenticated) {
-          Navigator.pushNamed(context, WeblendRoutes.discover);
+      onInitialBuild: (state) async {
+        if (state.loading == true) {
+          await AuthStore.checkAuthentication();
         }
       },
       onWillChange: (_, state) {
-        if (state.isAuthenticated) {
-          Navigator.pushNamed(context, WeblendRoutes.discover);
+        if (state.loading == false) {
+          if (state.token != null) {
+            Navigator.pushReplacementNamed(context, WeblendRoutes.discover);
+          }
         }
       },
       builder: (context, state) {
-        if (state.isAuthenticated) {
+        if (state.token != null || state.loading == true) {
           return const ScreenLoading();
         }
 
@@ -68,26 +71,28 @@ class RedirectToLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AuthState, AuthState>(
       converter: (store) => store.state,
-      onInitialBuild: (state) {
-        if (!state.isAuthenticated) {
-          Navigator.pushNamed(context, WeblendRoutes.login);
+      onInitialBuild: (state) async {
+        if (state.loading == true) {
+          await AuthStore.checkAuthentication();
         }
       },
       onWillChange: (_, state) {
-        if (state.isAuthenticated) {
-          Navigator.pushNamed(context, WeblendRoutes.discover);
-        }
+        if (state.loading == false) {
+          if (state.token != null) {
+            Navigator.pushReplacementNamed(context, WeblendRoutes.discover);
+          }
 
-        if (!state.isAuthenticated) {
-          Navigator.pushNamed(context, WeblendRoutes.login);
+          if (state.token == null) {
+            Navigator.pushReplacementNamed(context, WeblendRoutes.login);
+          }
         }
       },
       builder: (context, state) {
-        if (state.isAuthenticated) {
-          return child;
+        if (state.token == null || state.loading == true) {
+          return const ScreenLoading();
         }
 
-        return const ScreenLoading();
+        return child;
       },
     );
   }

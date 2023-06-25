@@ -1,6 +1,9 @@
 class AuthState {
-  final bool isAuthenticated;
   final String? token;
+  final bool? loading;
 
-  AuthState({required this.isAuthenticated, this.token});
+  AuthState({
+    this.token,
+    this.loading = false,
+  });
 }

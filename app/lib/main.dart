@@ -24,10 +24,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreProvider<AuthState>(
-      store: AuthStore().store,
+      store: AuthStore.store,
       child: MaterialApp(
-        title: 'Weblend',
-        debugShowCheckedModeBanner: false,
+        title: 'Weblend | Blending cultures',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.purpleAccent),
           useMaterial3: true,

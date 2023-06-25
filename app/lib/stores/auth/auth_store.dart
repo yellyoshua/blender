@@ -4,26 +4,26 @@ import 'package:app/stores/auth/auth_reducer.dart';
 import 'package:app/stores/auth/auth_state.dart';
 
 class AuthStore {
-  final Store<AuthState> store;
+  static final Store<AuthState> store = Store<AuthState>(
+    authReducer,
+    initialState: AuthState(
+      token: null,
+      loading: true,
+    ),
+  );
 
-  AuthStore()
-      : store = Store<AuthState>(
-          authReducer,
-          initialState: AuthState(
-            isAuthenticated: false,
-            token: null,
-          ),
-        );
-
-  void login(String username, String password) {
-    store.dispatch(LoginAction(username, password));
+  static void login(String username, String password) async {
+    store.dispatch(LoginLoadingAction(true));
+    await Future.delayed(const Duration(seconds: 3));
+    store.dispatch(LoginAction('token'));
   }
 
-  void logout() {
+  static void logout() {
     store.dispatch(LogoutAction());
   }
 
-  bool isAuthenticated() {
-    return store.state.isAuthenticated;
+  static Future<void> checkAuthentication() async {
+    await Future.delayed(const Duration(seconds: 3));
+    store.dispatch(LoginAction('token'));
   }
 }

@@ -1,7 +1,7 @@
 import 'package:app/config/colors.dart';
 import 'package:app/config/icons.dart';
-import 'package:app/stores/auth/auth_actions.dart';
 import 'package:app/stores/auth/auth_state.dart';
+import 'package:app/stores/auth/auth_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -26,9 +26,7 @@ class SignInWithGoogle extends StatefulWidget {
 
 class _SignInWithGoogleState extends State<SignInWithGoogle> {
   void signInWithGoogle(BuildContext context) async {
-    StoreProvider.of<AuthState>(context).dispatch(
-      LoginAction('username', 'password'),
-    );
+    AuthStore.login('username', 'password');
   }
 
   @override

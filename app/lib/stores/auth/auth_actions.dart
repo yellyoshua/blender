@@ -1,8 +1,13 @@
 class LoginAction {
-  final String username;
-  final String password;
+  final String? token;
 
-  LoginAction(this.username, this.password);
+  LoginAction(this.token);
 }
 
 class LogoutAction {}
+
+class LoginLoadingAction {
+  final bool loading;
+
+  LoginLoadingAction(this.loading);
+}

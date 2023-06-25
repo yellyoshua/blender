@@ -1,7 +1,5 @@
-import 'package:app/stores/auth/auth_actions.dart';
-import 'package:app/stores/auth/auth_state.dart';
+import 'package:app/stores/auth/auth_store.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 
 class DiscoverScreen extends StatelessWidget {
   const DiscoverScreen({super.key});
@@ -13,20 +11,13 @@ class DiscoverScreen extends StatelessWidget {
         top: 30,
         bottom: 20,
       ),
-      child: StoreConnector<AuthState, AuthState>(
-        converter: (store) => store.state,
-        builder: (context, state) {
-          return Center(
-            child: TextButton(
-              onPressed: () {
-                StoreProvider.of<AuthState>(context).dispatch(
-                  LogoutAction(),
-                );
-              },
-              child: const Text('Discover'),
-            ),
-          );
-        },
+      child: Center(
+        child: TextButton(
+          onPressed: () {
+            AuthStore.logout();
+          },
+          child: const Text('Discover'),
+        ),
       ),
     );
   }
