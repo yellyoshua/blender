@@ -23,6 +23,7 @@ class _ProtectedRouteState extends State<ProtectedRoute> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      primary: false,
       body: SafeArea(
         child: widget.isPublicProtectedRoute
             ? RedirectToProtected(child: widget.child)

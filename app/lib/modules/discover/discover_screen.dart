@@ -1,22 +1,39 @@
-import 'package:app/stores/auth/auth_store.dart';
 import 'package:flutter/material.dart';
 
-class DiscoverScreen extends StatelessWidget {
+class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({super.key});
 
   @override
+  State<DiscoverScreen> createState() => _DiscoverScreenState();
+}
+
+class _DiscoverScreenState extends State<DiscoverScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 30,
-        bottom: 20,
-      ),
-      child: Center(
-        child: TextButton(
-          onPressed: () {
-            AuthStore.logout();
+    return RefreshIndicator(
+      onRefresh: () async {
+        await Future.delayed(const Duration(seconds: 1));
+      },
+      child: SingleChildScrollView(
+        child: ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return Container(
+              height: 100,
+              color: Colors.red,
+              margin: const EdgeInsets.only(
+                top: 10,
+                bottom: 10,
+              ),
+            );
           },
-          child: const Text('Discover'),
         ),
       ),
     );
