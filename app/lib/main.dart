@@ -1,6 +1,4 @@
 import 'package:app/navigation/routes.dart';
-import 'package:app/stores/app_tab_navigation/app_tab_navigation_state.dart';
-import 'package:app/stores/app_tab_navigation/app_tab_navigation_store.dart';
 import 'package:app/stores/auth/auth_state.dart';
 import 'package:app/stores/auth/auth_store.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +21,7 @@ void main() {
 Widget withProviders({required Widget child}) {
   return StoreProvider<AuthState>(
     store: AuthStore.store,
-    child: StoreProvider<AppTabNavigationState>(
-      store: AppTabNavigationStore.store,
-      child: child,
-    ),
+    child: child,
   );
 }
 
