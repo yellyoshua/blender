@@ -6,9 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-// TODO: Implement Google Sign In
-// https://pub.dev/packages/google_sign_in
-
 GoogleSignIn _googleSignIn = GoogleSignIn(
   scopes: <String>[
     'openid',
@@ -26,7 +23,23 @@ class SignInWithGoogle extends StatefulWidget {
 
 class _SignInWithGoogleState extends State<SignInWithGoogle> {
   void signInWithGoogle(BuildContext context) async {
-    AuthStore.login('username', 'password');
+    try {
+      var account = await _googleSignIn.signIn();
+      if (account != null) {
+        var authentication = await account.authentication;
+        var accessToken = authentication.accessToken;
+
+        await AuthStore.login(accessToken!);
+      }
+    } catch (e) {
+      print('Error signing in with Google: $e');
+    }
+  }
+
+  @override
+  void setState(VoidCallback fn) {
+    super.setState(fn);
+    _googleSignIn.signInSilently();
   }
 
   @override

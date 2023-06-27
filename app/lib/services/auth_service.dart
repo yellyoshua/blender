@@ -1,14 +1,14 @@
-import 'package:app/services/api_service.dart';
+import 'package:app/core/crud.dart';
+import 'package:app/main.dart';
 
-class AuthService {
-  static final WeblendApi _api = WeblendApi();
+class WeblendAuthGoogleService extends CrudModel {
+  WeblendAuthGoogleService() : super(WEBLEND_API_URL, 'auth/mobile/google');
 
-  static Future<dynamic> login(String email, String password) async {
-    final response = await _api.auth.post({
-      'email': email,
-      'password': password,
+  Future<String> login(String accessToken) async {
+    final response = await post({
+      'accessToken': accessToken,
     });
 
-    print(response);
+    return response;
   }
 }

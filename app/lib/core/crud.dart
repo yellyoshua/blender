@@ -12,8 +12,11 @@ class CrudModel {
   }
 
   Future<dynamic> post(Map<dynamic, dynamic> data) async {
-    var headers = getHeaders();
-    var response = await client.post(endpoint, body: data, headers: headers);
+    var response = await client.post(
+      endpoint,
+      body: jsonEncode(data),
+      headers: getHeaders(),
+    );
     return processResponse(response);
   }
 
@@ -60,7 +63,7 @@ dynamic processResponse(http.Response response) {
   var jsonBody = json.decode(responseBody);
 
   if (response.statusCode == 200) {
-    return jsonBody['results'];
+    return jsonBody['response'];
   } else {
     throw Exception(jsonBody['errors']);
   }

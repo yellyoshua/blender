@@ -1,3 +1,4 @@
+import 'package:app/services/auth_service.dart';
 import 'package:redux/redux.dart';
 import 'package:app/stores/auth/auth_actions.dart';
 import 'package:app/stores/auth/auth_reducer.dart';
@@ -12,10 +13,21 @@ class AuthStore {
     ),
   );
 
-  static void login(String username, String password) async {
-    store.dispatch(LoginLoadingAction(true));
-    await Future.delayed(const Duration(seconds: 3));
-    store.dispatch(LoginAction('token'));
+  static Future<void> login(String accessToken) async {
+    try {
+      store.dispatch(LoginLoadingAction(true));
+
+      final token = await WeblendAuthGoogleService().post({
+        'accessToken': accessToken,
+      });
+
+      await Future.delayed(const Duration(seconds: 3));
+
+      store.dispatch(LoginAction(token));
+    } catch (e) {
+      store.dispatch(LogoutAction());
+      rethrow;
+    }
   }
 
   static void logout() {
