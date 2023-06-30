@@ -1,3 +1,4 @@
+import 'package:app/services/user_data_service.dart';
 import 'package:flutter/material.dart';
 
 class DiscoverScreen extends StatefulWidget {
@@ -17,7 +18,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () async {
-        await Future.delayed(const Duration(seconds: 1));
+        var userData = await WeblendUserDataService().get({});
+        print('userData: $userData');
       },
       child: SingleChildScrollView(
         child: ListView.builder(

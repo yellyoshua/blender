@@ -1,6 +1,24 @@
+import _ from 'underscore';
+
 export default (mongooseInstance) => {
   return {
-    populate: (fields) => {
+    populate: (fields, default_populate) => {
+      if (default_populate) {
+        _(fields).each((select, path) => {
+          const populate = {};
+
+          populate.path = path;
+
+          if (select) {
+            populate.select = select;
+          }
+
+          mongooseInstance.populate(populate);
+        });
+
+        return;
+      }
+
       if (fields) {
         const splittedByComma = fields.split(',');
         const splittedBySpace = fields.split(' ');

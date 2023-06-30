@@ -1,4 +1,7 @@
+import 'package:app/stores/app_state.dart';
+import 'package:app/stores/auth/auth_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -23,7 +26,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: ListView(
           // physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          children: const [Text('Profile Screen')],
+          children: [
+            StoreConnector<AppState, AuthState>(
+              converter: (store) => store.state.authState,
+              builder: (_, state) {
+                if (state.user != null) {
+                  return Text(
+                    'Logged user: ${state.user!.firstName} ${state.user!.lastName} ${state.user!.email}',
+                  );
+                }
+
+                return Text('Profile Screen');
+              },
+            )
+          ],
         ),
       ),
     );

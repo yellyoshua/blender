@@ -2,7 +2,8 @@ import 'package:app/config/colors.dart';
 import 'package:app/config/logo.dart';
 import 'package:app/modules/discover/discover_screen.dart';
 import 'package:app/modules/profile/profile_screen.dart';
-import 'package:app/stores/auth/auth_store.dart';
+import 'package:app/stores/app_store.dart';
+import 'package:app/stores/auth/auth_actions.dart';
 import 'package:flutter/material.dart';
 
 class AppScreen extends StatefulWidget {
@@ -41,7 +42,7 @@ class _AppScreenState extends State<AppScreen> {
         actions: [
           InkWell(
             onTap: () {
-              AuthStore.logout();
+              AppStore.store.dispatch(LogoutAction());
             },
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(25),

@@ -19,7 +19,7 @@ export default (Model, defaults = {}) => {
       });
       const query = query_model(mongooseInstance);
       query.paginate(options.page, options.size);
-      query.populate(options.populate || defaultPopulate);
+      query.populate(options.populate || defaultPopulate, options.default_populate);
       query.select(options.select || defaultSelect);
       query.sort(options.sort);
       const data = await mongooseInstance.exec();

@@ -1,6 +1,7 @@
 // Create a Object called crud that reuses the methods from the CRUDModel
 
 import 'dart:convert';
+import 'package:app/stores/app_store.dart';
 import 'package:http/http.dart' as http;
 
 class CrudModel {
@@ -49,7 +50,8 @@ class CrudModel {
 }
 
 Map<String, String> getHeaders() {
-  var token = 'token_value';
+  var token = AppStore.store.state.authState.token;
+  print("token : $token");
 
   return {
     'content-type': 'application/json',
@@ -65,6 +67,7 @@ dynamic processResponse(http.Response response) {
   if (response.statusCode == 200) {
     return jsonBody['response'];
   } else {
-    throw Exception(jsonBody['errors']);
+    print(jsonBody['errors']);
+    return jsonBody['errors'];
   }
 }

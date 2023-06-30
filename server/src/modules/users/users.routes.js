@@ -1,4 +1,5 @@
 import usersController from './users.controller.js';
+import user_data from './user_data.controller.js';
 
 export default [
   {
@@ -18,5 +19,11 @@ export default [
     method: 'put',
     private: true,
     handler: usersController.update_me
+  },
+  {
+    path: '/user_data',
+    method: 'get',
+    private: true,
+    handler: user_data
   }
 ];

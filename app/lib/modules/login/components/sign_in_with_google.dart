@@ -1,7 +1,9 @@
 import 'package:app/config/colors.dart';
 import 'package:app/config/icons.dart';
+import 'package:app/stores/app_state.dart';
+import 'package:app/stores/app_store.dart';
+import 'package:app/stores/auth/auth_actions.dart';
 import 'package:app/stores/auth/auth_state.dart';
-import 'package:app/stores/auth/auth_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -27,9 +29,9 @@ class _SignInWithGoogleState extends State<SignInWithGoogle> {
       var account = await _googleSignIn.signIn();
       if (account != null) {
         var authentication = await account.authentication;
-        var accessToken = authentication.accessToken;
+        var accessToken = authentication.accessToken!;
 
-        await AuthStore.login(accessToken!);
+        AppStore.store.dispatch(InitAuthWithGoogleAction(accessToken));
       }
     } catch (e) {
       print('Error signing in with Google: $e');
@@ -44,8 +46,8 @@ class _SignInWithGoogleState extends State<SignInWithGoogle> {
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AuthState, AuthState>(
-      converter: (store) => store.state,
+    return StoreConnector<AppState, AuthState>(
+      converter: (store) => store.state.authState,
       builder: (context, state) {
         return Ink(
           decoration: const BoxDecoration(
