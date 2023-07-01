@@ -12,4 +12,5 @@ key.properties
 **/*.keystore
 !**/debug.keystore
 !**/weblend-development.keystore
+app/release-keystore.properties
 **/*.jks
