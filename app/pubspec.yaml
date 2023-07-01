@@ -38,6 +38,7 @@ dependencies:
   http: ^1.0.0
   google_sign_in: ^6.1.4
   flutter_redux: ^0.10.0
+  flutter_secure_storage:
   redux: ^5.0.0
 
 dev_dependencies:

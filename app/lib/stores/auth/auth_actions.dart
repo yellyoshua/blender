@@ -28,3 +28,5 @@ class InitAuthWithGoogleAction {
   final String accessToken;
   InitAuthWithGoogleAction(this.accessToken);
 }
+
+class InitCheckAuthAction {}

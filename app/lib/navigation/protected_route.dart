@@ -2,6 +2,7 @@ import 'package:app/components/loading_screen.dart';
 import 'package:app/navigation/routes.dart';
 import 'package:app/stores/app_state.dart';
 import 'package:app/stores/app_store.dart';
+import 'package:app/stores/auth/auth_actions.dart';
 import 'package:app/stores/auth/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -42,9 +43,9 @@ class RedirectToProtected extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, AuthState>(
       converter: (store) => store.state.authState,
-      onInitialBuild: (state) async {
+      onInitialBuild: (state) {
         if (state.loading == true) {
-          await AppStore.checkAuthentication();
+          AppStore.store.dispatch(InitCheckAuthAction());
         }
       },
       onWillChange: (_, state) {
@@ -73,14 +74,12 @@ class RedirectToLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, AuthState>(
       converter: (store) => store.state.authState,
-      onInitialBuild: (state) async {
-        debugPrint("state.loading : ${state.loading}", wrapWidth: 1024);
+      onInitialBuild: (state) {
         if (state.loading == true) {
-          await AppStore.checkAuthentication();
+          AppStore.store.dispatch(InitCheckAuthAction());
         }
       },
       onWillChange: (_, state) {
-        debugPrint("change state.loading : ${state.loading}", wrapWidth: 1024);
         if (state.loading == false) {
           if (state.token != null) {
             Navigator.pushReplacementNamed(context, WeblendRoutes.discover);
@@ -92,8 +91,6 @@ class RedirectToLogin extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        debugPrint("state.token : ${state.token}", wrapWidth: 1024);
-        debugPrint("state.loading : ${state.loading}", wrapWidth: 1024);
         if (state.token == null || state.loading == true) {
           return const ScreenLoading();
         }

@@ -1,9 +1,10 @@
 import 'package:app/stores/app_reducer.dart';
 import 'package:app/stores/app_state.dart';
-import 'package:app/stores/auth/auth_actions.dart';
 import 'package:app/stores/auth/auth_middleware.dart';
+import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 
+@immutable
 class AppStore {
   static final Store<AppState> store = Store<AppState>(
     appReducer,
@@ -11,10 +12,4 @@ class AppStore {
     distinct: true,
     middleware: [AuthMiddleware()],
   );
-
-  static Future<void> checkAuthentication() async {
-    await Future.delayed(const Duration(seconds: 3));
-    print('checkAuthentication');
-    store.dispatch(LogoutAction());
-  }
 }
