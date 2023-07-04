@@ -9,7 +9,7 @@ class CrudModel {
   http.Client client = http.Client();
 
   CrudModel(String url, String path) {
-    endpoint = Uri.parse('$url/$path');
+    endpoint = Uri.parse(url + path);
   }
 
   Future<dynamic> post(Map<dynamic, dynamic> data) async {
@@ -51,7 +51,6 @@ class CrudModel {
 
 Map<String, String> getHeaders() {
   var token = AppStore.store.state.authState.token;
-  print("token : $token");
 
   return {
     'content-type': 'application/json',

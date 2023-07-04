@@ -30,3 +30,9 @@ class InitAuthWithGoogleAction {
 }
 
 class InitCheckAuthAction {}
+
+class LoginErrorAction {
+  final String error;
+
+  LoginErrorAction(this.error);
+}

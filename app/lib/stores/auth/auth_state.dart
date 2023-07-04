@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 @immutable
 class AuthState {
   final String? token;
+  final String? error;
   final bool? loading;
   final User? user;
 
   const AuthState({
     this.token,
+    this.error,
     this.loading = true,
     this.user,
   });

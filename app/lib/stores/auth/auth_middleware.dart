@@ -46,12 +46,16 @@ Future<void> performLoginWithGoogle(
 ) async {
   store.dispatch(LoginLoadingAction(true));
 
-  final token = await WeblendAuthGoogleService().post({
-    'accessToken': action.accessToken,
-  });
+  try {
+    final token = await WeblendAuthGoogleService().post({
+      'accessToken': action.accessToken,
+    });
 
-  await AppSecureStorage.write('weblend-session-token-user', token);
-  store.dispatch(SetTokenAction(token));
-  final userData = await WeblendUserDataService().get({});
-  store.dispatch(LoginUserDataAction(userData, token));
+    await AppSecureStorage.write('weblend-session-token-user', token);
+    store.dispatch(SetTokenAction(token));
+    final userData = await WeblendUserDataService().get({});
+    store.dispatch(LoginUserDataAction(userData, token));
+  } catch (e) {
+    store.dispatch(LoginErrorAction(e.toString()));
+  }
 }
