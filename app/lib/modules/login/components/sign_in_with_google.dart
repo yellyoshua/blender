@@ -35,6 +35,7 @@ class _SignInWithGoogleState extends State<SignInWithGoogle> {
       }
     } catch (e) {
       print('Error signing in with Google: $e');
+      AppStore.store.dispatch(LoginErrorAction(e.toString()));
     }
   }
 
