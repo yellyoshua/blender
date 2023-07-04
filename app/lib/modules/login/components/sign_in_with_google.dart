@@ -14,8 +14,6 @@ GoogleSignIn _googleSignIn = GoogleSignIn(
     'https://www.googleapis.com/auth/userinfo.profile',
     'https://www.googleapis.com/auth/userinfo.email'
   ],
-  clientId:
-      '488977322120-lceeoojb40jenatg6p3qfhf5po1k31qg.apps.googleusercontent.com',
 );
 
 class SignInWithGoogle extends StatefulWidget {
