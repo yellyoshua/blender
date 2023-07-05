@@ -7,10 +7,18 @@ class AppState {
   const AppState({
     required this.authState,
     required this.userState,
+    required this.appName,
+    required this.packageName,
+    required this.version,
+    required this.buildNumber,
   });
 
   final AuthState authState;
   final UserState userState;
+  final String? appName;
+  final String? packageName;
+  final String? version;
+  final String? buildNumber;
 
   factory AppState.initial() {
     return const AppState(
@@ -18,6 +26,10 @@ class AppState {
       userState: UserState(
         loading: true,
       ),
+      appName: null,
+      packageName: null,
+      version: null,
+      buildNumber: null,
     );
   }
 
@@ -28,6 +40,10 @@ class AppState {
     return AppState(
       authState: authState ?? this.authState,
       userState: userState ?? this.userState,
+      appName: appName,
+      packageName: packageName,
+      version: version,
+      buildNumber: buildNumber,
     );
   }
 }

@@ -1,7 +1,9 @@
 import 'package:app/config/colors.dart';
 import 'package:app/config/logo.dart';
 import 'package:app/modules/login/components/sign_in_with_google.dart';
+import 'package:app/stores/app_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -13,8 +15,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreen extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.only(
+    return Padding(
+      padding: const EdgeInsets.only(
         top: 30,
         bottom: 20,
       ),
@@ -22,19 +24,19 @@ class _LoginScreen extends State<LoginScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            SizedBox(
+            const SizedBox(
               width: 200,
               child: WeblendLogo96x96,
             ),
-            SizedBox(
+            const SizedBox(
               width: 160,
               height: 60,
               child: WeblendLabel,
             ),
-            Text(
+            const Text(
               'Blending cultures',
               textScaleFactor: 1.0,
               style: TextStyle(
@@ -43,8 +45,8 @@ class _LoginScreen extends State<LoginScreen> {
                 color: primaryColor,
               ),
             ),
-            Spacer(),
-            Column(
+            const Spacer(),
+            const Column(
               children: [
                 Text(
                   'Welcome!',
@@ -66,15 +68,15 @@ class _LoginScreen extends State<LoginScreen> {
                 )
               ],
             ),
-            Spacer(),
+            const Spacer(),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                SignInWithGoogle(),
-                SizedBox(
+                const SignInWithGoogle(),
+                const SizedBox(
                   height: 20,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 350,
                   child: Text(
                     'By signing up, you agree to our Terms. See how we use your data in our Privacy Policy. We never post to Facebook, Twitter or Google.',
@@ -82,7 +84,21 @@ class _LoginScreen extends State<LoginScreen> {
                     textScaleFactor: 1.0,
                     style: TextStyle(letterSpacing: 0.1),
                   ),
-                )
+                ),
+                StoreConnector<AppState, AppState>(
+                  converter: (store) => store.state,
+                  builder: (_, state) {
+                    return Text(
+                      "Version ${state.version} (${state.buildNumber})",
+                      textScaleFactor: 1.0,
+                      style: const TextStyle(
+                        fontSize: 9,
+                        fontWeight: FontWeight.bold,
+                        color: primaryColor,
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ],

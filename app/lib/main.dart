@@ -9,7 +9,9 @@ import 'package:flutter_redux/flutter_redux.dart';
 const WEBLEND_API_URL = 'https://dev-api.weblend.app/api/';
 // TODO: Implement flutter redux persist
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -18,6 +20,8 @@ void main() {
       systemNavigationBarIconBrightness: Brightness.dark,
     ),
   );
+
+  await AppStore.checkAppInfo();
 
   runApp(const MyApp());
 }
