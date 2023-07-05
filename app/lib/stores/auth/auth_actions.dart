@@ -4,13 +4,6 @@ class SetTokenAction {
   SetTokenAction(this.token);
 }
 
-class LoginUserDataAction {
-  final dynamic userData;
-  final String token;
-
-  LoginUserDataAction(this.userData, this.token);
-}
-
 class LoginWithGoogleAction {
   final String accessToken;
   LoginWithGoogleAction(this.accessToken);

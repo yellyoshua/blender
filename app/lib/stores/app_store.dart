@@ -1,6 +1,7 @@
 import 'package:app/stores/app_reducer.dart';
 import 'package:app/stores/app_state.dart';
 import 'package:app/stores/auth/auth_middleware.dart';
+import 'package:app/stores/user/user_middleware.dart';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 
@@ -10,6 +11,9 @@ class AppStore {
     appReducer,
     initialState: AppState.initial(),
     distinct: true,
-    middleware: [AuthMiddleware()],
+    middleware: [
+      AuthMiddleware(),
+      UserMiddleware(),
+    ],
   );
 }

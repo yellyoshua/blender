@@ -1,8 +1,8 @@
 import 'package:app/services/app_secure_storage_service.dart';
 import 'package:app/services/auth_service.dart';
-import 'package:app/services/user_data_service.dart';
 import 'package:app/stores/app_state.dart';
 import 'package:app/stores/auth/auth_actions.dart';
+import 'package:app/stores/user/user_actions.dart';
 import 'package:redux/redux.dart';
 
 class AuthMiddleware extends MiddlewareClass<AppState> {
@@ -33,8 +33,7 @@ Future<void> checkAuth(
   final token = await AppSecureStorage.read('weblend-session-token-user');
   if (token != null) {
     store.dispatch(SetTokenAction(token));
-    final userData = await WeblendUserDataService().get({});
-    store.dispatch(LoginUserDataAction(userData, token));
+    store.dispatch(InitRefreshUserLoggedAction());
   } else {
     store.dispatch(LogoutAction());
   }
@@ -53,8 +52,7 @@ Future<void> performLoginWithGoogle(
 
     await AppSecureStorage.write('weblend-session-token-user', token);
     store.dispatch(SetTokenAction(token));
-    final userData = await WeblendUserDataService().get({});
-    store.dispatch(LoginUserDataAction(userData, token));
+    store.dispatch(InitRefreshUserLoggedAction());
   } catch (e) {
     store.dispatch(LoginErrorAction(e.toString()));
   }
