@@ -21,5 +21,37 @@ UserData transformDynamicUser(Map<String, dynamic> userData) {
     profilePicture: userData['profile_picture'],
     pendingOnboarding: pendingOnboarding,
     geolocation: userData['geolocation'],
+    profile: transformDynamicUserProfile(userData['profile']),
+  );
+}
+
+UserProfile transformDynamicUserProfile(Map<String, dynamic> profile) {
+  List<ProfileInterest> interests = profile['interests'] != null
+      ? List<ProfileInterest>.from(
+          profile['interests'].map(
+            (interest) => ProfileInterest(
+              type: interest['type'],
+              name: interest['name'],
+            ),
+          ),
+        )
+      : [];
+
+  List<ProfilePersonality> personalities = profile['personalities'] != null
+      ? List<ProfilePersonality>.from(
+          profile['personalities'].map(
+            (personality) => ProfilePersonality(
+              name: personality['name'],
+            ),
+          ),
+        )
+      : [];
+
+  return UserProfile(
+    locationCity: profile['location_city'],
+    locationCountry: profile['location_country'],
+    birthdate: profile['birthdate'],
+    interests: interests,
+    personalities: personalities,
   );
 }

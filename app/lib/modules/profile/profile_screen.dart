@@ -58,26 +58,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
               const SizedBox(height: 20),
-              Text(
-                "${user.firstName!} ${user.lastName!}",
-                textScaleFactor: 1.0,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              _completeNameLabel(user),
               const SizedBox(height: 10),
-              const Text(
-                'IN QUITO, ECUADOR',
-                textScaleFactor: 1.0,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: secondaryColor,
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              _locationLabel(user.profile),
+              const SizedBox(height: 10),
+              _interestsSection(user.profile),
+              const SizedBox(height: 10),
+              _interestsSection(user.profile),
             ],
           ),
         );
@@ -163,6 +150,113 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _completeNameLabel(UserData user) {
+    return Text(
+      "${user.firstName} ${user.lastName}",
+      textScaleFactor: 1.0,
+      textAlign: TextAlign.center,
+      style: const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+  Widget _locationLabel(UserProfile? profile) {
+    bool withoutLocation = profile == null ||
+        profile.locationCity == null ||
+        profile.locationCountry == null;
+
+    if (withoutLocation) {
+      return const SizedBox();
+    }
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Icon(
+          Icons.location_on,
+          color: secondaryColor,
+          size: 18,
+        ),
+        const SizedBox(width: 5),
+        Text(
+          "${profile.locationCity}, ${profile.locationCountry}",
+          textScaleFactor: 1.0,
+          style: const TextStyle(
+            color: secondaryColor,
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _interestsSection(UserProfile? profile) {
+    if (profile == null) {
+      return const SizedBox();
+    }
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Interests',
+                textScaleFactor: 1.0,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              IconButton(
+                onPressed: () => {},
+                icon: const Icon(
+                  Icons.edit,
+                  color: primaryColor,
+                  size: 18,
+                ),
+              )
+            ],
+          ),
+          const SizedBox(height: 10),
+          Wrap(
+            alignment: WrapAlignment.center,
+            children: profile.interests.map(
+              (interest) {
+                return Container(
+                  margin: const EdgeInsets.only(right: 5),
+                  padding: const EdgeInsets.only(
+                    top: 5,
+                    bottom: 5,
+                    left: 10,
+                    right: 10,
+                  ),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    color: primaryColor,
+                  ),
+                  child: Text(
+                    interest.name,
+                    textScaleFactor: 1.0,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  ),
+                );
+              },
+            ).toList(),
+          ),
+        ],
       ),
     );
   }
