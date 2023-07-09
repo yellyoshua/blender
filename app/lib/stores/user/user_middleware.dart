@@ -23,7 +23,6 @@ class UserMiddleware extends MiddlewareClass<AppState> {
 Future<void> refreshUserLoggedData(
   Store<AppState> store,
 ) async {
-  final userData = await WeblendUserDataService().get({});
-  final user = transformDynamicUser(userData);
+  final user = await WeblendUserDataService().get({});
   store.dispatch(RefreshUserLoggedAction(user));
 }

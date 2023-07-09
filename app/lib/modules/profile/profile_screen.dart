@@ -36,8 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
         return RefreshIndicator(
           onRefresh: () async {
-            final userData = await WeblendUserDataService().get({});
-            final user = transformDynamicUser(userData);
+            final user = await WeblendUserDataService().get({});
             AppStore.store.dispatch(RefreshUserLoggedAction(user));
           },
           child: ListView(
@@ -140,7 +139,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 width: 10,
               ),
               Text(
-                'Settings',
+                'Settingss',
                 textScaleFactor: 1.0,
                 style: TextStyle(
                   color: Colors.white,
