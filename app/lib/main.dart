@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
 // TODO: Change this to env variable
-const WEBLEND_API_URL = 'https://dev-api.weblend.app/api/';
+const WEBLEND_API_URL = 'http://192.168.100.5:4000/api/';
 // TODO: Implement flutter redux persist
 
 void main() async {

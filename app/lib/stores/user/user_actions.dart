@@ -25,7 +25,11 @@ UserData transformDynamicUser(Map<String, dynamic> userData) {
   );
 }
 
-UserProfile transformDynamicUserProfile(Map<String, dynamic> profile) {
+UserProfile transformDynamicUserProfile(Map<String, dynamic>? profile) {
+  if (profile == null) {
+    return const UserProfile();
+  }
+
   List<ProfileInterest> interests = profile['interests'] != null
       ? List<ProfileInterest>.from(
           profile['interests'].map(

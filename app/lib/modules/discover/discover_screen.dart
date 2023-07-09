@@ -1,4 +1,3 @@
-import 'package:app/services/user_data_service.dart';
 import 'package:flutter/material.dart';
 
 class DiscoverScreen extends StatefulWidget {
@@ -18,25 +17,21 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () async {
-        var userData = await WeblendUserDataService().get({});
-        print('userData: $userData');
+        await Future.delayed(const Duration(seconds: 1));
       },
-      child: SingleChildScrollView(
-        child: ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return Container(
-              height: 100,
-              color: Colors.red,
-              margin: const EdgeInsets.only(
-                top: 10,
-                bottom: 10,
-              ),
-            );
-          },
-        ),
+      child: ListView.builder(
+        physics: const AlwaysScrollableScrollPhysics(),
+        itemCount: 2,
+        itemBuilder: (context, index) {
+          return Container(
+            height: 100,
+            color: Colors.red,
+            margin: const EdgeInsets.only(
+              top: 10,
+              bottom: 10,
+            ),
+          );
+        },
       ),
     );
   }

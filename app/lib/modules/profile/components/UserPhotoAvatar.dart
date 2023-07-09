@@ -10,10 +10,17 @@ class UserPhotoAvatar extends StatelessWidget {
     var profilePicture =
         user.profilePicture != null ? user.profilePicture['url'] : user.picture;
 
+    if (profilePicture == null) {
+      return const CircleAvatar(
+        radius: 50,
+        backgroundColor: Colors.grey,
+      );
+    }
+
     return CircleAvatar(
       radius: 50,
       backgroundImage: NetworkImage(
-        profilePicture!,
+        profilePicture,
       ),
       backgroundColor: Colors.grey[300],
     );

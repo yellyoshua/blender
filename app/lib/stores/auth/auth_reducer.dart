@@ -11,7 +11,7 @@ AuthState authReducer(AuthState state, dynamic action) {
     case LogoutAction:
       return const AuthState(token: null, loading: false, user: null);
     case LoginErrorAction:
-      return AuthState(error: action.error, loading: false);
+      return AuthState(error: action.error, loading: false, token: null);
     default:
       return state;
   }

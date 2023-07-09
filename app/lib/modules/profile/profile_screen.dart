@@ -42,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           },
           child: ListView(
             physics: const AlwaysScrollableScrollPhysics(),
-            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -62,9 +62,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(height: 10),
               _locationLabel(user.profile),
               const SizedBox(height: 10),
-              _interestsSection(user.profile),
+              _itemsSection('Interests', user.profile?.interests ?? []),
               const SizedBox(height: 10),
-              _interestsSection(user.profile),
+              _itemsSection('Personalities', user.profile?.personalities ?? []),
             ],
           ),
         );
@@ -197,11 +197,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _interestsSection(UserProfile? profile) {
-    if (profile == null) {
-      return const SizedBox();
-    }
-
+  Widget _itemsSection(String title, List<dynamic> items) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
@@ -209,10 +205,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'Interests',
+              Text(
+                title,
                 textScaleFactor: 1.0,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
@@ -228,36 +224,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ],
           ),
           const SizedBox(height: 10),
-          Wrap(
-            alignment: WrapAlignment.center,
-            children: profile.interests.map(
-              (interest) {
-                return Container(
-                  margin: const EdgeInsets.only(right: 5),
-                  padding: const EdgeInsets.only(
-                    top: 5,
-                    bottom: 5,
-                    left: 10,
-                    right: 10,
-                  ),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    color: primaryColor,
-                  ),
-                  child: Text(
-                    interest.name,
-                    textScaleFactor: 1.0,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                    ),
-                  ),
-                );
-              },
-            ).toList(),
-          ),
+          _listItemsBuilder(items),
         ],
       ),
+    );
+  }
+
+  Widget _listItemsBuilder(List<dynamic> items) {
+    return Wrap(
+      alignment: WrapAlignment.start,
+      children: items.map(
+        (item) {
+          return Container(
+            margin: const EdgeInsets.only(right: 5, top: 5, bottom: 5),
+            padding: const EdgeInsets.only(
+              top: 5,
+              bottom: 5,
+              left: 10,
+              right: 10,
+            ),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+              color: primaryColor,
+            ),
+            child: Text(
+              item.name,
+              textScaleFactor: 1.0,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+              ),
+            ),
+          );
+        },
+      ).toList(),
     );
   }
 }

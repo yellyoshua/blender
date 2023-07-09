@@ -54,6 +54,7 @@ Future<void> performLoginWithGoogle(
     store.dispatch(SetTokenAction(token));
     store.dispatch(InitRefreshUserLoggedAction());
   } catch (e) {
+    print("Error when login with google $e");
     store.dispatch(LoginErrorAction(e.toString()));
   }
 }

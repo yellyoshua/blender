@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'package:app/stores/app_store.dart';
+import 'package:app/stores/auth/auth_actions.dart';
 import 'package:http/http.dart' as http;
 
 class CrudModel {
@@ -63,10 +64,24 @@ dynamic processResponse(http.Response response) {
   var responseBody = response.body;
   var jsonBody = json.decode(responseBody);
 
-  if (response.statusCode == 200) {
-    return jsonBody['response'];
-  } else {
-    print(jsonBody['errors']);
-    return jsonBody['errors'];
+  if (response.statusCode == 401) {
+    AppStore.store.dispatch(LogoutAction());
+    print('Expired session error: ${jsonBody['errors']}');
+
+    Map<String, dynamic> error = {};
+    return error;
   }
+
+  if (response.statusCode == 200) {
+    List<dynamic> errorsArray = jsonBody['errors'] ?? [];
+
+    if (errorsArray.isNotEmpty) {
+      print('Server Request errors ${jsonBody['errors']}');
+    }
+
+    return jsonBody['response'];
+  }
+
+  print('Client request errors status (${response.statusCode})');
+  return jsonBody['errors'];
 }
