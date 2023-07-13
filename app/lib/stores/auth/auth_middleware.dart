@@ -3,6 +3,7 @@ import 'package:app/services/auth_service.dart';
 import 'package:app/stores/app_state.dart';
 import 'package:app/stores/auth/auth_actions.dart';
 import 'package:app/stores/user/user_actions.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:redux/redux.dart';
 
 class AuthMiddleware extends MiddlewareClass<AppState> {
@@ -53,8 +54,12 @@ Future<void> performLoginWithGoogle(
     await AppSecureStorage.write('weblend-session-token-user', token);
     store.dispatch(SetTokenAction(token));
     store.dispatch(InitRefreshUserLoggedAction());
-  } catch (e) {
-    print("Error when login with google $e");
-    store.dispatch(LoginErrorAction(e.toString()));
+  } catch (error) {
+    await FirebaseCrashlytics.instance.recordError(
+      'Error when login with google: $error',
+      null,
+      fatal: true,
+    );
+    store.dispatch(LoginErrorAction(error.toString()));
   }
 }

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "488977322120",
+    "project_id": "blender-364018",
+    "storage_bucket": "blender-364018.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488977322120:android:15892a4abe40acdc2d0f3d",
+        "android_client_info": {
+          "package_name": "com.weblend.weblend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488977322120-ltnhekme6tc88rqpbv90l9algl6ccedn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxLXUXPvUMZ9nrU_DFaqdpd__9GRGHKio"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488977322120-ltnhekme6tc88rqpbv90l9algl6ccedn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "488977322120-7096qldkbh4qsd2730bdbsv028ndiqgh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.app.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

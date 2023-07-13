@@ -1,6 +1,10 @@
+import 'package:app/firebase_options.dart';
 import 'package:app/navigation/routes.dart';
 import 'package:app/stores/app_state.dart';
 import 'package:app/stores/app_store.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -20,6 +24,17 @@ void main() async {
       systemNavigationBarIconBrightness: Brightness.dark,
     ),
   );
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
 
   await AppStore.checkAppInfo();
 

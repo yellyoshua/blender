@@ -4,6 +4,7 @@ import 'package:app/stores/app_state.dart';
 import 'package:app/stores/app_store.dart';
 import 'package:app/stores/auth/auth_actions.dart';
 import 'package:app/stores/auth/auth_state.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -33,9 +34,14 @@ class _SignInWithGoogleState extends State<SignInWithGoogle> {
 
         AppStore.store.dispatch(InitAuthWithGoogleAction(accessToken));
       }
-    } catch (e) {
-      print('Error signing in with Google: $e');
-      AppStore.store.dispatch(LoginErrorAction(e.toString()));
+    } catch (error) {
+      await FirebaseCrashlytics.instance.recordError(
+        'Error signing in with Google: $error',
+        null,
+        fatal: true,
+      );
+
+      AppStore.store.dispatch(LoginErrorAction(error.toString()));
     }
   }
 

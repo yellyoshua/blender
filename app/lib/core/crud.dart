@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'package:app/stores/app_store.dart';
 import 'package:app/stores/auth/auth_actions.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:http/http.dart' as http;
 
 class CrudModel {
@@ -46,7 +47,8 @@ class CrudModel {
     var headers = getHeaders();
     var newEndpoint = endpoint.replace(queryParameters: query);
     var response = await client.get(newEndpoint, headers: headers);
-    return processResponse(response);
+    final total = await processResponse(response);
+    return total;
   }
 }
 
@@ -60,13 +62,18 @@ Map<String, String> getHeaders() {
   };
 }
 
-dynamic processResponse(http.Response response) {
+Future<dynamic> processResponse(http.Response response) async {
   var responseBody = response.body;
   var jsonBody = json.decode(responseBody);
 
   if (response.statusCode == 401) {
     AppStore.store.dispatch(LogoutAction());
-    print('Expired session error: ${jsonBody['errors']}');
+
+    await FirebaseCrashlytics.instance.recordError(
+      'Expired session error: ${jsonBody['errors']}',
+      null,
+      fatal: true,
+    );
 
     Map<String, dynamic> error = {};
     return error;
@@ -76,12 +83,20 @@ dynamic processResponse(http.Response response) {
     List<dynamic> errorsArray = jsonBody['errors'] ?? [];
 
     if (errorsArray.isNotEmpty) {
-      print('Server Request errors ${jsonBody['errors']}');
+      await FirebaseCrashlytics.instance.recordError(
+        'Server Request errors ${jsonBody['errors']}',
+        null,
+        fatal: true,
+      );
     }
 
     return jsonBody['response'];
   }
 
-  print('Client request errors status (${response.statusCode})');
+  await FirebaseCrashlytics.instance.recordError(
+    'Client request errors status (${response.statusCode})',
+    null,
+    fatal: true,
+  );
   return jsonBody['errors'];
 }

@@ -30,6 +30,10 @@ def releaseKeystoreProperties = new Properties()
 releaseKeystoreProperties.load(new FileInputStream(releaseKeystorePropertiesFile))
 
 apply plugin: 'com.android.application'
+// START: FlutterFire Configuration
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
+// END: FlutterFire Configuration
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
