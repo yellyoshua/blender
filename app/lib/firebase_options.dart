@@ -23,9 +23,15 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -58,27 +64,5 @@ class DefaultFirebaseOptions {
     messagingSenderId: '488977322120',
     projectId: 'blender-364018',
     storageBucket: 'blender-364018.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDyEMOTCl_Rk3zlgibN4qawnape7gWzyy8',
-    appId: '1:488977322120:ios:e19d9b8f66325f3d2d0f3d',
-    messagingSenderId: '488977322120',
-    projectId: 'blender-364018',
-    storageBucket: 'blender-364018.appspot.com',
-    androidClientId: '488977322120-9qeo7pcjac2qhhv6j8kchq4aqp57chq0.apps.googleusercontent.com',
-    iosClientId: '488977322120-ivfn2k1t3d5lbsueeavh94pnpe2r5mog.apps.googleusercontent.com',
-    iosBundleId: 'com.example.app',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDyEMOTCl_Rk3zlgibN4qawnape7gWzyy8',
-    appId: '1:488977322120:ios:2f7be026f4d20a392d0f3d',
-    messagingSenderId: '488977322120',
-    projectId: 'blender-364018',
-    storageBucket: 'blender-364018.appspot.com',
-    androidClientId: '488977322120-9qeo7pcjac2qhhv6j8kchq4aqp57chq0.apps.googleusercontent.com',
-    iosClientId: '488977322120-7096qldkbh4qsd2730bdbsv028ndiqgh.apps.googleusercontent.com',
-    iosBundleId: 'com.example.app.RunnerTests',
   );
 }

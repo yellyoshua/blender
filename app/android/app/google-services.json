@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "488977322120-ltnhekme6tc88rqpbv90l9algl6ccedn.apps.googleusercontent.com",
+          "client_id": "488977322120-lceeoojb40jenatg6p3qfhf5po1k31qg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.weblend.weblend",
+            "certificate_hash": "23860b9be6eb6994a928049bf288e9dd98ee2d50"
+          }
+        },
+        {
+          "client_id": "488977322120-a2kka0bnapvaetqj5slq1d95rspemtef.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,15 +35,8 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "488977322120-ltnhekme6tc88rqpbv90l9algl6ccedn.apps.googleusercontent.com",
+              "client_id": "488977322120-a2kka0bnapvaetqj5slq1d95rspemtef.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "488977322120-7096qldkbh4qsd2730bdbsv028ndiqgh.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.app.RunnerTests"
-              }
             }
           ]
         }

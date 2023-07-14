@@ -2,7 +2,6 @@ import 'package:app/services/app_secure_storage_service.dart';
 import 'package:app/services/auth_service.dart';
 import 'package:app/stores/app_state.dart';
 import 'package:app/stores/auth/auth_actions.dart';
-import 'package:app/stores/user/user_actions.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:redux/redux.dart';
 
@@ -34,7 +33,6 @@ Future<void> checkAuth(
   final token = await AppSecureStorage.read('weblend-session-token-user');
   if (token != null) {
     store.dispatch(SetTokenAction(token));
-    store.dispatch(InitRefreshUserLoggedAction());
   } else {
     store.dispatch(LogoutAction());
   }
@@ -53,7 +51,6 @@ Future<void> performLoginWithGoogle(
 
     await AppSecureStorage.write('weblend-session-token-user', token);
     store.dispatch(SetTokenAction(token));
-    store.dispatch(InitRefreshUserLoggedAction());
   } catch (error) {
     await FirebaseCrashlytics.instance.recordError(
       'Error when login with google: $error',

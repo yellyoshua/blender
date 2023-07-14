@@ -17,14 +17,12 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, UserState>(
       converter: (store) => store.state.userState,
+      onInit: (store) {
+        AppStore.store.dispatch(InitRefreshUserLoggedAction());
+      },
       builder: (_, userState) {
         if (userState.user == null || userState.loading) {
           return const Center(

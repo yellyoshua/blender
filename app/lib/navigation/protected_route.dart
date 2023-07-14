@@ -43,6 +43,8 @@ class RedirectToProtected extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, AuthState>(
       converter: (store) => store.state.authState,
+      distinct: true,
+      // rebuildOnChange: false,
       onInitialBuild: (state) {
         if (state.loading == true) {
           AppStore.store.dispatch(InitCheckAuthAction());
@@ -74,6 +76,7 @@ class RedirectToLogin extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, AuthState>(
       converter: (store) => store.state.authState,
+      distinct: true,
       onInitialBuild: (state) {
         if (state.loading == true) {
           AppStore.store.dispatch(InitCheckAuthAction());
