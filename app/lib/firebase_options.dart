@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBXVaUsupsNN_CKsGl0bpjcwlpZgTVP6Ws',
-    appId: '1:488977322120:web:b8fdf05bd83615fc2d0f3d',
-    messagingSenderId: '488977322120',
-    projectId: 'blender-364018',
-    authDomain: 'blender-364018.firebaseapp.com',
-    storageBucket: 'blender-364018.appspot.com',
+    apiKey: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+    appId: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+    messagingSenderId: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+    projectId: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+    authDomain: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+    storageBucket: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBxLXUXPvUMZ9nrU_DFaqdpd__9GRGHKio',
-    appId: '1:488977322120:android:15892a4abe40acdc2d0f3d',
-    messagingSenderId: '488977322120',
-    projectId: 'blender-364018',
-    storageBucket: 'blender-364018.appspot.com',
+    apiKey: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+    appId: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+    messagingSenderId: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+    projectId: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+    storageBucket: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
   );
 }
