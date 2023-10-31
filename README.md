@@ -6,7 +6,7 @@
 
 ---
 
-Blender is a global platform for creating intercultural connections and online communities. It focuses on networking and friendship, facilitating social relationships in over 190 countries, with strict user control to ensure a secure environment.
+Blender is a global platform for creating intercultural connections and online communities. It focuses on networking and friendship, facilitating social relationships in all countries, with strict user control to ensure a secure environment.
 
 [Spanish Version](README.ES.md)
 
