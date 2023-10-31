@@ -1,6 +1,7 @@
 <p align="center">
   <img src="/app/assets/images/weblend_label.png" alt="Blending Cultures - Portrait">
 </p>
+
 ---
 
 Blender is a global platform for creating intercultural connections and online communities. It focuses on networking and friendship, facilitating social relationships in over 190 countries, with strict user control to ensure a secure environment.
