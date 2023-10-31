@@ -1,6 +1,8 @@
-<p align="center">
-  <img src="/app/assets/images/weblend_label.png" alt="Blending Cultures - Portrait">
-</p>
+<span align="center">
+
+![Blending Cultures - Portrait](/app/assets/images/weblend_label.png)
+
+</span>
 
 ---
 
@@ -66,17 +68,24 @@ Blender is a global platform for creating intercultural connections and online c
 
 ### Screenshots
 
-<p align="center">
-  <img src="/client/public/images/screen_complete_profile.png" alt="Blending Cultures - Portrait">
-</p>
+<span align="center">
 
-<p align="center">
-  <img src="/client/public/images/screen_interests_select.png" alt="Blending Cultures - Portrait">
-</p>
+  ![Blending Cultures - Portrait](/client/public/images/screen_complete_profile.png)
 
-<p align="center">
-  <img src="/client/public/images/screen_photos_upload.png" alt="Blending Cultures - Portrait">
-</p>
+</span>
+
+
+<span align="center">
+
+  ![Blending Cultures - Portrait](/client/public/images/screen_interests_select.png)
+
+</span>
+
+<span align="center">
+
+  ![Blending Cultures - Portrait](/client/public/images/screen_photos_upload.png)
+
+</span>
 
 ---
 
