@@ -31,6 +31,24 @@ export default {
     return {
       redirect: `${process.env.FRONTEND_URL}/?accessToken=${accessToken}`
     };
+  },
+  authMobileGoogle: async (query, req) => {
+    const client_data = await googleAuthService.getPersonData(query.accessToken);
+
+    const user = await get_or_create_user(client_data);
+    const request_details = get_request_details(req);
+
+    const new_session_data = {
+      user: user._id,
+      ip: request_details.ip,
+      user_agent: request_details.user_agent
+    };
+
+    const session = await sessionsModel.create(new_session_data);
+    const jwt_payload = compose_jwt_payload(user, session);
+    const accessToken = jwt.sign(jwt_payload);
+
+    return accessToken;
   }
 };
 

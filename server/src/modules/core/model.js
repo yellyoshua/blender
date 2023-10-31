@@ -2,7 +2,6 @@
 import _ from 'underscore';
 import query_model from './query_model';
 import {objectToDotNotation} from '../shared/utils';
-import mongoose from 'mongoose';
 
 /**
  * @param {import('mongoose').Model} Model
@@ -20,7 +19,7 @@ export default (Model, defaults = {}) => {
       });
       const query = query_model(mongooseInstance);
       query.paginate(options.page, options.size);
-      query.populate(options.populate || defaultPopulate);
+      query.populate(options.populate || defaultPopulate, options.default_populate);
       query.select(options.select || defaultSelect);
       query.sort(options.sort);
       const data = await mongooseInstance.exec();
@@ -85,29 +84,3 @@ export default (Model, defaults = {}) => {
     raw: Model
   };
 };
-
-function sanitize_update_query (data, query = {}) {
-  if (_(data).isArray()) {
-    query.$set = data;
-    return data;
-  }
-
-  const data_keys = Object.keys(data);
-
-  _(data_keys).each((key) => {
-    if (_(data[key]).isArray()) {
-      query.$addToSet = query.$addToSet || {};
-      query.$addToSet[key] = data[key];
-      return;
-    }
-    if (_(data[key]).isObject()) {
-      query.$set = query.$set || {};
-      query.$set = {
-        ...query.$set,
-        ...objectToDotNotation({[key]: data[key]})
-      };
-    }
-  });
-
-  return query;
-}

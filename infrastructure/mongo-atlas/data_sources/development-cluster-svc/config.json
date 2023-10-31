@@ -1,0 +1,10 @@
+{
+    "name": "development-cluster-svc",
+    "type": "mongodb-atlas",
+    "config": {
+        "clusterName": "development-cluster",
+        "readPreference": "primary",
+        "wireProtocolEnabled": false
+    },
+    "version": 1
+}

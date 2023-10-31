@@ -9,10 +9,6 @@ export default {
       receptor: receptor_user._id
     }, {populate: 'emisor receptor'});
 
-    if (bumpingFist && bumpingFist.status === 'accepted') {
-      return bumpingFist;
-    }
-
     if (!bumpingFist) {
       await bumpingFistsModel.create({
         emisor: emisor_user._id,
@@ -21,6 +17,10 @@ export default {
         personalities: getCommonPersonalities(emisor_user, receptor_user),
         status: 'pending'
       });
+    }
+
+    if (bumpingFist.status === 'accepted') {
+      return bumpingFist;
     }
 
     return null;
@@ -32,17 +32,11 @@ export default {
     }, {populate: 'emisor receptor'});
 
     if (bumpingFist && bumpingFist.status === 'pending') {
-      await bumpingFistsModel.update(
+      return bumpingFistsModel.update(
         {_id: bumpingFist._id},
-        {status: 'accepted'}
-      );
-
-      const [bumped_fist] = await bumpingFistsModel.find(
-        {_id: bumpingFist._id},
+        {status: 'accepted'},
         {populate: 'emisor receptor'}
       );
-
-      return bumped_fist;
     }
 
     return bumpingFist;

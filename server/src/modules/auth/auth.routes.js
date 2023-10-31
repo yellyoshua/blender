@@ -12,5 +12,11 @@ export default [
     method: 'get',
     private: false,
     handler: authController.googleCallback
+  },
+  {
+    path: '/auth/mobile/google',
+    method: 'post',
+    private: false,
+    handler: authController.authMobileGoogle
   }
 ];

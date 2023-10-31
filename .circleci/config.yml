@@ -1,0 +1,183 @@
+version: 2.1
+
+# Workflows are the top-level items in a CircleCI configuration file.
+workflows:
+  version: 2
+  development:
+    jobs:
+      - check-branch:
+          filters:
+            branches:
+              only:
+                - development
+      - server-test:
+          requires:
+            - check-branch
+      - client-test:
+          requires:
+            - check-branch
+      - deploy-development-server:
+          requires:
+            - server-test
+
+  reset-development-data:
+    jobs:
+      - reset-development-data-approval:
+          type: approval
+          filters:
+            branches:
+              only:
+                - development
+      - reset-development-data:
+          requires:
+            - reset-development-data-approval
+
+# Executors are the virtual machines or containers that run your jobs.
+executors:
+  container-executor:
+    docker:
+      - image: mongo:5.0.18
+        environment:
+          ENVIRONMENT: development
+          JWT_SECRET: BA2F2F9F-9F9F-4F2B-BA2F-2F9F9F4F2BBA
+    working_directory: ~/yellyoshua
+
+# Jobs are collections of steps that run in a virtual machine or container.
+jobs:
+  server-test:
+    executor: container-executor
+    steps:
+      - install-packages
+      - checkout
+      - setup_remote_docker
+      - run: mongod --fork --logpath /var/log/mongod.log
+      - test-server
+  
+  client-test:
+    executor: container-executor
+    steps:
+      - install-packages
+      - checkout
+      - test-client
+  
+  reset-development-data:
+    executor: container-executor
+    steps:
+      - install-packages
+      - checkout
+      - development-seed
+  
+  deploy-development-server:
+    executor: container-executor
+    environment:
+      CONTAINER: server-development
+      GCP_CLOUD_RUN_REGION: us-central1
+      PROJECT_PATH: ./server
+      CONTAINER_FILE: Server.Dockerfile
+      SERVICE_NAME: weblend-development
+    steps:
+      - install-packages
+      - install-gcloud
+      - install-docker
+      - checkout
+      - setup_remote_docker
+      - activate-service-account
+      - build-image
+      - depoy-server
+
+  check-branch:
+    executor: container-executor
+    resource_class: large
+    steps:
+      - run: echo "Checking branch"
+
+# Reusable commands that can be used across jobs and workflows.
+commands:
+  install-packages:
+    steps:
+      - run:
+          name: Install full packages
+          command: |
+            apt-get update -y
+            apt-get install -y curl \
+            nano software-properties-common \
+            git wget tar build-essential \
+            libssl-dev libffi-dev -y
+            curl -sL https://deb.nodesource.com/setup_18.x | bash
+            apt-get install -y nodejs
+
+  install-gcloud:
+    steps:
+      - run: 
+          name: Install gcloud
+          command: |
+            echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+            curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+            apt-get update -yq
+            apt-get install google-cloud-sdk -yq
+            apt-get install google-cloud-sdk-gke-gcloud-auth-plugin -yq
+
+  install-docker:
+    steps:
+      - run: 
+          name: Install docker
+          command: |
+            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+            add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+            apt-get update -yq
+            apt-get install docker-ce -yq
+
+  activate-service-account:
+    steps:
+      - run: 
+          name: Activate service account
+          command: |
+            echo $GCLOUD_SERVICE_KEY_CI | base64 --decode --ignore-garbage > ~/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file ~/gcloud-service-key.json
+            gcloud auth configure-docker --quiet
+
+  # install-playwright:
+  #   steps:
+  #     - run: npx playwright install-deps
+
+  build-image:
+    steps:
+      - run:
+          name: Build image
+          command: |
+            cd ${PROJECT_PATH} && docker build -t us.gcr.io/${GCP_PROJECT_ID}/weblend/${CONTAINER}:latest -f ../infrastructure/docker/${CONTAINER_FILE} .
+            docker push us.gcr.io/${GCP_PROJECT_ID}/weblend/${CONTAINER}:latest
+  
+  depoy-server:
+    steps:
+      - run:
+          name: Deploy server development
+          command: |
+            gcloud run deploy ${SERVICE_NAME} --image us.gcr.io/${GCP_PROJECT_ID}/weblend/${CONTAINER}:latest --platform managed --region ${GCP_CLOUD_RUN_REGION} --allow-unauthenticated --project ${GCP_PROJECT_ID}
+
+  test-client:
+    steps:
+      - run:
+          name: Client tests
+          command: |
+            cd client
+            echo "Testing client"
+  
+  test-server:
+    steps:
+      - run:
+          name: Server tests
+          command: |
+            cd server
+            npm install --save-dev
+            npm run test
+
+  development-seed:
+    steps:
+      - run:
+          name: Seed development data
+          command: |
+            cd server
+            npm install --save-dev
+            DATABASE_URL=${DATABASE_URL_DEVELOPMENT} npm run seed
+
