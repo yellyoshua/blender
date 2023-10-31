@@ -1,0 +1,3 @@
+- [Yoshua Lopez (Full Stack Developer)](https://github.com/yellyoshua)
+- [Maria Paz Quirola (Frontend Developer & UX/UI Designer)](https://github.com/Mpqg)
+- [Laura Socarras (Backend Developer)](https://github.com/0806socrrn)

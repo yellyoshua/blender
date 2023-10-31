@@ -1,8 +1,8 @@
-## Weblend - Mezclando Culturas
-
 <p align="center">
   <img src="/app/assets/images/weblend_label.png" alt="Blending Cultures - Portrait">
 </p>
+
+---
 
 Blender es una plataforma global para la creación de conexiones interculturales y comunidades en línea. Se centra en el networking y la amistad, facilitando relaciones sociales en más de 190 países, con un estricto control de usuarios para garantizar un entorno seguro.
 
@@ -59,6 +59,33 @@ Blender es una plataforma global para la creación de conexiones interculturales
 
 - **Filtros Personalizables:**
     - Filtros de edad, género e intereses para una búsqueda más específica.
+
+
+---
+
+### Capturas de Pantalla (Portrait)
+
+<p align="center">
+  <img src="/client/public/images/screen_complete_profile.png" alt="Blending Cultures - Portrait">
+</p>
+
+<p align="center">
+  <img src="/client/public/images/screen_interests_select.png" alt="Blending Cultures - Portrait">
+</p>
+
+<p align="center">
+  <img src="/client/public/images/screen_photos_upload.png" alt="Blending Cultures - Portrait">
+</p>
+
+---
+
+### Tecnologías
+
+- Consulta el archivo [TECHNOLOGIES.md](/doc/TECHNOLOGIES.md) para más detalles.
+
+### 📄 Créditos
+
+- Sigue las contribuciones y créditos en el archivo [CONTRIBUTING.md](CONTRIBUTING.md).
 
 
 ---
