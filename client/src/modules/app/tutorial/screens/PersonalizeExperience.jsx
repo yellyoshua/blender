@@ -1,4 +1,4 @@
-import SparklesIcon from '../../../shared/icons/SparklesIcon';
+import SparklesIcon from '@/icons/SparklesIcon';
 
 export default function PersonalizeExperience ({profile, updateProfile}) {
   const handleDonePersonalize = () => {

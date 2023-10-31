@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import { useMemo, useState } from 'react';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import useDateInfo from '../../../shared/hooks/useDateInfo';
-import Icon from '../../../shared/components/Icon';
+import Icon from '@/components/Icon';
 
 export default function Birthdate ({ updateProfile }) {
   const {get_date_info} = useDateInfo();

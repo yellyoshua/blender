@@ -6,7 +6,7 @@ export const useDiscoverStores = createStore((set) => ({
   potentialMatch: null,
   loading: false,
   discover: async () => {
-    set({ loading: true, error: null });
+    set({ loading: true, potentialMatch: null });
     try {
       const potentialMatch = await services.discover.get();
       set({ potentialMatch });

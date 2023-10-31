@@ -1,8 +1,8 @@
 import { useLocation, Link } from 'react-router-dom';
-import { useResizeDeviceStore } from '../../shared/components/ResizeDevice';
-import BlenderAppLogo from '../../shared/icons/BlenderappLogo';
-import ChatIcon from '../../shared/icons/ChatIcon';
-import UsersIcon from '../../shared/icons/UsersIcon';
+import { useResizeDeviceStore } from '@/components/ResizeDevice';
+import BlenderAppLogo from '@/icons/BlenderappLogo';
+import ChatIcon from '@/icons/ChatIcon';
+import UsersIcon from '@/icons/UsersIcon';
 import ProfilePhoto from './ProfilePhoto';
 
 const navigationTabs = [

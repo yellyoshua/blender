@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import { useState } from 'react';
-import { usePersonalitiesStores } from '../../../shared/store';
-import OptionsSelector from '../../../shared/components/OptionsSelector';
+import { usePersonalitiesStores } from '@/shared/store';
+import OptionsSelector from '@/components/OptionsSelector';
 
 export default function SelectPersonalities ({ profile, updateProfile }) {
   const [selectedPersonalities, setSelectedPersonalities] = useState(() => {

@@ -1,6 +1,6 @@
 import SocialLoginButton from './components/SocialLoginButton';
-import BlenderappLogo from '../shared/icons/BlenderappLogo';
-import BlenderappLabel from '../shared/icons/BlenderappLabel';
+import BlenderappLogo from '@/icons/BlenderappLogo';
+import BlenderappLabel from '@/icons/BlenderappLabel';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -54,8 +54,8 @@ export default function LoginDesktop () {
           </div>
           <div className="justify-center flex">
             <p className="max-w-xs text-xs">
-              By signing up, you agree to <Link to="/terms-page" className="underline">our Terms</Link>. See how we use your
-              data in our <Link to="/privacy-page" className="underline">Privacy Policy</Link>.
+              By signing up, you agree to <Link to="/terms" className="underline">our Terms</Link>. See how we use your
+              data in our <Link to="/privacy" className="underline">Privacy Policy</Link>.
               We never post to Facebook, Twitter or Google.
             </p>
           </div>

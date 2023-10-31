@@ -1,5 +1,5 @@
 import useAuthentication from '../../shared/hooks/useAuthentication';
-import LogoutIcon from '../../shared/icons/LogoutIcon';
+import LogoutIcon from '@/icons/LogoutIcon';
 import './styles.css';
 
 export default function Logout () {

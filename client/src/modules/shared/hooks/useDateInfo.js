@@ -4,8 +4,8 @@ import dayjs from 'dayjs';
 
 export default function useDateInfo () {
   const get_date_info = (date) => {
-    const age = getAge(date);
-    const zodiac = getZodiacSign(date);
+    const age = getAge(dayjs(date));
+    const zodiac = getZodiacSign(dayjs(date));
     const isLegalAge = age >= 18;
 
     return {
